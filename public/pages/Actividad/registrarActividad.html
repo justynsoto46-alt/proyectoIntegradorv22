@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Actividad</title>
+
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/componentes.css">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="/css/paginas/menuPrincipal.css">
+    <link rel="stylesheet" href="/css/paginas/registrarActividad.css">
+</head>
+
+<body>
+
+    <header class="encabezado">
+
+        <div class="contenedor">
+
+            <img src="/img/LogoBlanco.png" alt="Logo de CENFOTEC" class="logo">
+
+            <h1>CENFOTEC Página Web Eventos</h1>
+
+            <div class="usuario">
+                <i class="fa-solid fa-bell"></i>
+                <i class="fa-solid fa-user"></i>
+                <span>Administrador</span>
+            </div>
+
+        </div>
+
+    </header>
+
+    <main>
+
+        <!-- El menú lateral se carga desde /partials/navbar.html -->
+        <div id="navbar"></div>
+
+        <section class="section">
+
+            <div class="contenedor tarjeta-actividad">
+
+                <h2>Registrar Actividad</h2>
+
+                <form id="formularioActividad" class="formulario" action="#" method="post" novalidate>
+
+                    <label for="nombreActividad">
+                        Nombre de la Actividad
+                    </label>
+
+                    <input type="text" id="nombreActividad" name="nombreActividad"
+                        placeholder="Ingrese el nombre de la actividad" required>
+
+                    <label for="imagenActividad">
+                        Imagen de la Actividad
+                    </label>
+
+                    <input type="file" id="imagenActividad" name="imagenActividad" accept="image/*">
+
+                    <label for="eventoAsociado">
+                        Evento Asociado
+                    </label>
+
+                    <input type="text" id="eventoAsociado" name="eventoAsociado" placeholder="Ej. Maker Fair 2026"
+                        required>
+
+                    <label for="categoria">
+                        Categoría
+                    </label>
+
+                    <select id="categoria" name="categoria" required>
+
+                        <option value="">
+                            Seleccione una categoría
+                        </option>
+
+                        <option value="Cultural">
+                            Cultural
+                        </option>
+
+                        <option value="Deportiva">
+                            Deportiva
+                        </option>
+
+                        <option value="Tecnologica">
+                            Tecnológica
+                        </option>
+
+                        <option value="Artistica">
+                            Artística
+                        </option>
+
+                        <option value="Recreacion">
+                            Recreación
+                        </option>
+
+                        <option value="Voluntariado">
+                            Voluntariado
+                        </option>
+
+                    </select>
+
+                    <label for="descripcion">
+                        Descripción
+                    </label>
+
+                    <textarea id="descripcion" name="descripcion" rows="5"
+                        placeholder="Ingrese la descripción de la actividad" required></textarea>
+
+                    <label for="fecha">
+                        Fecha
+                    </label>
+
+                    <input type="date" id="fecha" name="fecha" required>
+
+                    <label for="horaInicio">
+                        Hora de inicio
+                    </label>
+
+                    <input type="time" id="horaInicio" name="horaInicio" required>
+
+                    <label for="horaFin">
+                        Hora de finalización
+                    </label>
+
+                    <input type="time" id="horaFin" name="horaFin" required>
+
+                    <label for="ubicacion">
+                        Ubicación
+                    </label>
+
+                    <select id="ubicacion" name="ubicacion" required>
+
+                        <option value="">
+                            Seleccionar Ubicación
+                        </option>
+
+                        <option value="Auditorio Principal">
+                            Auditorio Principal
+                        </option>
+
+                        <option value="Laboratorio 1">
+                            Laboratorio 1
+                        </option>
+
+                        <option value="Parqueo">
+                            Parqueo
+                        </option>
+
+                        <option value="Externo">
+                            Externo (fuera del campus)
+                        </option>
+
+                    </select>
+
+                    <label for="cupo">
+                        Cupo Máximo
+                    </label>
+
+                    <input type="number" id="cupo" name="cupo" min="1" placeholder="Ingrese el cupo máximo" required>
+
+                    <label for="responsable">
+                        Responsable
+                    </label>
+
+                    <select id="responsable" name="responsable" required>
+
+                        <option value="">
+                            Seleccione un responsable
+                        </option>
+
+                        <option value="1">
+                            Juan Pérez
+                        </option>
+
+                        <option value="2">
+                            María Rodríguez
+                        </option>
+
+                        <option value="3">
+                            Carlos Ramírez
+                        </option>
+
+                    </select>
+
+                    <label for="estado">
+                        Estado
+                    </label>
+
+                    <select id="estado" name="estado" required>
+
+                        <option value="">
+                            Seleccione un estado
+                        </option>
+
+                        <option value="Activo">
+                            Activo
+                        </option>
+
+                        <option value="Suspendido">
+                            Suspendido
+                        </option>
+
+                    </select>
+
+                    <button type="submit" class="boton boton-primario boton-bloque boton-lg">
+
+                        Guardar Actividad
+
+                    </button>
+
+                </form>
+
+                <!-- El precio de la actividad se configura en su propia
+                     pantalla, por eso el acceso queda fuera del formulario -->
+                <a href="/pages/DashBoard/pagoSimulado.html"
+                   class="boton boton-bloque boton-lg boton-secundario">
+
+                    <i class="fa-solid fa-credit-card"></i>
+                    Configurar pago de la actividad
+
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer>
+
+        <h2>Somos lo que sabemos</h2>
+
+        <p>&copy; 2026 Universidad CENFOTEC</p>
+
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/js/comunes/utilidades.js"></script>
+    <script src="/js/comunes/api.js"></script>
+    <script src="/js/comunes/avisos.js"></script>
+    <script src="/js/comunes/navbar.js"></script>
+    <script src="/js/comunes/sesion.js"></script>
+    <script src="/js/Actividad/registrarActividad.js"></script>
+</body>
+
+</html>

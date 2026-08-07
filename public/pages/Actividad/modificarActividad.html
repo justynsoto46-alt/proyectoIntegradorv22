@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modificar Actividad</title>
+
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/componentes.css">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="/css/paginas/menuPrincipal.css">
+    <link rel="stylesheet" href="/css/paginas/modificarActividad.css">
+</head>
+
+<body>
+    <header class="encabezado">
+
+        <div class="contenedor">
+
+            <img src="/img/LogoBlanco.png" alt="Logo de CENFOTEC" class="logo">
+
+            <h1>CENFOTEC Página Web Eventos</h1>
+
+            <div class="usuario">
+                <i class="fa-solid fa-bell"></i>
+                <i class="fa-solid fa-user"></i>
+                <span>Administrador</span>
+            </div>
+
+        </div>
+
+    </header>
+
+    <main>
+
+        <!-- El menú lateral se carga desde /partials/navbar.html -->
+        <div id="navbar"></div>
+
+
+        <section class="section">
+
+            <div class="contenedor tarjeta-actividad">
+
+                <h2>Modificar Actividad</h2>
+
+                <form class="formulario" action="#" method="post">
+
+                    <label for="idActividad">
+                        ID de la Actividad
+                    </label>
+
+                    <input type="text" id="idActividad" name="idActividad" value="ACT-001" readonly>
+
+                    <label for="nombreActividad">
+                        Nombre de la Actividad
+                    </label>
+
+                    <input type="text" id="nombreActividad" name="nombreActividad"
+                        value="Conferencia de Inteligencia Artificial" required>
+
+                    <label for="imagenActividad">
+                        Imagen de la Actividad
+                    </label>
+
+                    <input type="file" id="imagenActividad" name="imagenActividad" accept="image/*">
+
+                    <label for="categoria">
+                        Categoría
+                    </label>
+
+                    <select id="categoria" name="categoria" required>
+
+                        <option value="Tecnologica" selected>Tecnológica</option>
+                        <option value="Cultural">Cultural</option>
+                        <option value="Deportiva">Deportiva</option>
+                        <option value="Artistica">Artística</option>
+                        <option value="Recreacion">Recreación</option>
+                        <option value="Voluntariado">Voluntariado</option>
+
+                    </select>
+
+                    <label for="descripcion">
+                        Descripción
+                    </label>
+
+                    <textarea id="descripcion" name="descripcion" rows="5"
+                        required>Actividad enfocada en tendencias actuales de IA.</textarea>
+
+                    <label for="fecha">
+                        Fecha
+                    </label>
+
+                    <input type="date" id="fecha" name="fecha" value="2026-08-15" required>
+
+                    <label for="horaInicio">
+                        Hora de Inicio
+                    </label>
+
+                    <input type="time" id="horaInicio" name="horaInicio" value="09:00" required>
+
+                    <label for="horaFin">
+                        Hora de Finalización
+                    </label>
+
+                    <input type="time" id="horaFin" name="horaFin" value="11:00" required>
+
+                    <label for="espacio">
+                        Espacio o Sede
+                    </label>
+
+                    <input type="text" id="espacio" name="espacio" value="Auditorio Principal" required>
+
+                    <label for="cupo">
+                        Cupo Máximo
+                    </label>
+
+                    <input type="number" id="cupo" name="cupo" value="100" min="1" required>
+
+                    <label for="responsable">
+                        Responsable
+                    </label>
+
+                    <select id="responsable" name="responsable" required>
+
+                        <option value="Juan Pérez" selected>Juan Pérez</option>
+                        <option value="María Gómez">María Gómez</option>
+                        <option value="Carlos Mora">Carlos Mora</option>
+
+                    </select>
+
+                    <label for="estado">
+                        Estado
+                    </label>
+
+                    <select id="estado" name="estado" required>
+                        <option value="Activo" selected>Activo</option>
+                        <option value="Suspendido">Suspendido</option>
+                        <option value="Finalizada">Finalizada</option>
+                        <option value="Cancelada">Cancelada</option>
+                    </select>
+
+                    <button type="submit" class="boton boton-primario">
+
+                        Guardar Cambios
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer>
+
+        <h2>Somos lo que sabemos</h2>
+
+        <p>&copy; 2026 Universidad CENFOTEC</p>
+
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/js/comunes/utilidades.js"></script>
+    <script src="/js/comunes/api.js"></script>
+    <script src="/js/comunes/avisos.js"></script>
+    <script src="/js/comunes/navbar.js"></script>
+    <script src="/js/comunes/sesion.js"></script>
+    <script src="/js/Actividad/modificarActividad.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,131 @@
+/* Contenedor del formulario */
+.formulario-contenedor {
+    width: 700px;
+    background-color: white;
+    padding: 35px;
+    border: 2px solid var(--color-grisClaro);
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+/* Descripción */
+.descripcion {
+    margin-bottom: 12px;
+    margin-top: 12px;
+    color: var(--color-azulOscuro);
+}
+
+/* Mensaje de restricción */
+.nota-restriccion {
+    background-color: var(--color-grisMasClaro);
+    border-left: 5px solid var(--color-azulClaro);
+    color: var(--color-azulOscuro);
+    padding: 12px;
+    border-radius: 5px;
+    margin-bottom: 25px;
+    font-size: 15px;
+}
+
+.nota-restriccion i {
+    margin-right: 8px;
+}
+
+/* Etiquetas */
+.formulario label {
+    display: block;
+    margin-top: 18px;
+    margin-bottom: 6px;
+    font-weight: bold;
+    color: var(--color-azulOscuro);
+}
+
+/* Campos de texto */
+.formulario input{
+    display: block;
+    width: 100%;
+    padding: 11px;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    font-size: 15px;
+}
+
+/* Aplica un estilo diferente a los campos restringidos */
+.formulario input:disabled {
+    background-color: #f1f1f1;
+    color: var(--color-grisOscuro);
+    cursor: not-allowed;
+}
+
+/* Efecto al seleccionar un campo (Focus: Es el elemento sobre el que el usuario está escribiendo o interactuando) */
+.formulario input:focus {
+    outline: none; /* No muestre el borde de enfoque que el navegador agrega automáticamente cuando el usuario selecciona un campo */
+    border-color: var(--color-azulClaro);
+}
+
+/* Contenedor de botones */
+.botones {
+    text-align: center;
+    margin-top: 35px;
+}
+
+/* Botón Guardar */
+.boton-principal {
+    background-color: var(--color-azulClaro);
+    color: white;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 6px;
+    font-size: 17px;
+    cursor: pointer;
+    margin-right: 15px;
+    transition: transform 0.3s;
+}
+
+/* Hover botón Guardar */
+.boton-principal:hover {
+    background-color: var(--color-azulOscuro);
+    transform: scale(1.05);
+}
+
+/* Botón Cancelar */
+.boton-secundario {
+    background-color: var(--color-grisOscuro);
+    color: white;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 6px;
+    font-size: 17px;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+/* Hover botón Cancelar */
+.boton-secundario:hover {
+    background-color: #5f5f5f;
+    transform: scale(1.05);
+}
+
+/* Campos con error */
+.input-error {
+    border: 2px solid #fcc2c2 !important;
+    background-color: #ffe5e5;
+}
+
+.formulario select {
+    margin-bottom: 50;
+    display: block;
+    width: 100%;
+    padding: 11px;
+    border: 1px solid var(--color-AzulClaro);
+    border-radius: 15px;
+    font-size: 15px;
+    background-color: var(--color-AzulOscuro);
+    color: black;
+    cursor: pointer;
+}
+
+.formulario-contenedor h2 {
+    color: var(--color-azulOscuro);
+    font-size: 32px;
+    margin-bottom: 8px;
+}

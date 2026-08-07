@@ -1,0 +1,166 @@
+.tarjeta-actividad{
+    width:1080px;
+    margin-top:30px;
+    background:white;
+    padding:40px;
+    border:2px solid var(--color-grisClaro);
+    border-radius:10px;
+    box-shadow:0 3px 8px rgba(0,0,0,.12);
+
+}
+
+.tarjeta-actividad h2{
+    color: var(--color-AzulOscuro);
+    margin-bottom:25px;
+}
+
+.campo-busqueda{
+    flex:1;
+    min-width:220px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    border:1px solid var(--color-grisClaro);
+    border-radius:8px;
+    padding:10px 15px;
+    background:white;
+}
+
+#filtroEstado{
+    border:1px solid var(--color-grisClaro);
+    border-radius:8px;
+    padding:10px 15px;
+    font-size:15px;
+    background:white;
+    cursor:pointer;
+}
+
+.tabla-actividad{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+.tabla-actividad th{
+
+    background:var(--color-AzulOscuro);
+
+    color:white;
+
+    padding:14px;
+
+    text-align:left;
+
+}
+
+.tabla-actividad td{
+
+    padding:14px;
+
+    border:1px solid #ddd;
+
+}
+
+.tabla-actividad tr:nth-child(even){
+
+    background:#f4f4f4;
+
+}
+
+.tabla-actividad tbody tr:hover{
+
+    background:var(--color-celesteClaro);
+
+}
+
+.badge{
+    padding:6px 14px;
+    border-radius:20px;
+    font-size:13px;
+    font-weight:600;
+    color:white;
+    display:inline-block;
+}
+
+.badge-activo{
+    background:#27ae60;
+}
+
+.badge-suspendido{
+    background:#e67e22;
+}
+
+.badge-finalizada{
+    background:#7c7b75;
+}
+
+.badge-cancelada{
+    background:#e74c3c;
+}
+
+.celda-acciones{
+    display:flex;
+    gap:10px;
+    justify-content:center;
+}
+
+.btn-accion{
+    width:42px;
+    height:42px;
+    border:1px solid #d8d8d8;
+    border-radius:50%;
+    background:white;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    color:#f39c12;
+    font-size:16px;
+    text-decoration:none;
+
+    transition:.3s;
+    box-shadow:0 2px 6px rgba(0,0,0,.12);
+}
+
+.btn-accion:hover{
+    background:#f39c12;
+    color:white;
+    transform:scale(1.08);
+}
+
+.btn-eliminar{
+    color:#e74c3c;
+    cursor:pointer;
+}
+
+.btn-eliminar:hover{
+    background:#e74c3c;
+    color:white;
+}
+
+.sin-resultados{
+    text-align:center;
+    padding:20px;
+    color:#888;
+    font-style:italic;
+}
+
+.tabla-actividad td:last-child{
+    width:120px;
+    text-align:center;
+}
+
+.celda-acciones .btn-accion{
+    width:42px;
+    height:42px;
+    font-size:16px;
+}
+
+.celda-imagen{
+    text-align:center;
+    font-size:28px;
+    width:80px;
+}

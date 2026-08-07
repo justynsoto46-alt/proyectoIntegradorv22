@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agenda del Evento</title>
+
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/componentes.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="/css/paginas/menuPrincipal.css">
+    <link rel="stylesheet" href="/css/paginas/agenda.css">
+</head>
+
+<body>
+
+    <header class="encabezado">
+        <div class="contenedor">
+
+            <img src="/img/LogoBlanco.png" alt="Logo CENFOTEC" class="logo">
+
+            <h1>CENFOTEC Página Web Eventos</h1>
+
+            <div class="usuario">
+                <i class="fa-solid fa-bell"></i>
+                <i class="fa-solid fa-user"></i>
+                <span>Administrador</span>
+            </div>
+
+        </div>
+    </header>
+
+    <main>
+
+        <!-- El menú lateral se carga desde /partials/navbar.html -->
+        <div id="navbar"></div>
+
+        <section class="section">
+
+            <div class="contenedor tarjeta-agenda">
+
+                <h2>Agenda del Evento</h2>
+
+                <h3>Evento: Feria Tecnológica CENFOTEC 2026</h3>
+
+                <p class="descripcion">
+                    Calendario de actividades programadas para este evento.
+                </p>
+
+                <div class="mes">
+
+                    <button class="flecha">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+
+                    <h2>Septiembre 2026</h2>
+
+                    <button class="flecha">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+
+                </div>
+
+                <table class="calendario">
+
+                    <thead>
+
+                        <tr>
+                            <th>Dom</th>
+                            <th>Lun</th>
+                            <th>Mar</th>
+                            <th>Mié</th>
+                            <th>Jue</th>
+                            <th>Vie</th>
+                            <th>Sáb</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+
+                            <td class="otro-mes">30</td>
+                            <td class="otro-mes">31</td>
+
+                            <td>
+                                <span class="numero">1</span>
+
+                                <div class="evento azul" data-actividad="Taller IA" data-fecha="01/09/2026"
+                                    data-inicio="9:00 a.m." data-fin="11:00 a.m." data-responsable="Juan Pérez">
+                                    Taller IA
+                                </div>
+
+                            </td>
+
+                            <td>
+                                <span class="numero">2</span>
+                            </td>
+
+                            <td>
+                                <span class="numero">3</span>
+
+                                <div class="evento verde" data-actividad="Registro" data-fecha="03/09/2026"
+                                    data-inicio="8:00 a.m." data-fin="10:00 a.m." data-responsable="María Rodríguez">
+                                    Registro
+                                </div>
+
+                            </td>
+
+                            <td>
+                                <span class="numero">4</span>
+                            </td>
+
+                            <td>
+                                <span class="numero">5</span>
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td><span class="numero">6</span></td>
+
+                            <td><span class="numero">7</span></td>
+
+                            <td>
+
+                                <span class="numero">8</span>
+
+                                <div class="evento naranja" data-actividad="Conferencia" data-fecha="08/09/2026"
+                                    data-inicio="10:00 a.m." data-fin="12:00 p.m." data-responsable="Carlos Mora">
+                                    Conferencia
+                                </div>
+
+                            </td>
+
+                            <td><span class="numero">9</span></td>
+
+                            <td>
+
+                                <span class="numero">10</span>
+
+                                <div class="evento rojo" data-actividad="Taller Desarrollo Software"
+                                    data-fecha="10/09/2026" data-inicio="1:00 p.m." data-fin="3:00 p.m."
+                                    data-responsable="Ana Solís">
+                                    Taller Desarrollo Software
+                                </div>
+
+                            </td>
+
+                            <td><span class="numero">11</span></td>
+
+                            <td><span class="numero">12</span></td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td><span class="numero">13</span></td>
+
+                            <td>
+
+                                <span class="numero">14</span>
+
+                                <div class="evento morado" data-actividad="Torneo Robótica" data-fecha="14/09/2026"
+                                    data-inicio="9:00 a.m." data-fin="1:00 p.m." data-responsable="Laura Gómez">
+                                    Torneo Robótica
+                                </div>
+
+                            </td>
+
+                            <td><span class="numero">15</span></td>
+
+                            <td><span class="numero">16</span></td>
+
+                            <td>
+
+                                <span class="numero">17</span>
+
+                                <div class="evento azul" data-actividad="Clase de Datos" data-fecha="17/09/2026"
+                                    data-inicio="2:00 p.m." data-fin="4:00 p.m." data-responsable="Juan Pérez">
+                                    Clase de Datos
+                                </div>
+
+                            </td>
+
+                            <td><span class="numero">18</span></td>
+
+                            <td><span class="numero">19</span></td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td><span class="numero">20</span></td>
+                            <td><span class="numero">21</span></td>
+                            <td><span class="numero">22</span></td>
+                            <td><span class="numero">23</span></td>
+                            <td><span class="numero">24</span></td>
+                            <td><span class="numero">25</span></td>
+                            <td><span class="numero">26</span></td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td><span class="numero">27</span></td>
+                            <td><span class="numero">28</span></td>
+                            <td><span class="numero">29</span></td>
+                            <td><span class="numero">30</span></td>
+
+                            <td class="otro-mes">1</td>
+                            <td class="otro-mes">2</td>
+                            <td class="otro-mes">3</td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+                <div class="detalle-evento" id="detalleEvento">
+
+                    <h3>Detalle de la actividad seleccionada</h3>
+
+                    <p><strong>Actividad:</strong> <span id="detalleActividad"></span></p>
+
+                    <p><strong>Fecha:</strong> <span id="detalleFecha"></span></p>
+
+                    <p><strong>Hora inicio:</strong> <span id="detalleInicio"></span></p>
+
+                    <p><strong>Hora final:</strong> <span id="detalleFin"></span></p>
+
+                    <p><strong>Responsable:</strong> <span id="detalleResponsable"></span></p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer>
+
+        <h2>Somos lo que sabemos</h2>
+
+        <p>&copy; 2026 Universidad CENFOTEC</p>
+
+    </footer>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/js/comunes/utilidades.js"></script>
+    <script src="/js/comunes/api.js"></script>
+    <script src="/js/comunes/avisos.js"></script>
+    <script src="/js/comunes/navbar.js"></script>
+    <script src="/js/comunes/sesion.js"></script>
+    <script src="/js/Agenda/agenda.js"></script>
+</body>
+
+</html>

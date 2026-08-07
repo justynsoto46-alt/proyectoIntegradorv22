@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CENFOTEC - Pasarela de Pago</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/paginas/index.css">
+    <link rel="stylesheet" href="/css/paginas/pago.css">
+</head>
+
+<body>
+    <!-- Encabezado -->
+    <header class="encabezado">
+
+        <div class="contenedor">
+            <img src="/img/LogoBlanco.png" alt="Logo Universidad CENFOTEC" class="logo">
+            <h1>CENFOTEC Página Web Eventos</h1>
+
+            <nav class="menu">
+                <a href="/index.html">Inicio</a>
+                <a href="/index.html#eventos">Eventos</a>
+                <a href="/pages/Agenda/agendaPublica.html">Agenda</a>
+                <a href="/index.html#stands">Stands</a>
+                <a href="/pages/Inscripciones/inscripciones.html">Inscribirse</a>
+                <a href="/pages/DashBoard/iniciarSesion.html">Iniciar Sesión</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="seccion fondo-pago">
+        <div class="contenedor">
+            <div class="tarjeta-pago">
+                <h2 id="titulo-pago">Detalles del Pago</h2>
+
+                <div class="resumen-compra">
+                    <p><strong>Actividad:</strong> ¿Cómo transformar datos en movimiento físico en tiempo real?</p>
+                    <p class="precio-total">Total a pagar: <span>₡15,000</span></p>
+                </div>
+
+                <!-- MEJORA 1: Tarjeta visual interactiva (se llena en vivo y gira en el CVV) -->
+                <div class="tarjeta-visual">
+                    <div class="tarjeta-caras" id="tarjetaVisual" data-marca="">
+                        <div class="cara frente">
+                            <div class="tv-fila-top">
+                                <div class="tv-chip"></div>
+                                <div class="tv-marca" id="tvMarca"><i class="fa-regular fa-credit-card"></i></div>
+                            </div>
+                            <div class="tv-numero" id="tvNumero">•••• •••• •••• ••••</div>
+                            <div class="tv-fila-bottom">
+                                <div><span>Titular</span>
+                                    <div class="tv-nombre" id="tvNombre">NOMBRE APELLIDO</div>
+                                </div>
+                                <div><span>Vence</span>
+                                    <div class="tv-vence" id="tvVence">MM/AA</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cara reverso">
+                            <div class="tv-banda"></div>
+                            <div class="tv-cvv-label">CVV</div>
+                            <div class="tv-cvv-caja" id="tvCvv">•••</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MEJORA 4: Aviso de pago rechazado -->
+                <div class="aviso-rechazo" id="avisoRechazo" role="alert">
+                    <i class="fa-solid fa-circle-xmark"></i> Pago rechazado. Revisá los datos de la tarjeta e intentá de
+                    nuevo.
+                </div>
+
+                <form id="formulario-simulado" novalidate>
+                    <div class="grupo-input">
+                        <label for="titular">Nombre en la tarjeta</label>
+                        <div class="input-icono">
+                            <i class="fa-regular fa-user"></i>
+                            <input type="text" id="titular" placeholder="Ej. Juan Pérez" autocomplete="cc-name"
+                                aria-describedby="err-titular" required>
+                        </div>
+                        <span class="mensaje-error" id="err-titular" aria-live="polite"></span>
+                    </div>
+
+                    <div class="grupo-input">
+                        <label for="numero-tarjeta">Número de tarjeta</label>
+                        <div class="input-icono">
+                            <i class="fa-regular fa-credit-card"></i>
+                            <input type="text" id="numero-tarjeta" placeholder="0000 0000 0000 0000" inputmode="numeric"
+                                autocomplete="cc-number" maxlength="19" aria-describedby="err-numero" required>
+                        </div>
+                        <span class="mensaje-error" id="err-numero" aria-live="polite"></span>
+                    </div>
+
+                    <div class="fila-inputs">
+                        <div class="grupo-input">
+                            <label for="fecha-vencimiento">Vencimiento</label>
+                            <input type="text" id="fecha-vencimiento" placeholder="MM/AA" inputmode="numeric"
+                                autocomplete="cc-exp" maxlength="5" aria-describedby="err-fecha" required>
+                            <span class="mensaje-error" id="err-fecha" aria-live="polite"></span>
+                        </div>
+                        <div class="grupo-input">
+                            <label for="cvv">CVV</label>
+                            <div class="input-icono">
+                                <i class="fa-solid fa-lock"></i>
+                                <input type="password" id="cvv" placeholder="123" inputmode="numeric"
+                                    autocomplete="cc-csc" maxlength="4" aria-describedby="err-cvv" required>
+                            </div>
+                            <span class="mensaje-error" id="err-cvv" aria-live="polite"></span>
+                        </div>
+                    </div>
+
+                    <!-- MEJORA 3: botón deshabilitado hasta que el formulario sea válido -->
+                    <button type="submit" class="boton boton-procesar" id="btn-pagar" disabled>
+                        Procesar Pago <i class="fa-solid fa-shield-halved"></i>
+                    </button>
+                </form>
+
+                <div id="mensaje-exito" class="pantalla-exito" role="status" aria-live="polite">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <h3>¡Pago Procesado Exitosamente!</h3>
+                    <p>Tu espacio ha sido reservado. Te enviamos un comprobante al correo.</p>
+                    <a href="/index.html" class="boton-secundario mt-2">Volver al inicio</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="piePagina">
+        <h2>Somos lo que sabemos </h2>
+        <p>&copy; 2026 Universidad Cenfotec </p>
+    </footer>
+
+    <script src="/js/comunes/utilidades.js"></script>
+    <script src="/js/comunes/api.js"></script>
+    <script src="/js/comunes/avisos.js"></script>
+    <script src="/js/DashBoard/pago.js"></script>
+</body>
+
+</html>

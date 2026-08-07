@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CENFOTEC Página Web Eventos - Modificar Administrador</title>
+
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/componentes.css">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Estilos generales -->
+    <link rel="stylesheet" href="/css/paginas/menuPrincipal.css">
+
+    <!-- Estilos propios de la pantalla -->
+    <link rel="stylesheet" href="/css/paginas/modificarAdmin.css">
+</head>
+
+<body>
+
+    <!-- Encabezado -->
+    <header class="encabezado">
+        <div class="contenedor">
+
+            <img src="/img/LogoBlanco.png" alt="Logo Universidad CENFOTEC" class="logo">
+
+            <h1>CENFOTEC Página Web Eventos</h1>
+
+            <div class="usuario">
+                <i class="fa-solid fa-user"></i>
+                Administrador
+            </div>
+        </div>
+
+    </header>
+    <main>
+        <!-- Menú lateral -->
+        <!-- El menú lateral se carga desde /partials/navbar.html -->
+        <div id="navbar"></div>
+
+        <!-- Contenido principal -->
+        <section class="section">
+            <div class="contenedor formulario-contenedor">
+
+                <h2>Modificar Stand</h2>
+
+                <p class="descripcion">
+                    Actualice la información del Stand seleccionado.
+                </p>
+
+                <form id="formularioStand" class="formulario" action="#" method="post" novalidate>
+                    <label for="evento">
+                        Evento
+                        <input type="text" id="evento" placeholder="Nombre del evento" value="Conferencia Tech"
+                            required>
+                    </label>
+
+                    <label for="Nombre">
+                        Nombre
+                        <input type="text" id="Nombre" placeholder="Nombre del Stands"
+                            value="Stand A1 - TechSolutions S.A." required>
+                    </label>
+
+                    <label for="encargado">
+                        Encargado
+                        <input type="text" id="encargado" placeholder="Nombre del Encargado" value="María Salas"
+                            required>
+                    </label>
+
+                    <label for="correo">
+                        Encargado
+                        <input type="text" id="correo" placeholder="correo del Encargado" value="msalas@empresa.com"
+                            required>
+                    </label>
+
+                    <label for="telefono">
+                        Telefono
+                        <input type="number" id="telefono" placeholder="Telefono" value="88321459" required>
+                    </label>
+
+                    <div class="botones">
+
+                        <button type="submit" class="boton-principal">
+                            Guardar cambios
+                        </button>
+
+                        <button type="button" id="btnCancelar" class="boton-secundario">
+                            Cancelar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Pie de página -->
+    <footer>
+        <h2>Somos lo que sabemos</h2>
+        <p>&copy; 2026 Universidad Cenfotec</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/js/comunes/utilidades.js"></script>
+    <script src="/js/comunes/api.js"></script>
+    <script src="/js/comunes/avisos.js"></script>
+    <script src="/js/comunes/navbar.js"></script>
+    <script src="/js/comunes/sesion.js"></script>
+    <script src="/js/Stands/modificarStands.js"></script>
+</body>
+
+</html>

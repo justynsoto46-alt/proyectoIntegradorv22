@@ -1,0 +1,235 @@
+/* Selector universal */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Paleta de colores institucionales */
+:root {
+    --color-azulOscuro: #164a98;
+    --color-azulClaro: #006AEA;
+    --color-celesteClaro: #9CC8FF;
+    --color-grisClaro: #d2d2d2;
+    --color-grisOscuro: #7c7b75;
+    --color-amarilloClaro: #fff200;
+    --color-amarilloOscuro: #ffc63e;
+}
+
+/* Estructura principal de la página */
+html{
+    height: 100%;
+}
+
+body{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: var(--color-celesteClaro);
+    color: #252525;
+    line-height: 1.6;
+    overflow-y: auto; /* Permite el scroll vertical */
+}
+
+main{
+    flex: 1;
+}
+
+/* Encabezado */
+.encabezado {
+    background-color: var(--color-azulOscuro);
+    color: white;
+    padding: 18px 0;
+    border-bottom: 6px solid var(--color-amarilloOscuro);
+}
+
+/* Contenedor general */
+.contenedor {
+    width: 960px;
+    margin: 0 auto;
+}
+
+/* Logo */
+.logo {
+    width: 125px;
+    vertical-align: middle;
+}
+
+/* Título del encabezado */
+.encabezado h1 {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 15px;
+    font-size: 24px;
+    font-weight: normal;
+}
+
+/* Sección principal */
+.seccion-inscripciones {
+    padding: 45px 0;
+}
+
+/* Título */
+.seccion-inscripciones h2 {
+    text-align: center;
+    color: var(--color-azulOscuro);
+    font-size: 34px;
+    margin-bottom: 10px;
+}
+
+/* Descripción */
+.descripcion {
+    text-align: center;
+    color: var(--color-azulOscuro);
+    font-size: 18px;
+    margin-bottom: 35px;
+}
+
+/* Formulario de búsqueda */
+.formulario-consulta {
+    background-color: white;
+    border: 2px solid var(--color-grisClaro);
+    border-radius: 10px;
+    padding: 25px;
+    margin-bottom: 35px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+}
+
+/* Etiqueta */
+.formulario-consulta label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Campo de texto */
+.formulario-consulta input {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 2px solid var(--color-grisClaro);
+    border-radius: 6px;
+    margin-bottom: 20px;
+}
+
+/* Botón Buscar */
+.boton-buscar {
+    background-color: var(--color-azulClaro);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: transform 0.3s;
+}
+
+/* Hover botón Buscar */
+.boton-buscar:hover {
+    background-color: var(--color-azulOscuro);
+    transform: scale(1.05);
+}
+
+/* Contenedor de tarjetas */
+.contenedor-inscripciones {
+    margin-top: 30px;
+}
+
+/* Tarjetas */
+.tarjeta-inscripcion {
+    background-color: white;
+    border: 2px solid var(--color-grisClaro);
+    border-radius: 10px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+}
+
+/* Nombre de la actividad */
+.tarjeta-inscripcion h3 {
+    color: var(--color-azulOscuro);
+    margin-bottom: 15px;
+    font-size: 24px;
+}
+
+/* Ícono */
+.tarjeta-inscripcion h3 i {
+    color: var(--color-azulClaro);
+    margin-right: 8px;
+}
+
+/* Información */
+.tarjeta-inscripcion p {
+    margin-bottom: 8px;
+    font-size: 17px;
+}
+
+/* Etiquetas */
+.etiqueta {
+    font-weight: bold;
+    color: black;
+}
+
+/* Botón cancelar inscripción */
+.boton-cancelar {
+    margin-top: 20px;
+    background-color: #c62828;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: transform 0.3s;
+}
+
+/* Hover botón cancelar */
+.boton-cancelar:hover {
+    background-color: #8e1b1b;
+    transform: scale(1.05);
+}
+
+/* Mensaje sin inscripciones */
+.mensaje-sin-inscripciones {
+    display: none;
+    text-align: center;
+    color: var(--color-azulOscuro);
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 40px;
+}
+
+/* Contenedor botón final */
+.acciones-finales {
+    text-align: center;
+    margin-top: 45px;
+}
+
+/* Botón agregar actividades */
+.boton-agregar {
+    background-color: var(--color-azulOscuro);
+    color: white;
+    border: none;
+    padding: 14px 35px;
+    border-radius: 6px;
+    font-size: 17px;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+/* Hover botón agregar */
+.boton-agregar:hover {
+    background-color: var(--color-azulClaro);
+    transform: scale(1.05);
+}
+
+/* Pie de página */
+footer {
+    background-color: var(--color-azulClaro);
+    color: white;
+    text-align: center;
+    padding: 18px;
+    margin-top: 50px;
+}

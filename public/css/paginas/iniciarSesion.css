@@ -1,0 +1,172 @@
+/* Selector universal */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Paleta de colores institucionales */
+:root {
+    --color-azulOscuro: #164a98;
+    --color-azulClaro: #006AEA;
+    --color-celesteClaro: #9CC8FF;
+    --color-grisClaro: #d2d2d2;
+    --color-grisOscuro: #7c7b75;
+    --color-amarilloClaro: #fff200;
+    --color-amarilloOscuro: #ffc63e;
+}
+
+/* Estructura principal de la página */
+html{
+    height: 100%;
+}
+
+body{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: var(--color-celesteClaro);
+    color: #252525;
+    line-height: 1.6;
+}
+
+main{
+    flex: 1;
+}
+
+/* Encabezado */
+.encabezado {
+    background-color: var(--color-azulOscuro);
+    color: white;
+    padding: 20px 0;
+    border-bottom: 6px solid var(--color-amarilloOscuro);
+}
+
+/* Contenedor general */
+.contenedor {
+    width: 960px;
+    margin: 0 auto;
+}
+
+/* Logo */
+.logo {
+    width: 125px;
+    vertical-align: middle;
+}
+
+/* Título del encabezado */
+.encabezado h1 {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 15px;
+    font-size: 24px;
+    font-weight: normal;
+}
+
+/* Sección principal del login */
+.seccion-login {
+    padding: 45px 0;
+}
+
+/* Título del formulario */
+.seccion-login h2 {
+    color: var(--color-azulOscuro);
+    font-size: 30px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Contenedor del formulario */
+.formulario-contenedor {
+    width: 520px;
+    background-color: white;
+    padding: 30px;
+    border: 2px solid var(--color-grisClaro);
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    margin: 0 auto;
+}
+
+/* Estilo del formulario */
+.formulario {
+    margin-top: 20px;
+}
+
+/* Etiquetas del formulario */
+.formulario label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: var(--color-azulOscuro);
+}
+
+/* Campos del formulario */
+.formulario input {
+    display: block;
+    width: 100%;
+    padding: 11px;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    font-size: 15px;
+    margin-bottom: 40px;
+}
+
+/* Efecto al seleccionar un campo */
+.formulario input:focus {
+    outline: none;
+    border-color: var(--color-azulClaro);
+}
+
+/* Botón del formulario */
+.formulario button {
+    display: block;
+    background-color: var(--color-azulClaro);
+    color: white;
+    text-decoration: none;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-size: 18px;
+    cursor: pointer;
+    margin: 22px auto 0 auto;
+    transition: transform 0.3s;
+}
+
+/* Efecto visual al pasar el mouse por encima del botón */
+.formulario button:hover {
+    background-color: var(--color-azulOscuro);
+    transform: scale(1.05);
+}
+
+/* Enlace para recuperar contraseña */
+.enlace-recuperar {
+    display: block;
+    text-align: center;
+    color: var(--color-azulClaro);
+    text-decoration: none;
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.enlace-recuperar:hover {
+    color: var(--color-azulOscuro);
+    text-decoration: underline;
+}
+
+/* Pie de página */
+footer {
+    background-color:var(--color-azulClaro);
+    color: white;
+    padding: 18px;
+    margin-top: 30px;
+    text-align: center;
+}
+
+/* ERROR */
+.input-error{
+    border: 2px solid #e63946 !important;
+    background-color: #ffe5e5;
+}

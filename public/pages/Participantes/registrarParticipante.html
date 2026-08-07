@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CENFOTEC Página Web Eventos - Registro de Participante</title>
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="/css/paginas/registrarParticipante.css">
+    <link rel="stylesheet" href="/css/paginas/index.css">
+</head>
+
+<body>
+
+    <!-- Encabezado -->
+    <header class="encabezado">
+
+        <div class="contenedor">
+            <img src="/img/LogoBlanco.png" alt="Logo Universidad CENFOTEC" class="logo">
+            <h1>CENFOTEC Página Web Eventos</h1>
+
+            <nav class="menu">
+                <a href="/index.html">Inicio</a>
+                <a href="/index.html#eventos">Eventos</a>
+                <a href="/pages/Agenda/agendaPublica.html">Agenda</a>
+                <a href="/index.html#stands">Stands</a>
+                <a href="/pages/Inscripciones/inscripciones.html">Inscribirse</a>
+                <a href="/pages/DashBoard/iniciarSesion.html">Iniciar Sesión</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="seccion-registro">
+
+            <div class="contenedor">
+                <h2>Registro de Participante</h2>
+
+                <p class="subtitulo">
+                    Inscripción para actividades del evento institucional.
+                </p>
+
+                <div class="formulario-contenedor">
+                    <form class="formulario" id="formulario" action="#" method="post" novalidate>
+
+                        <label for="nombreCompleto">Nombre completo *</label>
+                        <input type="text" id="nombreCompleto" name="nombreCompleto" placeholder="Nombre y apellidos" required>
+
+                        <label for="identificacion">Identificación *</label>
+                        <input type="text" id="identificacion" name="identificacion" placeholder="123456789" required>
+
+                        <label for="correo">Correo electrónico *</label>
+                        <input type="email" id="correo" name="correo" placeholder="ejemplo@ucenfotec.com"  required>
+
+                        <label for="telefono">Teléfono *</label>
+                        <input type="text" id="telefono" name="telefono" placeholder="88888888" required>
+
+                        <label for="edad">Edad</label>
+                        <input type="number" id="edad" name="edad" placeholder="Solo mayores de 16">
+
+                        <label for="profesion">Profesión</label>
+                        <input type="text" id="profesion" name="profesion" placeholder="Profesión">
+
+                        <div class="campo-boton">
+                            <button type="submit" class="boton">
+                            Guardar y seleccionar actividades
+                            </button>
+                        </div>
+                        
+                    </form>
+                </div>
+
+                <p class="campos-obligatorios">
+                    * Campos obligatorios
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="piePagina">
+        <h2>Somos lo que sabemos </h2>
+        <p>&copy; 2026 Universidad Cenfotec </p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/js/comunes/utilidades.js"></script>
+    <script src="/js/comunes/api.js"></script>
+    <script src="/js/comunes/avisos.js"></script>
+    <script src="/js/Participantes/registrarParticipante.js"></script>
+</body>
+
+</html>

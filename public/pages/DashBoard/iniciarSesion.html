@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CENFOTEC Página Web Eventos - Inicio de Sesión</title>
+
+    <!--FontAwesome-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/paginas/iniciarSesion.css">
+    <link rel="stylesheet" href="/css/paginas/index.css">
+</head>
+<body>
+    <!-- Encabezado -->
+    <header class="encabezado">
+
+        <div class="contenedor">
+            <img src="/img/LogoBlanco.png" alt="Logo Universidad CENFOTEC" class="logo">
+            <h1>CENFOTEC Página Web Eventos</h1>
+
+            <nav class="menu">
+                <a href="/index.html">Inicio</a>
+                <a href="/index.html#eventos">Eventos</a>
+                <a href="/pages/Agenda/agendaPublica.html">Agenda</a>
+                <a href="/index.html#stands">Stands</a>
+                <a href="/pages/Inscripciones/inscripciones.html">Inscribirse</a>
+                <a href="/pages/DashBoard/iniciarSesion.html">Iniciar Sesión</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="seccion-login">
+
+            <div class="contenedor">
+                <h2>Inicio de Sesión</h2>
+
+                <div class="formulario-contenedor">
+                    <form class="formulario" id= "formulario" action="#" method="post" novalidate>
+                        <label for="correo">Correo electrónico</label>
+                        <input type="email" id="correo" name="correo" required>
+
+                        <label for="contrasenia">Contraseña</label>
+                        <input type="password" id="contrasenia" name="contrasenia" required>
+
+                        <button type="submit">Iniciar Sesión</button>
+                    </form>
+
+                    <a href="/pages/DashBoard/modificarContrasenia.html" class="enlace-recuperar">¿Olvidó su contraseña?</a>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="piePagina">
+        <h2>Somos lo que sabemos </h2>
+        <p>&copy; 2026 Universidad Cenfotec </p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/js/comunes/utilidades.js"></script>
+    <script src="/js/comunes/api.js"></script>
+    <script src="/js/comunes/avisos.js"></script>
+    <script src="/js/DashBoard/iniciarSesion.js"></script>
+</body>
+</html>

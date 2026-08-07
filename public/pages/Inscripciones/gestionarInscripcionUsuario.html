@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CENFOTEC Página Web Eventos - Gestionar Inscripción</title>
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="/css/paginas/gestionarInscripcionUsuario.css">
+    <link rel="stylesheet" href="/css/paginas/index.css">
+</head>
+
+<body>
+    <!-- Encabezado -->
+    <header class="encabezado">
+
+        <div class="contenedor">
+            <img src="/img/LogoBlanco.png" alt="Logo Universidad CENFOTEC" class="logo">
+            <h1>CENFOTEC Página Web Eventos</h1>
+
+            <nav class="menu">
+                <a href="/index.html">Inicio</a>
+                <a href="/index.html#eventos">Eventos</a>
+                <a href="/pages/Agenda/agendaPublica.html">Agenda</a>
+                <a href="/index.html#stands">Stands</a>
+                <a href="/pages/Inscripciones/inscripciones.html">Inscribirse</a>
+                <a href="/pages/DashBoard/iniciarSesion.html">Iniciar Sesión</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="seccion-inscripciones">
+
+            <div class="contenedor">
+                <h2>Gestionar mis inscripciones</h2>
+
+                <p class="descripcion">
+                    Digite su número de cédula para consultar las actividades en las que se encuentra inscrito.
+                </p>
+
+                <div class="formulario-consulta">
+                    <label for="cedula">Número de cédula:</label>
+                    <input type="text" id="cedula" placeholder="Ejemplo: 123456789">
+
+                    <button type="button" id="btnBuscarInscripciones" class="boton-buscar">
+                        Buscar inscripciones
+                    </button>
+                </div>
+
+                <div id="contenedorInscripciones" class="contenedor-inscripciones">
+                    <div class="tarjeta-inscripcion">
+                        <h3><i class="fa-solid fa-calendar-check"></i> Conferencia de Inteligencia Artificial</h3>
+                        <p><span class="etiqueta">Fecha:</span> 12/09/2026</p>
+                        <p><span class="etiqueta">Horario:</span> 9:00 a.m. - 11:00 a.m.</p>
+                        <p><span class="etiqueta">Lugar:</span> Auditorio principal</p>
+                        <p><span class="etiqueta">Estado:</span> Inscrita</p>
+
+                        <button type="button" class="boton-cancelar">
+                            Cancelar inscripción
+                        </button>
+                    </div>
+
+                    <div class="tarjeta-inscripcion">
+                        <h3><i class="fa-solid fa-calendar-check"></i> Taller de Desarrollo Web</h3>
+                        <p><span class="etiqueta">Fecha:</span> 13/09/2026</p>
+                        <p><span class="etiqueta">Horario:</span> 3:00 p.m. - 5:00 p.m.</p>
+                        <p><span class="etiqueta">Lugar:</span> Laboratorio 3</p>
+                        <p><span class="etiqueta">Estado:</span> Inscrita</p>
+
+                        <button type="button" class="boton-cancelar">
+                            Cancelar inscripción
+                        </button>
+                    </div>
+                </div>
+
+                <p id="mensajeSinInscripciones" class="mensaje-sin-inscripciones">
+                    No tiene actividades inscritas actualmente.
+                </p>
+
+                <div class="acciones-finales">
+                    <button type="button" id="btnAgregarActividades" class="boton-agregar">
+                        Agregar más actividades
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="piePagina">
+        <h2>Somos lo que sabemos</h2>
+        <p>&copy; 2026 Universidad Cenfotec</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/js/comunes/utilidades.js"></script>
+    <script src="/js/comunes/api.js"></script>
+    <script src="/js/comunes/avisos.js"></script>
+    <script src="/js/Inscripciones/gestionarInscripcionUsuario.js"></script>
+</body>
+</html>

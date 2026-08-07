@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CENFOTEC Página Web Eventos - Participantes</title>
+
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/componentes.css">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="/css/paginas/modulos.css">
+</head>
+
+<body>
+    <header class="encabezado">
+        <div class="contenedor">
+            <img src="/img/LogoBlanco.png"
+                 alt="Logo Universidad CENFOTEC"
+                 class="logo">
+
+            <h1>CENFOTEC Página Web Eventos</h1>
+
+            <div class="usuario">
+                <i class="fa-solid fa-user"></i>
+                Administrador
+            </div>
+        </div>
+
+    </header>
+    <main>
+        <!-- El menú lateral se carga desde /partials/navbar.html -->
+        <div id="navbar"></div>
+    
+
+
+        <!-- Contenido -->
+        <section class="contenido-principal">
+
+            <h2>Participantes</h2>
+
+            <p class="descripcion">
+                Seleccione la acción que desea realizar.
+            </p>
+
+            <div class="tarjeta-opcion">
+
+                <i class="fa-solid fa-list"></i>
+
+                <h3>Listar Participantes</h3>
+                <p>
+                    Muestra todos los participantes registrados
+                    en el sistema.
+                </p>
+
+                <a href="/pages/Participantes/listarParticipantes.html"
+                   class="boton">
+                    Acceder
+                </a>
+            </div>
+
+            <div class="tarjeta-opcion">
+
+                <i class="fa-solid fa-clipboard-list"></i>
+
+                <h3>Consultar por Actividad</h3>
+                <p>
+                    Visualiza los participantes inscritos
+                    en una actividad específica.
+                </p>
+
+                <a href="/pages/Participantes/buscarParticipantes.html"
+                   class="boton">
+                    Acceder
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <h2>Somos lo que sabemos </h2>
+        <p>&copy; 2026 Universidad Cenfotec </p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/js/comunes/utilidades.js"></script>
+    <script src="/js/comunes/api.js"></script>
+    <script src="/js/comunes/avisos.js"></script>
+    <script src="/js/comunes/navbar.js"></script>
+    <script src="/js/comunes/sesion.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,79 @@
+.contenido-principal {
+    padding:35px;
+}
+
+.contenido-principal h2{
+    color:var(--color-azulOscuro);
+    font-size:32px;
+    margin-bottom:10px;
+}
+
+.descripcion{
+    font-size:18px;
+    color:#666;
+    margin-bottom:30px;
+}
+
+.opciones{
+    margin-top:20px;
+}
+
+.tarjeta-opcion{
+    width:400px;
+    min-height:240px;
+    background:white;
+    border:2px solid #ddd;
+    border-radius:10px;
+    padding:30px;
+    text-align:center;
+    box-shadow:0 3px 8px rgba(0,0,0,.12);
+
+    display:inline-block;
+    vertical-align:top;
+    margin-right:25px;
+    margin-bottom:25px;
+}
+
+.tarjeta-opcion i{
+    font-size:48px;
+    color:var(--color-azulOscuro);
+    margin-bottom:20px;
+}
+
+.tarjeta-opcion h3{
+    color:var(--color-azulOscuro);
+    font-size:30px;
+    margin-bottom:18px;
+}
+
+.tarjeta-opcion p{
+    color:#555;
+    font-size:17px;
+    line-height:1.6;
+    margin-bottom:25px;
+}
+
+.boton{
+    display:inline-block;
+    background:var(--color-azulClaro);
+    color:white;
+    text-decoration:none;
+    padding:12px 25px;
+    border-radius:8px;
+    font-weight:bold;
+    transition:.3s;
+}
+
+.boton:hover{
+    background:var(--color-azulOscuro);
+}
+
+.badge-finalizada{
+    background:#7f8c8d;
+    color:white;
+}
+
+.badge-cancelada{
+    background:#e74c3c;
+    color:white;
+}

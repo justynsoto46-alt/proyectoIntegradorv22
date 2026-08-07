@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CENFOTEC Página Web Eventos</title>
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="/css/paginas/index.css">
+</head>
+
+<body>
+
+    <!-- Encabezado -->
+    <header class="encabezado">
+
+        <div class="contenedor">
+            <img src="/img/LogoBlanco.png" alt="Logo Universidad CENFOTEC" class="logo">
+            <h1>CENFOTEC Página Web Eventos</h1>
+
+            <nav class="menu">
+                <a href="/index.html">Inicio</a>
+                <a href="/index.html#eventos">Eventos</a>
+                <a href="/pages/Agenda/agendaPublica.html">Agenda</a>
+                <a href="/index.html#stands">Stands</a>
+                <a href="/pages/Inscripciones/inscripciones.html">Inscribirse</a>
+                <a href="/pages/DashBoard/iniciarSesion.html">Iniciar Sesión</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Evento destacado -->
+        <section class="evento-principal">
+
+            <div class="contenedor">
+                <div class="informacion-evento">
+
+                    <h2>Maker Faire</h2>
+                    <p>
+                        Maker Faire San José es la mayor celebración de la cultura "Hazlo tú mismo" (Do It Yourself) 
+                        en Costa Rica. Es un evento internacional sin fines de lucro que reúne a las mentes más curiosas, 
+                        creativas y apasionadas por la tecnología para compartir lo que hacen y lo que aprenden.
+                    </p>
+
+                    <p>
+                        Más que una feria de tecnología, es un movimiento global donde personas de todas las edades y niveles 
+                        de experiencia exhiben desde proyectos personales hasta emprendimientos innovadores. A través del 
+                        intercambio de ideas y la colaboración, fomentamos un ambiente que empodera a nuestra comunidad 
+                        para construir un futuro mejor.
+                    </p>
+
+                    <a href="/pages/Agenda/agendaPublica.html" class="boton">Ver Agenda</a>
+
+                    <a href="/pages/Inscripciones/inscripciones.html" class="boton-secundario">
+                        Inscribirse
+                    </a>
+                </div>
+
+                <div class="imagen-evento">
+
+                    <img src="/img/Maker Faire.png" alt="Evento Principal">
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Eventos institucionales -->
+        <section id="eventos" class="seccion">
+            <div class="contenedor">
+
+                <h2>Eventos Institucionales</h2>
+
+                <div class="tarjeta">
+                    <img src="/img/Maker Faire.png" alt="Maker Faire">
+
+                    <h3>Maker Faire</h3>
+
+                    <p>
+                        Evento tecnológico que reúne proyectos, talleres,
+                        conferencias y demostraciones desarrolladas por estudiantes,
+                        profesionales y empresas.
+                    </p>
+
+                    <p><i class="fa-solid fa-calendar-days"></i><strong>Fecha:</strong> 28 de junio de 2026</p>
+                    <p><i class="fa-solid fa-location-dot"></i><strong>Ubicación:</strong> Centro de Convenciones CIC ANDE</p>
+                    <p><i class="fa-solid fa-circle-check"></i><strong>Estado:</strong> Activo</p>
+
+                    <a href="/pages/Agenda/agendaPublica.html" class="boton-tarjeta">
+                        Ver agenda
+                    </a>
+                </div>
+
+                <div class="tarjeta">
+                    <img src="/img/Evento Empleo.jpg" alt="Feria de Empleo Tecnológico">
+
+                    <h3>Feria de Empleo Tecnológico</h3>
+
+                    <p>
+                        Espacio de encuentro entre estudiantes, profesionales
+                        y empresas interesadas en contratar talento para el
+                        sector tecnológico.
+                    </p>
+
+                    <p><i class="fa-solid fa-calendar-days"></i><strong>Fecha:</strong> 15 de agosto de 2026</p>
+                    <p><i class="fa-solid fa-location-dot"></i><strong>Ubicación:</strong> Universidad CENFOTEC</p>
+                    <p><i class="fa-solid fa-clock"></i></i><strong>Estado:</strong> Próximamente</p>
+
+                    <button class="boton-proximamente" disabled>
+                        Próximamente
+                    </button>
+                </div>
+
+                <div class="tarjeta">
+                    <img src="/img/Evento Innovacion.png" alt="Semana de Innovación">
+
+                    <h3>Semana de Innovación</h3>
+
+                    <p>
+                        Evento académico con actividades relacionadas con
+                        inteligencia artificial, desarrollo de software,
+                        ciberseguridad y emprendimiento.
+                    </p>
+
+                    <p><i class="fa-solid fa-calendar-days"></i><strong>Fecha:</strong> 3 al 7 de septiembre de 2026</p>
+                    <p><i class="fa-solid fa-location-dot"></i><strong>Ubicación:</strong> Universidad CENFOTEC</p>
+                    <p><i class="fa-solid fa-clock"></i><strong>Estado:</strong> Próximamente</p>
+
+                    <button class="boton-proximamente" disabled>
+                        Próximamente
+                    </button>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Actividades destacadas -->
+        <section class="seccion">
+            <div class="contenedor">
+
+                <h2>Actividades Destacadas del Maker Fair</h2>
+
+                <div class="tarjeta">
+                    <img src="/img/Actividad 1.jpg" alt="Actividad">
+                    <h3>¿Cómo transformar datos en movimiento físico en tiempo real?</h3>
+                    <p>Domingo 28 de junio, 2026</p>
+                    <p>9:30 am - 10:00 am</p>
+                    <p>Charla.</p>
+                    <button type="button" class="boton-tarjeta btn-actividad-uno">
+                        Ver actividad
+                    </button>
+
+                    <button id="btn-pago" class="boton-pago" onclick="window.location.href='/pages/DashBoard/pagoParticipante.html'"> &#128274;  Realizar Pago </button>
+                </div>
+
+                <div class="tarjeta">
+                    <img src="/img/Actividad 2.jpg" alt="Actividad">
+                    <h3>Impresión 3D: una tecnología para todos y todas</h3>
+                    <p>Domingo 28 de junio, 2026</p>
+                    <p>10:00 am - 12:00 pm</p>
+                    <p>Taller.</p>
+                    <button type="button" class="boton-tarjeta btn-actividad-dos">
+                        Ver actividad
+                    </button>
+                </div>
+
+                <div class="tarjeta">
+                    <img src="/img/Actividad 3.jpg" alt="Actividad">
+                    <h3>Primeros pasos con la placa microcontroladora IdeaBoard</h3>
+                    <p>Domingo 28 de junio, 2026</p>
+                    <p>10:00 am - 12:00 pm</p>
+                    <p>Taller.</p>
+                    <button type="button" class="boton-tarjeta btn-actividad-tres">
+                        Ver actividad
+                    </button>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Stands -->
+        <section id="stands" class="seccion">
+            <div class="contenedor">
+
+                <h2>Stands Participantes</h2>
+
+                <div class="tarjeta">
+                    <img src="/img/Stand 1.jpg" alt="Stand">
+                    <h3>Microsoft Costa Rica</h3>
+                    <p>Conozca las oportunidades de certificación, programas académicos y opciones de empleo 
+                        para estudiantes interesados en tecnologías Microsoft y computación en la nube.</p>
+                    <button type="button" class="boton-tarjeta btn-stand-uno">
+                        Ver más
+                    </button>
+                </div>
+
+                <div class="tarjeta">
+                    <img src="/img/Stand 2.jpg" alt="Stand">
+                    <h3>CINDE</h3>
+                    <p>Información sobre oportunidades laborales, crecimiento profesional y empresas 
+                        multinacionales que operan en Costa Rica dentro del sector tecnológico.</p>
+                    <button type="button" class="boton-tarjeta btn-stand-dos">
+                        Ver más
+                    </button>
+                </div>
+
+                <div class="tarjeta">
+                    <img src="/img/Stand 3.png" alt="Stand">
+                    <h3>GBM Costa Rica</h3>
+                    <p>Presentación de soluciones empresariales, infraestructura tecnológica, servicios en la nube 
+                        y programas dirigidos a estudiantes y futuros profesionales..</p>
+                    <button type="button" class="boton-tarjeta btn-stand-tres">
+                        Ver más
+                    </button>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Información del evento -->
+        <section class="seccion">
+            <div class="contenedor informacion-general">
+                <div>
+                    <h3>Fecha</h3>
+                    <p>Junio. 28, 2026.</p>
+                </div>
+
+                <div>
+                    <h3>Ubicación</h3>
+                    <p>Centro de Convenciones CIC ANDE, Heredia.</p>
+                </div>
+
+                <div>
+                    <h3>Organiza</h3>
+                    <p>Universidad CENFOTEC.</p>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Pie de página -->
+    <footer>
+        <div class="contenedor">
+            <div class="logo-footer">
+
+                <img src="/img/LogoBlanco.png" alt="Logo">
+
+            </div>
+
+            <div class="enlaces-footer">
+                <h3>Enlaces rápidos</h3>
+                <a href="/index.html">Inicio</a>
+                <a href="/pages/Agenda/agendaPublica.html">Agenda</a>
+                <a href="/index.html#stands">Stands</a>
+                <a href="/sobreNosotros.html">Sobre Nosotros</a>
+            </div>
+
+            <div class="contacto-footer">
+                <h3>Contacto</h3>
+                <p>Universidad CENFOTEC</p>
+                <p>Correo: info@ucenfotec.ac.cr</p>
+                <p>Teléfono: 4000-3950</p>
+            </div>
+
+            <div class="redes-sociales">
+                <h3>Síguenos</h3>
+                <i class="fa-brands fa-facebook-f"></i>
+                <i class="fa-brands fa-instagram"></i>
+                <i class="fa-brands fa-linkedin-in"></i>
+                <i class="fa-brands fa-youtube"></i>
+            </div>
+        </div>
+
+        <p>&copy; 2026 Universidad CENFOTEC</p>
+
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/js/comunes/utilidades.js"></script>
+    <script src="/js/comunes/api.js"></script>
+    <script src="/js/comunes/avisos.js"></script>
+    <script src="/js/Publico/index.js"></script>
+</body>
+</html>

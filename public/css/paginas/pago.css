@@ -1,0 +1,306 @@
+/* ============================================================
+   Estas dos variables son nuevas para esta página.
+   El resto (--color-azulOscuro, --color-celesteClaro, etc.)
+   siguen viniendo de index.css, no hace falta redefinirlas.
+   ============================================================ */
+:root {
+    --color-error: #d64545;
+    --color-exito: #28a745;
+}
+
+/* Centrar y darle diseño a la tarjeta de pago */
+.fondo-pago {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 70vh;
+}
+.tarjeta-pago {
+    background-color: white;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 35px;
+    border: 2px solid var(--color-grisClaro);
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+.tarjeta-pago h2 {
+    color: var(--color-azulOscuro);
+    text-align: center;
+    font-size: 26px;
+    margin-bottom: 20px;
+}
+
+/* Resumen del evento */
+.resumen-compra {
+    background-color: var(--color-celesteClaro);
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 25px;
+    color: var(--color-azulOscuro);
+    font-size: 15px;
+}
+.precio-total {
+    margin-top: 5px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* ============================================================
+   MEJORA 1: Tarjeta visual interactiva (se llena en vivo y gira)
+   ============================================================ */
+.tarjeta-visual {
+    perspective: 1000px;
+    height: 200px;
+    margin-bottom: 28px;
+}
+.tarjeta-caras {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+.tarjeta-caras.girada {
+    transform: rotateY(180deg);
+}
+.cara {
+    position: absolute;
+    inset: 0;
+    border-radius: 14px;
+    padding: 22px;
+    backface-visibility: hidden;
+    color: #fff;
+    background: linear-gradient(135deg, #1f3a5f 0%, #2f80ed 100%);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: background 0.5s;
+}
+.cara.frente {
+    overflow: hidden;
+}
+.cara.reverso {
+    transform: rotateY(180deg);
+    justify-content: flex-start;
+}
+/* Colores según la marca detectada */
+.tarjeta-caras[data-marca="visa"] .cara {
+    background: linear-gradient(135deg, #1a1f71, #2f6fd0);
+}
+.tarjeta-caras[data-marca="mastercard"] .cara {
+    background: linear-gradient(135deg, #3a2c1a, #c8551b);
+}
+.tarjeta-caras[data-marca="amex"] .cara {
+    background: linear-gradient(135deg, #0b5b8a, #26a5db);
+}
+.tv-fila-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.tv-chip {
+    width: 44px;
+    height: 32px;
+    border-radius: 6px;
+    background: linear-gradient(135deg, #e6c86e, #c99b34);
+    opacity: 0.9;
+}
+.tv-marca {
+    font-size: 30px;
+    line-height: 1;
+    min-height: 34px;
+}
+.tv-numero {
+    font-size: 22px;
+    letter-spacing: 2px;
+    font-family: "Courier New", monospace;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+.tv-fila-bottom {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+.tv-fila-bottom span:first-child {
+    opacity: 0.7;
+    font-size: 9px;
+    display: block;
+    letter-spacing: 1px;
+}
+.tv-nombre,
+.tv-vence {
+    font-size: 14px;
+}
+/* Reverso: banda magnética y CVV */
+.tv-banda {
+    height: 40px;
+    background: #111;
+    margin: 8px -22px 18px;
+}
+.tv-cvv-caja {
+    background: #fff;
+    color: #222;
+    text-align: right;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-family: "Courier New", monospace;
+    letter-spacing: 2px;
+}
+.tv-cvv-label {
+    font-size: 9px;
+    opacity: 0.7;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+}
+
+/* Estilos de los inputs del formulario */
+.grupo-input {
+    margin-bottom: 20px;
+}
+.grupo-input label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--color-grisOscuro);
+    font-weight: bold;
+    font-size: 14px;
+}
+.input-icono {
+    position: relative;
+}
+.input-icono i {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--color-grisOscuro);
+}
+.grupo-input input {
+    width: 100%;
+    padding: 12px 12px 12px 35px; /* Espacio extra a la izquierda para el ícono */
+    border: 2px solid var(--color-grisClaro);
+    border-radius: 6px;
+    font-size: 16px;
+    font-family: inherit;
+    transition: border-color 0.25s, box-shadow 0.25s;
+}
+/* Input sin ícono */
+#fecha-vencimiento {
+    padding: 12px;
+}
+.grupo-input input:focus {
+    outline: none;
+    border-color: var(--color-azulClaro);
+    box-shadow: 0 0 0 3px rgba(47, 128, 237, 0.15);
+}
+
+/* ============================================================
+   MEJORA 2: Estados de validación en vivo (verde / rojo)
+   ============================================================ */
+.grupo-input input.valido {
+    border-color: var(--color-exito);
+}
+.grupo-input input.invalido {
+    border-color: var(--color-error);
+}
+.mensaje-error {
+    color: var(--color-error);
+    font-size: 12px;
+    margin-top: 6px;
+    min-height: 14px;
+    display: block;
+}
+
+/* Alinear vencimiento y CVV */
+.fila-inputs {
+    display: flex;
+    gap: 15px;
+}
+.fila-inputs .grupo-input {
+    flex: 1;
+}
+
+/* Botón de pago a ancho completo */
+.boton-procesar {
+    width: 100%;
+    font-size: 18px;
+    padding: 15px;
+    margin-top: 10px;
+    transition: background 0.3s, opacity 0.3s;
+}
+/* MEJORA 3: botón deshabilitado hasta que el formulario sea válido */
+.boton-procesar:disabled {
+    background-color: var(--color-grisClaro);
+    color: var(--color-grisOscuro);
+    cursor: not-allowed;
+}
+
+/* ============================================================
+   MEJORA 4: Animación de rechazo (shake) + aviso
+   ============================================================ */
+@keyframes sacudir {
+    0%, 100%   { transform: translateX(0); }
+    20%, 60%   { transform: translateX(-8px); }
+    40%, 80%   { transform: translateX(8px); }
+}
+.sacudir {
+    animation: sacudir 0.4s;
+}
+.aviso-rechazo {
+    background-color: #fdecea;
+    color: var(--color-error);
+    border: 1px solid #f5c2c0;
+    border-radius: 6px;
+    padding: 12px;
+    margin-bottom: 18px;
+    font-size: 14px;
+    display: none;
+}
+.aviso-rechazo.visible {
+    display: block;
+}
+
+/* Pantalla de éxito (Oculta por defecto) */
+.pantalla-exito {
+    display: none;
+    text-align: center;
+    padding: 20px 0;
+}
+.pantalla-exito.visible {
+    display: block;
+}
+.pantalla-exito i {
+    font-size: 60px;
+    color: var(--color-exito);
+    margin-bottom: 15px;
+    animation: aparecer 0.5s ease;
+}
+@keyframes aparecer {
+    from { transform: scale(0); opacity: 0; }
+    to   { transform: scale(1); opacity: 1; }
+}
+.pantalla-exito h3 {
+    color: var(--color-azulOscuro);
+    margin-bottom: 10px;
+}
+.mt-2 {
+    margin-top: 20px;
+}
+
+/* MEJORA 5: respetar la preferencia de menos movimiento (accesibilidad) */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Ajuste responsive */
+@media (max-width: 520px) {
+    .tarjeta-pago { padding: 24px; }
+    .tv-numero { font-size: 18px; }
+}

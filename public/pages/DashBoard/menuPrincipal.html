@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CENFOTEC Página Web Eventos - Menú Principal</title>
+
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/componentes.css">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="/css/paginas/menuPrincipal.css">
+</head>
+<body>
+    <header class="encabezado">
+        <div class="contenedor">
+            <img src="/img/LogoBlanco.png" alt="Logo de CENFOTEC" class="logo">
+            <h1>CENFOTEC Página Web Eventos</h1>
+
+            <div class="usuario">
+                <i class="fa-solid fa-bell"></i>
+                <i class="fa-solid fa-user"></i>
+                <span>Administrador</span>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- El menú lateral se carga desde /partials/navbar.html -->
+        <div id="navbar"></div>
+    
+
+
+        <section class="contenido-principal">
+            <h2>Menú Principal</h2>
+
+            <div class="tarjeta-bienvenida">
+                <h3>Bienvenido al sistema administrativo</h3>
+                <p>Seleccione una opción para gestionar la información de eventos institucionales de la Universidad CENFOTEC.</p>
+            </div>
+
+            <div class="rejilla-tarjetas">
+
+                <a href="/pages/Evento/moduloEvento.html" class="tarjeta-modulo">
+                    <span class="icono-modulo">
+                        <i class="fa-solid fa-award"></i>
+                    </span>
+                    <h3>Eventos</h3>
+                    <p>Registre y consulte los eventos institucionales.</p>
+                </a>
+
+                <a href="/pages/Actividad/moduloActividad.html" class="tarjeta-modulo">
+                    <span class="icono-modulo">
+                        <i class="fa-solid fa-book-open"></i>
+                    </span>
+                    <h3>Actividades</h3>
+                    <p>Administre las actividades de cada evento.</p>
+                </a>
+
+                <a href="/pages/Stands/listarStands.html" class="tarjeta-modulo">
+                    <span class="icono-modulo">
+                        <i class="fa-solid fa-cube"></i>
+                    </span>
+                    <h3>Stands</h3>
+                    <p>Controle los stands y sus encargados.</p>
+                </a>
+
+                <a href="/pages/Participantes/participantes.html" class="tarjeta-modulo">
+                    <span class="icono-modulo">
+                        <i class="fa-solid fa-users"></i>
+                    </span>
+                    <h3>Participantes</h3>
+                    <p>Consulte a las personas inscritas.</p>
+                </a>
+
+                <a href="/pages/Responsables/listarResponsables.html" class="tarjeta-modulo">
+                    <span class="icono-modulo">
+                        <i class="fa-solid fa-user-tie"></i>
+                    </span>
+                    <h3>Responsables</h3>
+                    <p>Gestione a los responsables de actividades.</p>
+                </a>
+
+                <a href="/pages/Administrador/listarAdmin.html" class="tarjeta-modulo">
+                    <span class="icono-modulo">
+                        <i class="fa-solid fa-user-plus"></i>
+                    </span>
+                    <h3>Administradores</h3>
+                    <p>Gestione las cuentas del personal del sistema.</p>
+                </a>
+
+                <a href="/pages/Agenda/listarAgenda.html" class="tarjeta-modulo">
+                    <span class="icono-modulo">
+                        <i class="fa-solid fa-table-columns"></i>
+                    </span>
+                    <h3>Agenda</h3>
+                    <p>Revise la programación por fecha y horario.</p>
+                </a>
+
+                <a href="/pages/DashBoard/pagoSimulado.html" class="tarjeta-modulo">
+                    <span class="icono-modulo">
+                        <i class="fa-solid fa-credit-card"></i>
+                    </span>
+                    <h3>Pagos</h3>
+                    <p>Consulte los pagos de las inscripciones.</p>
+                </a>
+
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <h2>Somos lo que sabemos </h2>
+        <p>&copy; 2026 Universidad CENFOTEC </p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/js/comunes/utilidades.js"></script>
+    <script src="/js/comunes/api.js"></script>
+    <script src="/js/comunes/avisos.js"></script>
+    <script src="/js/comunes/navbar.js"></script>
+    <script src="/js/comunes/sesion.js"></script>
+</body>
+</html>

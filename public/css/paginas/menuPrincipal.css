@@ -1,0 +1,131 @@
+/* Contenido principal */
+.contenido-principal {
+    padding: 35px;
+}
+
+/* ------------------------------------------------------------
+   Tarjetas del panel principal (menuPrincipal.html)
+   ------------------------------------------------------------ */
+
+/* Tarjeta de bienvenida */
+.tarjeta-bienvenida {
+    background-color: white;
+    padding: 28px 30px;
+    margin-bottom: 30px;
+
+    border: 1px solid var(--color-grisClaro);
+    border-left: 6px solid var(--color-amarilloOscuro);
+    border-radius: 12px;
+
+    box-shadow: 0 2px 10px rgba(22, 74, 152, 0.10);
+}
+
+.tarjeta-bienvenida h3 {
+    color: var(--color-azulOscuro);
+    font-size: 24px;
+    margin-bottom: 6px;
+}
+
+.tarjeta-bienvenida p {
+    font-size: 17px;
+    color: #555;
+    max-width: 720px;
+}
+
+/* Rejilla de accesos: las tarjetas se acomodan solas según
+   el ancho disponible, sin dejar huecos ni desbordarse. */
+.rejilla-tarjetas {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 20px;
+}
+
+/* Tarjeta de acceso a cada módulo */
+.tarjeta-modulo {
+    display: block;
+    position: relative;
+    overflow: hidden;
+
+    background-color: white;
+    padding: 24px 22px;
+
+    border: 1px solid var(--color-grisClaro);
+    border-radius: 12px;
+
+    text-decoration: none;
+    color: inherit;
+
+    box-shadow: 0 2px 10px rgba(22, 74, 152, 0.10);
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+
+/* Franja superior que aparece al pasar el mouse */
+.tarjeta-modulo::before {
+    content: "";
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+
+    background-color: var(--color-amarilloOscuro);
+
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.2s;
+}
+
+.tarjeta-modulo:hover {
+    transform: translateY(-4px);
+    border-color: var(--color-azulClaro);
+    box-shadow: 0 8px 20px rgba(22, 74, 152, 0.20);
+}
+
+.tarjeta-modulo:hover::before {
+    transform: scaleX(1);
+}
+
+/* Círculo con el icono del módulo */
+.icono-modulo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 52px;
+    height: 52px;
+    margin-bottom: 16px;
+
+    background-color: var(--color-celesteClaro);
+    border-radius: 12px;
+
+    transition: background-color 0.2s;
+}
+
+.icono-modulo i {
+    font-size: 22px;
+    color: var(--color-azulOscuro);
+    transition: color 0.2s;
+}
+
+.tarjeta-modulo:hover .icono-modulo {
+    background-color: var(--color-azulOscuro);
+}
+
+.tarjeta-modulo:hover .icono-modulo i {
+    color: white;
+}
+
+/* Título de la tarjeta */
+.tarjeta-modulo h3 {
+    color: var(--color-azulOscuro);
+    font-size: 19px;
+    margin-bottom: 6px;
+}
+
+/* Texto de la tarjeta */
+.tarjeta-modulo p {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.5;
+}

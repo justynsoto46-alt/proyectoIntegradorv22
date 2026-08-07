@@ -1,0 +1,325 @@
+/* ============================================================
+   componentes.css
+   Piezas visuales que se repiten en varias pantallas: las tablas de
+   los listados, la barra de búsqueda, los botones de acción, la
+   paginación y los campos de los formularios.
+
+   Las reglas se tomaron tal cual de las hojas del proyecto; lo único
+   que cambió es que ahora están escritas una sola vez.
+
+   Se enlaza después de base.css y antes de la hoja de cada página,
+   para que cualquier pantalla pueda seguir ajustando lo suyo.
+   ============================================================ */
+
+
+/* ---------- Listados: tarjeta, tabla, filtros, acciones y paginación ---------- */
+
+.tarjeta-admin{
+    width:100%;
+    max-width:1080px;
+    background:white;
+    padding:40px;
+    border:2px solid var(--color-grisClaro);
+    border-radius:10px;
+    box-shadow:0 3px 8px rgba(0,0,0,.12);
+}
+
+.tarjeta-admin h2{
+    color:var(--color-AzulOscuro);
+    margin-bottom:8px;
+}
+
+.encabezado-listado{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+}
+
+.barra-filtros{
+    display:flex;
+    gap:15px;
+    margin-bottom:20px;
+    flex-wrap:wrap;
+}
+
+.campo-busqueda{
+    flex:1;
+    min-width:260px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    border:1px solid var(--color-grisClaro);
+    border-radius:8px;
+    padding:10px 15px;
+    background:white;
+}
+
+.campo-busqueda:focus-within{
+    border-color:var(--color-AzulClaro);
+    box-shadow:0 0 4px rgba(0,106,234,.25);
+}
+
+.campo-busqueda i{
+    color:#888;
+}
+
+.campo-busqueda input{
+    border:none;
+    outline:none;
+    width:100%;
+    font-size:15px;
+}
+
+.selector-estado{
+    border:1px solid var(--color-grisClaro);
+    border-radius:8px;
+    padding:10px 15px;
+    background:white;
+    cursor:pointer;
+}
+
+.tabla-admin{
+    width:100%;
+    border-collapse:collapse;
+}
+
+.tabla-admin th{
+    background:var(--color-AzulOscuro);
+    color:white;
+    padding:14px;
+    text-align:left;
+}
+
+.tabla-admin td{
+    padding:14px;
+    border:1px solid #ddd;
+    vertical-align:middle;
+}
+
+.tabla-admin tbody tr:nth-child(even){
+    background:#f4f4f4;
+}
+
+.tabla-admin tbody tr:hover{
+    background:var(--color-celesteClaro);
+}
+
+.celda-imagen{
+    width:70px;
+    text-align:center;
+}
+
+.celda-imagen i{
+    font-size:28px;
+    color:#7f8c8d;
+}
+
+.celda-acciones{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:10px;
+}
+
+.btn-icono{
+    width:42px;
+    height:42px;
+    border:1px solid #d8d8d8;
+    border-radius:50%;
+    background:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-decoration:none;
+    cursor:pointer;
+    transition:.3s;
+    box-shadow:0 2px 6px rgba(0,0,0,.12);
+    font-size:16px;
+}
+
+.boton-modificar{
+    color:#f39c12;
+}
+
+.boton-modificar:hover{
+    background:#f39c12;
+    color:white;
+    transform:scale(1.08);
+}
+
+.boton-eliminar{
+    color:#e74c3c;
+}
+
+.boton-eliminar:hover{
+    background:#e74c3c;
+    color:white;
+    transform:scale(1.08);
+}
+
+.paginacion{
+    margin-top:25px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.texto-paginacion{
+    color:#555;
+}
+
+.controles-paginacion{
+    display:flex;
+    align-items:center;
+    gap:6px;
+}
+
+.btn-pag{
+    background:white;
+    border:1px solid #ddd;
+    padding:6px 12px;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.btn-pag.activo{
+    background:var(--color-AzulOscuro);
+    color:white;
+}
+
+.sin-resultados{
+    display: none;
+    text-align:center;
+    color:#777;
+    padding:20px;
+}
+
+
+/* ---------- Formularios ---------- */
+
+.formulario{
+    margin-top: 15px;
+}
+
+.formulario label{
+    display: block;
+    margin-top: 18px;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: var(--color-azulOscuro);
+}
+
+.formulario input,
+.formulario textarea,
+.formulario select{
+    display: block;
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--color-grisClaro);
+    border-radius: 8px;
+    font-size: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.formulario input:focus,
+.formulario textarea:focus,
+.formulario select:focus{
+    outline: none;
+    border-color: var(--color-azulClaro);
+}
+
+.formulario textarea{
+    resize: vertical;
+    min-height: 120px;
+}
+
+.formulario input[type="file"]{
+    padding:10px;
+    background:white;
+    cursor:pointer;
+}
+
+.formulario input[type="file"]::file-selector-button{
+    background:var(--color-azulClaro);
+    color:white;
+    border:none;
+    padding:8px 16px;
+    border-radius:6px;
+    margin-right:12px;
+    cursor:pointer;
+    font-size:14px;
+    transition:.3s;
+}
+
+.formulario input[type="file"]::file-selector-button:hover{
+    background:var(--color-azulOscuro);
+}
+
+
+/* ---------- Botones ---------- */
+
+.boton{
+    background:var(--color-AzulOscuro);
+    color:white;
+    border:none;
+    padding:12px 20px;
+    border-radius:8px;
+    text-decoration:none;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.boton:hover{
+    background:var(--color-AzulClaro);
+}
+
+.boton:active{
+    transform:translateY(0);
+}
+
+.boton-primario{
+    background:var(--color-AzulOscuro);
+    color:white;
+    border:none;
+    padding:12px 20px;
+    border-radius:8px;
+    text-decoration:none;
+    font-size:15px;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.boton-primario:hover{
+    background:var(--color-AzulClaro);
+}
+
+.boton-primario:active { transform: translateY(0); }
+
+/* Botón de acción secundaria: mismo tamaño que el principal
+   pero en gris, para que no compita con el de guardar.
+   Se tomó el estilo que ya usaba modificarAdmin.css. */
+.boton-secundario{
+    background:var(--color-grisOscuro);
+    color:white;
+    text-decoration:none;
+    display:inline-flex;
+    justify-content:center;
+    align-items:center;
+    gap:8px;
+}
+
+.boton-secundario:hover{
+    background:#5f5f5f;
+}
+
+.boton-bloque { width: 100%; }
+
+.boton-lg { padding: 0.85rem 1.75rem; font-size: var(--texto-base); }
+

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Admin</title>
+
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/componentes.css">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="/css/paginas/menuPrincipal.css">
+    <link rel = "Stylesheet" href = "/css/paginas/registrarAdmin.css">
+</head>
+<body>
+    <header class="encabezado">
+        <div class="contenedor">
+            <img src="/img/LogoBlanco.png" alt="Logo de CENFOTEC" class="logo">
+            <h1>CENFOTEC Página Web Eventos</h1>
+
+            <div class="usuario">
+                <i class="fa-solid fa-bell"></i>
+                <i class="fa-solid fa-user"></i>
+                <span>Administrador</span>
+            </div>
+        </div>
+    </header>
+    <main>
+        <!-- El menú lateral se carga desde /partials/navbar.html -->
+        <div id="navbar"></div>
+    
+
+        <section class="contenido-principal">
+
+            <div class="contenedor tarjeta-Inicio-Sesion">
+                <h2>Crear nuevo administrador</h2>
+
+                <form id ="formulario" class="formulario" action="#"  method="post" novalidate>
+
+                    <label for="nombre">Nombre </label>
+                        <input type="text" name="Nombre Completo" id="nombre" placeholder="Nombre Completo " required>
+
+                    <label for="correo">Correo Electronico </label>
+
+                        <input type="email" name="correo" id="correo" placeholder="ejemplo@correo.com" required>
+                    <label for="contrasena">Contraseña
+                        <input type="password" name="contrasena" id="contrasena" placeholder="******" required>
+                    </label>
+                    <h4> &#9888; La contraseña debe tener entre 8 a 16 caracteres, una mayúscula, una minúscula, un número, un caracter especial y no debe contener vocales. &#9888;
+                    </h4>
+                    <label for="rol">Seleccione un Rol</label>
+                    <select name="rol" id="rol">
+                        <option value="Administrador">
+                        Administrador
+                        </option>
+                    </select>
+                    <button type="submit" class="boton boton-primario boton-bloque boton-lg" id="boton-ingresar">
+
+                        Crear Usuario</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+
+    <footer>
+        <h2>Somos lo que sabemos </h2>
+        <p>&copy; 2026 Universidad CENFOTEC </p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/js/comunes/utilidades.js"></script>
+    <script src="/js/comunes/api.js"></script>
+    <script src="/js/comunes/avisos.js"></script>
+    <script src="/js/comunes/navbar.js"></script>
+    <script src="/js/comunes/sesion.js"></script>
+    <script src="/js/Administrador/registrarAdministrador.js"></script>
+</body>
+</html>

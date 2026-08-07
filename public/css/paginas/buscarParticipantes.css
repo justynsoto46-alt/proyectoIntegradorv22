@@ -1,0 +1,103 @@
+/* Contenedor del formulario */
+.formulario-contenedor {
+    width: 100%;
+    background-color: white;
+    padding: 35px;
+    border: 2px solid var(--color-grisClaro);
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+/* Descripción de la pantalla */
+.descripcion {
+    margin-bottom: 25px;
+    margin-top: 25px;
+    color: var(--color-azulOscuro);
+}
+
+/* Contenedor de búsqueda */
+.buscador {
+    display: flex;
+    align-items: end;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+/* Etiqueta del selector */
+.buscador label {
+    display: block;
+    font-weight: bold;
+    color: var(--color-azulOscuro);
+    margin-bottom: 8px;
+}
+
+/* Selector de actividades */
+.buscador select {
+    width: 550px;
+    padding: 10px;
+    border: 1px solid var(--color-grisClaro);
+    border-radius: 5px;
+    font-size: 15px;
+}
+
+/* Efecto al seleccionar el selector */
+.buscador select:focus {
+    outline: none;
+    border-color: var(--color-azulClaro);
+}
+
+/* Botón Consultar */
+.boton {
+    background-color: var(--color-azulClaro);
+    color: white;
+    border: none;
+    padding: 11px 22px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: transform 0.3s;
+}
+
+/* Hover del botón */
+.boton:hover {
+    background-color: var(--color-azulOscuro);
+    transform: scale(1.05);
+}
+
+/* Tabla de participantes */
+.tabla-participantes {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 25px;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+}
+
+/* Encabezados y celdas */
+.tabla-participantes th,
+.tabla-participantes td {
+    border: 1px solid var(--color-grisClaro);
+    padding: 16px 18px;
+    text-align: left;
+    vertical-align: middle;
+}
+
+/* Encabezado de la tabla */
+.tabla-participantes th {
+    background-color: var(--color-azulOscuro);
+    color: white;
+    padding: 18px;
+    font-size: 15px;
+}
+
+/* Filas pares */
+.tabla-participantes tr:nth-child(even) {
+    background-color: #f4f4f4;
+}
+
+/* Hover sobre las filas */
+.tabla-participantes tbody tr:hover {
+    background-color: var(--color-celesteClaro);
+}

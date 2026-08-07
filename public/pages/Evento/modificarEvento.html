@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modificar Evento</title>
+
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/componentes.css">
+    <!-- FontAwesome -->
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<link rel="stylesheet" href="/css/paginas/menuPrincipal.css">
+<link rel="stylesheet" href="/css/paginas/modificarEvento.css">
+</head>
+
+<body>
+
+    <header class="encabezado">
+        <div class="contenedor">
+            <img src="/img/LogoBlanco.png" alt="Logo de CENFOTEC" class="logo">
+
+            <h1>CENFOTEC Página Web Eventos</h1>
+
+            <div class="usuario">
+                <i class="fa-solid fa-bell"></i>
+                <i class="fa-solid fa-user"></i>
+                <span>Administrador</span>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- El menú lateral se carga desde /partials/navbar.html -->
+        <div id="navbar"></div>
+
+        <section class="section">
+
+            <div class="contenedor tarjeta-evento">
+
+                <h2>Modificar Evento</h2>
+
+                <form id="formularioModificarEvento" class="formulario">
+
+                    <label for="nombreEvento">
+                        Nombre del Evento
+                    </label>
+
+                    <input
+                    type="text"
+                    id="nombreEvento"
+                    name="nombreEvento"
+                    value="Feria Tecnológica 2026"
+                    required>
+
+                    <label for="descripcion">
+                        Descripción
+                    </label>
+
+                    <textarea
+                    id="descripcion"
+                    name="descripcion"
+                    required>Evento de innovación tecnológica organizado por Universidad CENFOTEC.</textarea>
+
+                    <label for="fechaInicio">
+                        Fecha de inicio
+                    </label>
+
+                    <input
+                    type="date"
+                    id="fechaInicio"
+                    name="fechaInicio"
+                    value="2026-09-15">
+
+                    <label for="fechaFinal">
+                        Fecha de finalización
+                    </label>
+
+                    <input
+                    type="date"
+                    id="fechaFinal"
+                    name="fechaFinal"
+                    value="2026-09-17">
+
+                    <label for="ubicacion">
+                        Ubicación
+                    </label>
+
+                    <input
+                    type="text"
+                    id="ubicacion"
+                    name="ubicacion"
+                    value="Universidad CENFOTEC">
+
+                    <label for="estado">
+                        Estado
+                    </label>
+
+                    <select
+                    id="estado"
+                    name="estado">
+
+                        <option value="Activo" selected>
+                            Activo
+                        </option>
+
+                        <option value="Cancelado">
+                            Cancelado
+                        </option>
+
+                        <option value="Finalizado">
+                            Finalizado
+                        </option>
+
+                    </select>
+                    <label for="imagenEvento">
+                        Imagen del Evento
+                    </label>
+
+                    <input
+                     type="file"
+                     id="imagenEvento"
+                     name="imagenEvento"
+                     accept=".jpg,.jpeg,.png">
+
+                    <button
+                    type="submit"
+                    class="boton boton-primario boton-bloque boton-lg">
+
+                        Guardar Cambios
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer>
+
+        <h2>Somos lo que sabemos</h2>
+
+        <p>&copy; 2026 Universidad CENFOTEC</p>
+
+    </footer>
+
+ <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/js/comunes/utilidades.js"></script>
+    <script src="/js/comunes/api.js"></script>
+    <script src="/js/comunes/avisos.js"></script>
+    <script src="/js/comunes/navbar.js"></script>
+    <script src="/js/comunes/sesion.js"></script>
+    <script src="/js/Evento/modificarEvento.js"></script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagos</title>
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/componentes.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/paginas/pagoSimulado.css">
+    <link rel="stylesheet" href="/css/paginas/menuPrincipal.css">
+</head>
+
+<body>
+    <header class="encabezado">
+        <div class="contenedor">
+            <img src="/img/LogoBlanco.png" alt="Logo de CENFOTEC" class="logo">
+            <h1>CENFOTEC Página Web Eventos</h1>
+
+            <div class="usuario">
+                <i class="fa-solid fa-bell"></i>
+                <i class="fa-solid fa-user"></i>
+                <span>Administrador</span>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- El menú lateral se carga desde /partials/navbar.html -->
+        <div id="navbar"></div>
+
+        <section class="section">
+            <div class="contenedor tarjeta-Inicio-Sesion">
+                <h2>Configurar Pago actividad</h2>
+
+                <form class="formulario" action="#" method="post" id="formPago" novalidate>
+                    <label for="rol">Seleccione una Actividad</label>
+                    <select name="rol" id="rol">
+                        <option value="defecto">Seleccione una Opcion</option>
+                        <option value="actividad1">Actividad 1</option>
+                        <option value="actividad2">Actividad 2</option>
+                    </select>
+
+                    <label for="precio">Precio de la actividad
+                        <span class="currency-symbol">&#8353;</span>
+                        <input type="number" name="PrecioActividad" id="precio" placeholder="500" required>
+                    </label>
+
+                    <button type="button" class="boton boton-primario boton-bloque boton-lg" id="boton-ingresar"
+                        onclick="registrarPagoRetorno()">
+                        Guardar Precio
+                    </button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <h2>Somos lo que sabemos </h2>
+        <p>&copy; 2026 Universidad Cenfotec </p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/js/comunes/utilidades.js"></script>
+    <script src="/js/comunes/api.js"></script>
+    <script src="/js/comunes/avisos.js"></script>
+    <script src="/js/comunes/navbar.js"></script>
+    <script src="/js/comunes/sesion.js"></script>
+    <script src="/js/DashBoard/pagoSimulado.js"></script>
+</body>
+
+</html>

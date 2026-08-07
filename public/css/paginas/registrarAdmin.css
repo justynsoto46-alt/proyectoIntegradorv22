@@ -1,0 +1,122 @@
+.contenido-principal {
+    display: flex;
+    justify-content:center;
+    padding:30px;
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:var(--color-celesteClaro);
+    color:var(--color-AzulOscuro);
+}
+
+footer{
+    background:var(--color-AzulClaro);
+    color:white;
+    text-align:center;
+    padding:18px;
+    margin-top:30px;
+}
+
+footer p{
+    color:white;
+}
+
+.tarjeta-Inicio-Sesion{
+    width:100%;
+    max-width:1080px;   /* antes 700px, ahora igual que .tarjeta-admin */
+    margin-top:30px;
+    background:white;
+    padding:40px;
+    border:2px solid var(--color-grisClaro);
+    border-radius:10px;
+    box-shadow:0 3px 8px rgba(0,0,0,.12);
+}
+
+.formulario{
+    margin-top:20px;
+}
+
+.formulario label{
+    display:block;
+    margin:15px 0 5px;
+    font-weight:bold;
+    color:#2d2a5f;
+}
+
+.formulario input,
+.formulario select{
+    display:block;
+    width:100%;
+    padding:12px;
+    font-size:15px;
+}
+
+.formulario input{
+    border:1px solid #aaa;
+    border-radius:5px;
+}
+
+.formulario input:focus,
+.formulario select:focus{
+    outline:none;
+    border-color:var(--color-AzulClaro);
+    box-shadow:0 0 4px rgba(0,106,234,.25);
+}
+
+.formulario select{
+    border:1px solid var(--color-grisClaro);
+    border-radius:8px;
+    background:white;
+    color:#333;
+    cursor:pointer;
+}
+
+.formulario h4{
+    margin-top:20px;
+    padding:10px;
+    background:var(--color-amarilloOscuro);
+    color:black;
+    border:2px solid var(--color-grisClaro);
+    border-radius:10px;
+    box-shadow:0 3px 8px rgba(0,0,0,.12);
+}
+
+.boton{
+    margin-top:20px;
+    display:inline-flex;
+    justify-content:center;
+    align-items:center;
+    gap:8px;
+    padding:14px 28px;
+    font-size:17px;
+    font-weight:600;
+    border:2px solid transparent;
+    border-radius:8px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.boton-lg{
+    padding:14px 28px;
+    font-size:17px;
+}
+
+.boton-primario{
+    background:var(--color-AzulClaro);
+    color:white;
+    border-color:var(--color-AzulClaro);
+    box-shadow:0 4px 14px rgba(0,106,234,.28);
+}
+
+.boton-primario:hover{
+    background:var(--color-AzulOscuro);
+    border-color:var(--color-AzulOscuro);
+    box-shadow:0 6px 20px rgba(22,74,152,.35);
+    transform:translateY(-1px);
+}
+
+.input-error{
+    border:2px solid #e74c3c !important;
+    background:#fff0f0;
+}

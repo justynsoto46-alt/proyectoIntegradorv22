@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listar Stand</title>
+
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/componentes.css">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="/css/paginas/menuPrincipal.css">
+    <link rel="stylesheet" href="/css/paginas/listarstand.css">
+</head>
+<body>
+    <header class="encabezado">
+        <div class="contenedor">
+            <img src="/img/LogoBlanco.png" alt="Logo de CENFOTEC" class="logo">
+            <h1>CENFOTEC Página Web Eventos</h1>
+
+            <div class="usuario">
+                <i class="fa-solid fa-bell"></i>
+                <i class="fa-solid fa-user"></i>
+                <span>Administrador</span>
+            </div>
+        </div>
+    </header>
+    <main>
+        <!-- El menú lateral se carga desde /partials/navbar.html -->
+        <div id="navbar"></div>
+
+        <section class="contenido-principal">
+
+            <div class="tarjeta-admin">
+
+                <div class="encabezado-listado">
+                    <h2>Stands</h2>
+                    <a href="/pages/Stands/registrarStand.html" class="boton">
+                        <i class="fa-solid fa-square-plus"></i>
+                        Nuevo Stand
+                    </a>
+                </div>
+
+
+                <div class="barra-filtros">
+
+                    <div class="campo-busqueda">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="search" id="buscarStand" placeholder="Buscar por nombre, teléfono o área...">
+                    </div>
+
+                    <select id="filtroEstado" class="selector-estado">
+                        <option value="todos">Estado: Todos</option>
+                        <option value="activo">Activo</option>
+                    </select>
+
+                </div>
+
+                <table class="tabla-admin">
+                    <thead>
+                        <tr>
+                            <th>Evento</th>
+                            <th>Nombre</th>
+                            <th>Encargado</th>
+                            <th>Correo</th>
+                            <th>Teléfono</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="cuerpoTablaStands">
+                        <!-- Las filas se agregan dinámicamente desde JavaScript -->
+                    </tbody>
+                </table>
+
+                <p id="sinResultados" class="sin-resultados" style="display:none;">
+                    No se encontraron stands que coincidan con la búsqueda.
+                </p>
+
+                <div class="paginacion">
+                    <span id="textoPaginacion" class="texto-paginacion"></span>
+                    <div class="controles-paginacion">
+                        <button class="btn-pag">Anterior</button>
+                        <button class="btn-pag activo">1</button>
+                        <button class="btn-pag">2</button>
+                        <span>...</span>
+                        <button class="btn-pag">5</button>
+                        <button class="btn-pag">Siguiente</button>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+    </main>
+
+    <footer>
+        <h2>Somos lo que sabemos </h2>
+        <p>&copy; 2026 Universidad CENFOTEC </p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/js/comunes/utilidades.js"></script>
+    <script src="/js/comunes/api.js"></script>
+    <script src="/js/comunes/avisos.js"></script>
+    <script src="/js/comunes/navbar.js"></script>
+    <script src="/js/comunes/sesion.js"></script>
+    <script src="/js/Stands/listarStands.js"></script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+.tarjeta-actividad{
+    margin-top: 30px;
+    width: 700px;
+    background-color: white;
+    padding: 40px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(0,0,0,.12);
+}
+
+.tarjeta-actividad h2{
+    color: var(--color-azulOscuro);
+    margin-bottom: 25px;
+}
+
+.formulario select{
+    background-color: white;
+    cursor: pointer;
+}
+
+.formulario input[readonly]{
+    background-color: #f2f2f2;
+    color: #666;
+    cursor: not-allowed;
+}
+
+.boton{
+    margin-top: 30px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: .3s;
+}
+
+.boton-primario{
+    background-color: var(--color-azulClaro);
+    color: white;
+}
+
+.boton-primario:hover{
+    background-color: var(--color-azulOscuro);
+}

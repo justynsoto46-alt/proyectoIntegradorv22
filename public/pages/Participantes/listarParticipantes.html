@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CENFOTEC Página Web Eventos - Participantes</title>
+
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/componentes.css">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="/css/paginas/menuPrincipal.css">
+    <link rel="stylesheet" href="/css/paginas/listarParticipantes.css">
+</head>
+
+<body>
+
+    <header class="encabezado">
+        <div class="contenedor">
+            <img src="/img/LogoBlanco.png" alt="Logo Universidad CENFOTEC" class="logo">
+
+            <h1>CENFOTEC Página Web Eventos</h1>
+
+            <div class="usuario">
+                <i class="fa-solid fa-bell"></i>
+                <i class="fa-solid fa-user"></i>
+                <span>Administrador</span>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- El menú lateral se carga desde /partials/navbar.html -->
+        <div id="navbar"></div>
+
+        <section class="contenido-principal">
+
+            <div class="tarjeta-admin">
+
+                <div class="encabezado-listado">
+                    <h2>Participantes</h2>
+                </div>
+
+                <div class="barra-filtros">
+                    <div class="campo-busqueda">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="search" id="buscarParticipante"
+                            placeholder="Buscar por nombre, identificación o correo...">
+                    </div>
+                </div>
+
+                <table class="tabla-admin">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Identificación</th>
+                            <th>Correo electrónico</th>
+                            <th>Teléfono</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="cuerpoTablaParticipantes">
+                        <!-- Las filas se agregarán dinámicamente desde JavaScript -->
+                    </tbody>
+
+                </table>
+
+                <p id="sinResultados" class="sin-resultados">
+                    No se encontraron participantes registrados.
+                </p>
+
+                <div class="paginacion">
+                    <span id="textoPaginacion" class="texto-paginacion">
+                        Total de participantes: 0
+                    </span>
+                </div>
+
+            </div>
+
+        </section>
+    </main>
+
+    <footer>
+        <h2>Somos lo que sabemos </h2>
+        <p>&copy; 2026 Universidad CENFOTEC </p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/js/comunes/utilidades.js"></script>
+    <script src="/js/comunes/api.js"></script>
+    <script src="/js/comunes/avisos.js"></script>
+    <script src="/js/comunes/navbar.js"></script>
+    <script src="/js/comunes/sesion.js"></script>
+    <script src="/js/Participantes/listarParticipantes.js"></script>
+</body>
+
+</html>

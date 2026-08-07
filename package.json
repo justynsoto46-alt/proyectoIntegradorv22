@@ -1,0 +1,27 @@
+{
+  "name": "proyecto-integrador",
+  "version": "1.0.0",
+  "description": "Repositorio para la creaction del proyecto final del curso de Proyecto Integrador l\r Para la pagina web de U Cenfotec",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/justynsoto46-alt/proyecto-integrador.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/justynsoto46-alt/proyecto-integrador/issues"
+  },
+  "homepage": "https://github.com/justynsoto46-alt/proyecto-integrador#readme",
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "jsdom": "^30.0.1",
+    "mongodb": "^7.5.0"
+  }
+}

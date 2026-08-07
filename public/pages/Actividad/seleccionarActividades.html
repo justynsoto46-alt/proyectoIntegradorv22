@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CENFOTEC Página Web Eventos - Selección de Actividades</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="/css/paginas/seleccionarActividades.css">
+</head>
+
+<body>
+    <header class="encabezado">
+        <div class="contenedor">
+            <img src="/img/LogoBlanco.png" alt="Logo Universidad CENFOTEC" class="logo">
+            <h1>CENFOTEC Página Web Eventos</h1>
+        </div>
+    </header>
+
+    <main>
+        <section class="seccion-actividades">
+            <div class="contenedor">
+                <h2>Selección de Actividades</h2>
+
+                <p class="descripcion">
+                    Seleccione las actividades a las que desea inscribirse.
+                </p>
+
+                <div class="tarjeta-actividad" data-fecha="2026-09-12" data-inicio="9" data-fin="11" data-cupos="18">
+                    <h3><i class="fa-solid fa-calendar-check"></i>Conferencia de Inteligencia Artificial</h3>
+                    <p><span class="etiqueta">Fecha:</span> 12/09/2026</p>
+                    <p><span class="etiqueta">Horario:</span> 9:00 a.m. - 11:00 a.m.</p>
+                    <p><span class="etiqueta">Cupos disponibles:</span> <span class="cupos">18</span></p>
+
+                    <button type="button" class="boton-inscribir">
+                        Inscribirme
+                    </button>
+                    <button type="button" class="boton-pago" id="btn-pago" onclick="window.location.href='../DashBoard/pagoParticipante.html'">
+                    Pagar
+                    </button>
+
+                    <button type="button" class="boton-quitar">
+                        Quitar selección
+                    </button>
+                </div>
+
+                <div class="tarjeta-actividad" data-fecha="2026-09-12" data-inicio="10" data-fin="12" data-cupos="6">
+                    <h3><i class="fa-solid fa-calendar-check"></i>Taller de Robótica</h3>
+                    <p><span class="etiqueta">Fecha:</span> 12/09/2026</p>
+                    <p><span class="etiqueta">Horario:</span> 10:00 a.m. - 12:00 m.d.</p>
+                    <p><span class="etiqueta">Cupos disponibles:</span> <span class="cupos">6</span></p>
+
+                    <button type="button" class="boton-inscribir">
+                        Inscribirme
+                    </button>
+
+                    <button type="button" class="boton-quitar">
+                        Quitar selección
+                    </button>
+                </div>
+
+                <div class="tarjeta-actividad" data-fecha="2026-09-13" data-inicio="15" data-fin="17" data-cupos="1">
+                    <h3><i class="fa-solid fa-calendar-check"></i>Taller de Desarrollo Web</h3>
+                    <p><span class="etiqueta">Fecha:</span>13/09/2026</p>
+                    <p><span class="etiqueta">Horario:</span>3:00 p.m. - 5:00 p.m.</p>
+                    <p><span class="etiqueta">Cupos disponibles:</span><span class="cupos">1</span></p>
+
+                    <button type="button" class="boton-inscribir">
+                        Inscribirme
+                    </button>
+
+                    <button type="button" class="boton-quitar">
+                        Quitar selección
+                    </button>
+                </div>
+
+                <div class="tarjeta-actividad" data-fecha="2026-09-13" data-inicio="13" data-fin="15" data-cupos="0">
+                    <h3><i class="fa-solid fa-calendar-check"></i>Exposición de Proyectos</h3>
+                    <p><span class="etiqueta">Fecha:</span> 13/09/2026</p>
+                    <p><span class="etiqueta">Horario:</span> 1:00 p.m. - 3:00 p.m.</p>
+                    <p><span class="etiqueta">Cupos disponibles:</span> <span class="cupos">0</span></p>
+
+                    <button type="button" class="boton-sin-cupos" disabled>
+                        Sin cupos
+                    </button>
+
+                    <button type="button" class="boton-quitar">
+                        Quitar selección
+                    </button>
+                </div>
+
+                <div class="acciones-finales">
+                    <button type="button" id="btnFinalizar" class="boton-finalizar">
+                        Finalizar inscripción
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <h2>Somos lo que sabemos</h2>
+        <p>&copy; 2026 Universidad Cenfotec</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/js/comunes/utilidades.js"></script>
+    <script src="/js/comunes/api.js"></script>
+    <script src="/js/comunes/avisos.js"></script>
+    <script src="/js/Actividad/seleccionarActividades.js"></script>
+</body>
+</html>

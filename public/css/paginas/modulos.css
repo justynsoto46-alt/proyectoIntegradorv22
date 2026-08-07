@@ -1,0 +1,66 @@
+/* Contenido principal */
+.contenido-principal {
+    padding: 35px;
+}
+
+/* Título principal */
+.contenido-principal h2 {
+    color: var(--color-azulOscuro);
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+/* Tarjetas de opciones */
+.tarjeta-opcion {
+    display: inline-block;
+    vertical-align: top;
+    width: 400px;
+    min-height: 300px;
+    background-color: white;
+    padding: 25px;
+    margin: 15px 18px 20px 0;
+    border: 2px solid var(--color-grisClaro);
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+    text-align: center;
+}
+
+/* Iconos de las tarjetas */
+.tarjeta-opcion i {
+    font-size: 42px;
+    color: var(--color-azulOscuro);
+    margin-bottom: 20px;
+}
+
+/* Títulos de las tarjetas */
+.tarjeta-opcion h3 {
+    color: var(--color-azulOscuro);
+    font-size: 22px;
+    margin-bottom: 15px;
+}
+
+/* Texto de las tarjetas */
+.tarjeta-opcion p {
+    font-size: 15px;
+    margin-bottom: 25px;
+}
+
+/* Botón general */
+.boton {
+    display: inline-block;
+    background-color: var(--color-azulClaro);
+    color: white;
+    text-decoration: none;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 6px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+/* Efecto del botón */
+.boton:hover {
+    background-color: var(--color-azulOscuro);
+    transform: scale(1.05);
+}

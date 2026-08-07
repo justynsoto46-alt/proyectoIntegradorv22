@@ -1,0 +1,85 @@
+.tarjeta-evento{
+
+    width:650px;
+
+    margin-top:30px;
+
+    background:white;
+
+    padding:40px;
+
+    border:2px solid var(--color-grisClaro);
+
+    border-radius:10px;
+
+    box-shadow:0 3px 8px rgba(0,0,0,.12);
+
+}
+
+.tarjeta-evento h2{
+
+    color:var(--color-AzulOscuro);
+
+    margin-bottom:25px;
+
+}
+
+.formulario label{
+
+    display:block;
+
+    margin-top:18px;
+
+    margin-bottom:6px;
+
+    font-weight:bold;
+
+    color:var(--color-AzulOscuro);
+
+}
+
+.formulario input,
+
+.formulario textarea,
+
+.formulario select{
+
+    width:100%;
+
+    padding:12px;
+
+    border:1px solid #bdbdbd;
+
+    border-radius:6px;
+
+    font-size:15px;
+
+}
+
+.boton{
+
+    margin-top:30px;
+
+    width:100%;
+
+    padding:14px;
+
+    border:none;
+
+    border-radius:8px;
+
+    background:var(--color-AzulClaro);
+
+    color:white;
+
+    font-size:16px;
+
+    cursor:pointer;
+
+}
+
+.boton:hover{
+
+    background:var(--color-AzulOscuro);
+
+}

@@ -1,0 +1,264 @@
+/* Contenido principal */
+.contenido-principal {
+    padding: 25px;
+}
+
+/* Título principal */
+.contenido-principal h2 {
+    color: var(--color-azulOscuro);
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+/* Descripción */
+.descripcion{
+    color:#333;
+    margin-bottom:30px;
+}
+
+/* Buscador */
+.buscador {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+/* Label del buscador */
+.buscador label {
+    display: block;
+    color: var(--color-azulOscuro);
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+/* Input del buscador */
+.buscador input {
+    display: inline-block;
+    width: 350px;
+    padding: 10px;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    font-size: 15px;
+    margin-right: 10px;
+}
+
+/* Efecto al seleccionar el input */
+.buscador input:focus {
+    outline: none;
+    border-color: var(--color-azulClaro);
+}
+
+/* Botón general */
+.boton {
+    display: inline-block;
+    background-color: var(--color-azulClaro);
+    color: white;
+    text-decoration: none;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 6px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+/* Hover del botón general */
+.boton:hover {
+    background-color: var(--color-azulOscuro);
+    transform: scale(1.05);
+}
+
+/* Tabla de responsables */
+.tabla-Stands {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 5px;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+}
+
+/* Encabezados y celdas */
+.tabla-Stands th,
+.tabla-Stands td {
+    border:1px solid var(--color-grisClaro);
+    padding: 16px 18px;
+    text-align: left;
+    vertical-align: middle;
+}
+
+/* Encabezado de tabla */
+.tabla-Stands th {
+    background-color: var(--color-azulOscuro);
+    color:white;
+    padding: 18px;
+    font-size: 15px;
+}
+
+/* Filas pares de la tabla */
+.tabla-Stands tr:nth-child(even) {
+    background-color: var(--color-grisClaro);
+}
+
+/* Efecto al pasar el mouse por una fila */
+.tabla-Stands tbody tr:hover {
+    background-color: var(--color-celesteClaro);
+}
+
+/* Botón modificar y eliminar*/
+.boton-modificar-eliminar {
+    display: inline-block;
+    background-color: var(--color-azulClaro);
+    color: white;
+    text-decoration: none;
+    padding: 8px 14px;
+    border-radius: 5px;
+    border: none;
+    font-size: 14px;
+    margin-right: 6px;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+/* Hover del botón modificar y eliminar */
+.boton-modificar-eliminar:hover {
+    background-color: var(--color-azulOscuro);
+    transform: scale(1.05);
+}
+
+/* Botón principal */
+.boton {
+    display: inline-block;
+    background-color: var(--color-azulClaro);
+    color: white;
+    text-decoration: none;
+    border: none;
+    padding: 15px 15px;
+    border-radius: 15px;
+    font-size: 15px;
+    cursor: pointer;
+    margin-right: 12px;
+    transition: transform 0.3s;
+}
+
+/* Botón secundario */
+.boton-secundario {
+    display: inline-block;
+    background-color: white;
+    color: var(--color-azulOscuro);
+    text-decoration: none;
+    border: 2px solid var(--color-azulClaro);
+    padding: 10px 22px;
+    border-radius: 6px;
+    font-size: 17px;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.btn-icono {
+    background: none;
+    border: 1px solid #ccc;
+    border-radius: 50%; 
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.btn-icono:hover {
+    background-color: var(--color-azulOscuro);
+}
+
+/* Efecto visual de botones */
+.boton:hover,
+.boton-secundario:hover,
+.boton-tarjeta:hover {
+    transform: scale(1.05);
+}
+
+/* Hover de botón principal */
+.boton:hover {
+    background-color: var(--color-azulOscuro);
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:var(--color-celesteClaro);
+    color:var(--color-AzulOscuro);
+}
+
+.contenido-principal {
+    display: flex;
+    justify-content:center;
+    padding:30px;
+}
+
+.descripcion{
+    color:#555;
+    margin-bottom:30px;
+}
+
+.boton{
+    background:var(--color-AzulOscuro);
+    color:white;
+    border:2px solid var(--color-AzulOscuro);
+    padding:12px 20px;
+    border-radius:8px;
+    text-decoration:none;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    cursor:pointer;
+    font-weight:600;
+    transition:.3s;
+}
+
+.boton:hover{
+    background:var(--color-AzulClaro);
+    border-color:var(--color-AzulClaro);
+    transform:translateY(-1px);
+}
+
+.campo-busqueda{
+    flex:1;
+    min-width:260px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    border:1px solid #aaa;
+    border-radius:5px;
+    padding:10px 15px;
+    background:white;
+    transition:.3s;
+}
+
+.selector-estado{
+    border:1px solid #aaa;
+    border-radius:5px;
+    padding:10px 15px;
+    background:white;
+    color:#333;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.selector-estado:focus{
+    outline:none;
+    border-color:var(--color-AzulClaro);
+    box-shadow:0 0 4px rgba(0,106,234,.25);
+}
+
+.tabla-admin td{
+    padding:14px;
+    border:1px solid #ddd;
+    vertical-align:middle;
+    color:#222;
+}
+
+.sin-resultados{
+    text-align:center;
+    color:#777;
+    padding:20px;
+}
