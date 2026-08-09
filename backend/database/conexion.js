@@ -11,14 +11,53 @@ const nombreBaseDatos = process.env.DB_NAME;
 // Crea el cliente que permitirá conectarse a MongoDB Atlas
 const clienteMongo = new MongoClient(uri);
 
-// Función para conectarse a MongoDB Atlas
-async function conectarBaseDatos() {
 
+// Función para crear un administrador inicial
+// únicamente cuando no existen administradores registrados
+async function crearAdministradorInicial(baseDatos){
+
+    // Obtiene la colección de administradores
+    const coleccionAdministradores =
+        baseDatos.collection("administradores");
+
+    // Cuenta cuántos administradores existen
+    const cantidadAdministradores =
+        await coleccionAdministradores.countDocuments();
+
+    // Si no existe ningún administrador, crea uno inicial
+    if(cantidadAdministradores === 0){
+
+        const administradorInicial = {
+            nombreCompleto: "Administrador CENFOTEC",
+            correo: "admin@ucenfotec.ac.cr",
+            contrasena: "Hwk$2026",
+            rol: "Administrador"
+        };
+
+        await coleccionAdministradores.insertOne(
+            administradorInicial
+        );
+
+        console.log(
+            "Administrador inicial creado correctamente"
+        );
+    }
+}
+
+
+// Función para conectarse a MongoDB Atlas
+async function conectarBaseDatos(){
+
+    // Realiza la conexión con MongoDB Atlas
     await clienteMongo.connect();
 
-    const baseDatos = clienteMongo.db(nombreBaseDatos);
+    // Obtiene la base de datos del proyecto
+    const baseDatos =
+        clienteMongo.db(nombreBaseDatos);
 
-    // Crea un índice único para impedir identificaciones duplicadas
+
+    // Crea un índice único para impedir
+    // identificaciones duplicadas de participantes
     await baseDatos
         .collection("participantes")
         .createIndex(
@@ -26,7 +65,9 @@ async function conectarBaseDatos() {
             { unique: true }
         );
 
-    // Crea un índice único para impedir correos duplicados de administradores
+
+    // Crea un índice único para impedir
+    // correos duplicados de administradores
     await baseDatos
         .collection("administradores")
         .createIndex(
@@ -34,7 +75,9 @@ async function conectarBaseDatos() {
             { unique: true }
         );
 
-    // Crea un índice único para impedir correos duplicados de responsables
+
+    // Crea un índice único para impedir
+    // correos duplicados de responsables
     await baseDatos
         .collection("responsables")
         .createIndex(
@@ -42,11 +85,24 @@ async function conectarBaseDatos() {
             { unique: true }
         );
 
-    console.log("Conexión exitosa con MongoDB Atlas");
 
+    // Verifica si se necesita crear
+    // el administrador inicial
+    await crearAdministradorInicial(
+        baseDatos
+    );
+
+
+    console.log(
+        "Conexión exitosa con MongoDB Atlas"
+    );
+
+    // Devuelve la conexión para utilizarla en el servidor
     return baseDatos;
 }
 
+
+// Exporta la función de conexión
 module.exports = {
     conectarBaseDatos
 };

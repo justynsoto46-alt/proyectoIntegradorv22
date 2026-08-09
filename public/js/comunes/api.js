@@ -1,8 +1,6 @@
 // Comunicación con el backend.
 //
-// Todos los listados y formularios repetían el mismo bloque: llamar a
-// fetch, convertir la respuesta a JSON y revisar si venía un error.
-// Estas funciones concentran ese trabajo: devuelven los datos ya listos
+// api.js lo que hace es llamar a fetch, convertir la respuesta a JSON y revisar si viene un error. Devuelven los datos ya listos
 // o lanzan un error con el mensaje que envió el servidor.
 
 
@@ -24,7 +22,7 @@ async function revisarRespuesta(respuesta){
 
 
 // Consulta una lista o un registro
-async function obtenerDatos(direccion){
+export async function obtenerDatos(direccion){
 
     const respuesta = await fetch(direccion);
 
@@ -33,7 +31,7 @@ async function obtenerDatos(direccion){
 
 
 // Envía un registro nuevo
-async function crearDatos(direccion, datos){
+export async function crearDatos(direccion, datos){
 
     const respuesta = await fetch(direccion, {
         method: "POST",
@@ -48,7 +46,7 @@ async function crearDatos(direccion, datos){
 
 
 // Guarda los cambios de un registro existente
-async function actualizarDatos(direccion, datos){
+export async function actualizarDatos(direccion, datos){
 
     const respuesta = await fetch(direccion, {
         method: "PUT",
@@ -63,7 +61,7 @@ async function actualizarDatos(direccion, datos){
 
 
 // Elimina un registro
-async function eliminarDatos(direccion){
+export async function eliminarDatos(direccion){
 
     const respuesta = await fetch(direccion, {
         method: "DELETE"

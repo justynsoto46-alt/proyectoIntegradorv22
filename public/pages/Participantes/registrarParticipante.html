@@ -47,13 +47,14 @@
                     <form class="formulario" id="formulario" action="#" method="post" novalidate>
 
                         <label for="nombreCompleto">Nombre completo *</label>
-                        <input type="text" id="nombreCompleto" name="nombreCompleto" placeholder="Nombre y apellidos" required>
+                        <input type="text" id="nombreCompleto" name="nombreCompleto" placeholder="Nombre y apellidos"
+                            required>
 
                         <label for="identificacion">Identificación *</label>
                         <input type="text" id="identificacion" name="identificacion" placeholder="123456789" required>
 
                         <label for="correo">Correo electrónico *</label>
-                        <input type="email" id="correo" name="correo" placeholder="ejemplo@ucenfotec.com"  required>
+                        <input type="email" id="correo" name="correo" placeholder="ejemplo@ucenfotec.com" required>
 
                         <label for="telefono">Teléfono *</label>
                         <input type="text" id="telefono" name="telefono" placeholder="88888888" required>
@@ -66,10 +67,10 @@
 
                         <div class="campo-boton">
                             <button type="submit" class="boton">
-                            Guardar y seleccionar actividades
+                                Guardar y seleccionar actividades
                             </button>
                         </div>
-                        
+
                     </form>
                 </div>
 
@@ -86,10 +87,10 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="/js/comunes/utilidades.js"></script>
-    <script src="/js/comunes/api.js"></script>
     <script src="/js/comunes/avisos.js"></script>
-    <script src="/js/Participantes/registrarParticipante.js"></script>
+    <script type="module" 
+        src="/js/controllers/registrarParticipanteController.js">
+    </script>
 </body>
 
 </html>

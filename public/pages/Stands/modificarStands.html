@@ -80,6 +80,12 @@
                         <input type="number" id="telefono" placeholder="Telefono" value="88321459" required>
                     </label>
 
+                    <label for="descripcion">
+                        Descripcion
+                        <textarea id="descripcion" name="descripcion" rows="5"
+                            placeholder="Ingrese la descripcion del stand" required></textarea>
+                    </label>
+
                     <div class="botones">
 
                         <button type="submit" class="boton-principal">
@@ -102,12 +108,13 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="/js/comunes/utilidades.js"></script>
-    <script src="/js/comunes/api.js"></script>
     <script src="/js/comunes/avisos.js"></script>
     <script src="/js/comunes/navbar.js"></script>
     <script src="/js/comunes/sesion.js"></script>
-    <script src="/js/Stands/modificarStands.js"></script>
+    <script
+        type="module"
+        src="/js/controllers/modificarStandController.js">
+    </script>
 </body>
 
 </html>

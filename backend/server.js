@@ -36,6 +36,14 @@ const responsableRoutes =
 const administradorRoutes =
     require("./routes/administradorRoutes");
 
+// Importa las rutas de autenticación
+const autenticacionRoutes =
+    require("./routes/autenticacionRoutes");
+
+// Importa las rutas para modificar contraseña
+const contrasenaRoutes =
+    require("./routes/contrasenaRoutes");
+
 // Permite recibir información en formato JSON
 app.use(express.json());
 
@@ -49,6 +57,12 @@ app.use("/api/administradores", administradorRoutes);
 
 // Permite que Express muestre los archivos del frontend
 app.use(express.static(carpetaPublica));
+
+// Registra las rutas de autenticación
+app.use("/api/autenticacion", autenticacionRoutes);
+
+// Registra las rutas de contraseña
+app.use("/api/contrasena", contrasenaRoutes);
 
 // Ruta temporal para comprobar que el servidor funciona
 app.get("/api/prueba", function (req, res) {

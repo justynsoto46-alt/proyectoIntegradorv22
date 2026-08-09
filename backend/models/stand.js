@@ -23,6 +23,7 @@ function crearDatosActualizacion(datos){
         encargado: datos.encargado,
         correo: datos.correo,
         telefono: datos.telefono,
+        descripcion: datos.descripcion,
         fechaModificacion: new Date()
     };
 }

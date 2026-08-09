@@ -47,6 +47,10 @@
                         <input type="text" name="institucion" id="institucion" placeholder="Microsoft" required>
                     </label>
 
+                    <label for="area">Área
+                        <input type="text" id="area" name="area" placeholder="Área del responsable" required>
+                    </label>
+
                     <div id="contenedor-telefonos">
                         <label>Teléfono
                             <input type="tel" name="telefono" placeholder="88888888" required>
@@ -86,12 +90,11 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="/js/comunes/utilidades.js"></script>
-    <script src="/js/comunes/api.js"></script>
     <script src="/js/comunes/avisos.js"></script>
     <script src="/js/comunes/navbar.js"></script>
     <script src="/js/comunes/sesion.js"></script>
-    <script src="/js/Responsables/registrarResponsable.js"></script>
+    <script type="module" src="/js/controllers/registrarResponsableController.js">
+    </script>
 </body>
 
 </html>

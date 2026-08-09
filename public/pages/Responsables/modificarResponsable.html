@@ -58,42 +58,38 @@
                         Nombre completo 
                         <input type="text"
                         id="nombreCompleto"
-                        placeholder="Nombre completo del Responsable"
-                        value="Carlos Mendoza" required>
+                        placeholder="Nombre completo del Responsable" required>
                     </label>
 
                     <label for="telefono">
                         Telefono 
                         <input type="number"
                         id="telefono"
-                        placeholder="Telefono"
-                        value="88321459" required>
+                        placeholder="Telefono" required>
                     </label>
 
                     <label for="Institucion">
                         Institucion 
                         <input type="text"
                         id="Institucion"
-                        placeholder="Institucion del Responable"
-                        value="TechSolutions S.A." required>
+                        placeholder="Institucion del Responable" required>
                     </label>
 
                     <label for="Area">
                         Area 
                         <input type="text"
                         id="Area"
-                        placeholder="Area del Responable"
-                        value="Desarrollador Backend" required>
+                        placeholder="Area del Responable" required>
                     </label>
 
                     <label for="biografia">
                         Biografía
                         <textarea
-                        id="biografia"
-                        name="biografia"
-                        rows="5"
-                        placeholder="Ingrese la biografía del Responsable"
-                        required>Ingeniero de software con sólida experiencia en la creación de APIs y arquitecturas escalables. Apasionado por la optimización de bases de datos y la seguridad de la información. Actualmente, en TechSolutions S.A., se encarga de garantizar el rendimiento, la integración y la estabilidad de los servicios del lado del servidor.</textarea>
+                            id="biografia"
+                            name="biografia"
+                            rows="5"
+                            placeholder="Ingrese la biografía del Responsable"required>
+                        </textarea>
                     </label>
 
                     <div class="botones">
@@ -120,11 +116,12 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="/js/comunes/utilidades.js"></script>
-    <script src="/js/comunes/api.js"></script>
     <script src="/js/comunes/avisos.js"></script>
     <script src="/js/comunes/navbar.js"></script>
     <script src="/js/comunes/sesion.js"></script>
-    <script src="/js/Responsables/modificarResponsable.js"></script>
+    <script
+        type="module"
+        src="/js/controllers/modificarResponsableController.js">
+    </script>
 </body>
 </html>

@@ -65,8 +65,11 @@
                         Evento Asociado
                     </label>
 
-                    <input type="text" id="eventoAsociado" name="eventoAsociado" placeholder="Ej. Maker Fair 2026"
-                        required>
+                    <select id="eventoAsociado" name="eventoAsociado" required>
+                        <option value="">
+                            Seleccione un evento
+                        </option>
+                    </select>
 
                     <label for="categoria">
                         Categoría
@@ -217,8 +220,7 @@
 
                 <!-- El precio de la actividad se configura en su propia
                      pantalla, por eso el acceso queda fuera del formulario -->
-                <a href="/pages/DashBoard/pagoSimulado.html"
-                   class="boton boton-bloque boton-lg boton-secundario">
+                <a href="/pages/DashBoard/pagoSimulado.html" class="boton boton-bloque boton-lg boton-secundario">
 
                     <i class="fa-solid fa-credit-card"></i>
                     Configurar pago de la actividad
@@ -240,12 +242,15 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="/js/comunes/utilidades.js"></script>
-    <script src="/js/comunes/api.js"></script>
     <script src="/js/comunes/avisos.js"></script>
     <script src="/js/comunes/navbar.js"></script>
     <script src="/js/comunes/sesion.js"></script>
-    <script src="/js/Actividad/registrarActividad.js"></script>
+    
+    <!-- Controller para registrar actividades -->
+    <script
+        type="module"
+        src="/js/controllers/registrarActividadController.js">
+    </script>
 </body>
 
 </html>

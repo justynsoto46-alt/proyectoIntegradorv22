@@ -4,7 +4,7 @@
 
 // Quita las tildes de un texto, para que las búsquedas encuentren
 // "Ramirez" aunque la persona esté guardada como "Ramírez".
-function quitarTildes(texto){
+export function quitarTildes(texto){
 
     return String(texto || "")
         .normalize("NFD")
@@ -14,14 +14,14 @@ function quitarTildes(texto){
 
 // Convierte un texto en algo cómodo de comparar:
 // sin tildes, sin espacios sobrantes y en minúscula.
-function normalizarTexto(texto){
+export function normalizarTexto(texto){
 
     return quitarTildes(texto).trim().toLowerCase();
 }
 
 
 // Muestra una fecha guardada como "2026-09-15" en formato dd/mm/aaaa
-function darFormatoFecha(fecha){
+export function darFormatoFecha(fecha){
 
     if(!fecha){
         return "";
@@ -38,7 +38,7 @@ function darFormatoFecha(fecha){
 
 
 // Muestra una hora de 24 horas ("14:30") en formato de 12 horas ("2:30 PM")
-function darFormatoHora(hora){
+export function darFormatoHora(hora){
 
     if(!hora){
         return "";
@@ -67,7 +67,7 @@ function darFormatoHora(hora){
 
 // Une en un solo texto todos los valores de un registro que se quieren
 // poder buscar. Se usa en los listados para filtrar mientras se escribe.
-function unirParaBuscar(valores){
+export function unirParaBuscar(valores){
 
     return normalizarTexto(valores.join(" "));
 }
