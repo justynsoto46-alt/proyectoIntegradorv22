@@ -333,6 +333,13 @@ async function registrarParticipanteRetorno() {
             const datosRespuesta =
                 await registrarParticipante(participante);
 
+            // Guarda temporalmente el identificador del participante
+            // para poder relacionarlo con sus inscripciones
+            sessionStorage.setItem(
+                "participanteId",
+                datosRespuesta.idParticipante
+            );
+
             // Muestra el mensaje de éxito
             Swal.fire({
                 title: "Datos registrados correctamente",
