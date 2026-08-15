@@ -43,3 +43,14 @@ export async function cancelarInscripcion(
         `${URL_INSCRIPCIONES}/${idInscripcion}`
     );
 }
+
+// Busca las inscripciones de un participante
+// utilizando su identificación
+export async function obtenerInscripcionesPorIdentificacion(
+    identificacion
+){
+
+    return await obtenerDatos(
+        `${URL_INSCRIPCIONES}/identificacion/${identificacion}`
+    );
+}

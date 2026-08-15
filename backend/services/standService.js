@@ -1,114 +1,222 @@
-// Aquí está toda la lógica para insertar, buscar,
-// modificar y eliminar stands en MongoDB.
+/*
+============================================================
+SERVICIO DE STANDS
+============================================================
 
-// Importa el tipo de dato especial que usa MongoDB para los _id (ObjectId)
+Este archivo contiene la lógica relacionada con stands.
+
+Aquí NO se accede directamente a MongoDB.
+
+Flujo:
+Controller -> Service -> DatosService -> MongoDB
+============================================================
+*/
+
 const { ObjectId } = require("mongodb");
 
-// Nombre de la colección
-const COLECCION = "stands";
+// Importa el servicio de acceso a datos
+const standDatosService =
+    require("./standDatosService");
 
-// Inserta el stand en MongoDB
-async function insertarStand(baseDatos, stand){
 
-    const coleccionStands = baseDatos.collection(COLECCION);
+/*
+Valida que el identificador tenga formato ObjectId.
+*/
+function validarId(idStand){
 
-    const resultado = await coleccionStands.insertOne(stand);
-
-    return resultado;
+    return ObjectId.isValid(
+        idStand
+    );
 }
 
-// Obtiene todos los stands guardados en MongoDB
-async function obtenerStands(baseDatos){
 
-    const coleccionStands =
-        baseDatos.collection(COLECCION);
+/*
+Registra un stand.
+*/
+async function registrarStand(
+    baseDatos,
+    stand
+){
 
-    // Consulta todos los documentos y los convierte en un arreglo
-    const stands =
-        await coleccionStands
-            .find()
-            .sort({ fechaRegistro: -1 })
-            .toArray();
+    const standGuardado =
+        await standDatosService.crear(
+            baseDatos,
+            stand
+        );
 
-    return stands;
+    return standGuardado;
 }
 
-// Obtiene el stand según su identificador
-async function obtenerStandPorId(
+
+/*
+Obtiene todos los stands.
+*/
+async function listarStands(
+    baseDatos
+){
+
+    return await standDatosService.listar(
+        baseDatos
+    );
+}
+
+
+/*
+Consulta un stand por su identificador.
+*/
+async function consultarStandPorId(
     baseDatos,
     idStand
 ){
 
-    // Verifica que el identificador tenga un formato válido
-    if(!ObjectId.isValid(idStand)){
-        return null;
+    // Valida el identificador
+    if(!validarId(idStand)){
+
+        const error =
+            new Error(
+                "El identificador del stand no es válido."
+            );
+
+        error.status = 400;
+
+        throw error;
     }
 
-    const coleccionStands =
-        baseDatos.collection(COLECCION);
 
+    // Busca el stand
     const stand =
-        await coleccionStands.findOne(
-            {
-                _id: new ObjectId(idStand)
-            }
+        await standDatosService.obtener(
+            baseDatos,
+            idStand
         );
+
+
+    // Verifica que exista
+    if(!stand){
+
+        const error =
+            new Error(
+                "No se encontró el stand."
+            );
+
+        error.status = 404;
+
+        throw error;
+    }
 
     return stand;
 }
 
-// Modifica el stand según su identificador
+
+/*
+Modifica un stand.
+*/
 async function modificarStand(
     baseDatos,
     idStand,
-    datosActualizados
+    cambios
 ){
 
-    // Verifica que el identificador tenga un formato válido
-    if(!ObjectId.isValid(idStand)){
-        return null;
+    // Valida el identificador
+    if(!validarId(idStand)){
+
+        const error =
+            new Error(
+                "El identificador del stand no es válido."
+            );
+
+        error.status = 400;
+
+        throw error;
     }
 
-    const coleccionStands =
-        baseDatos.collection(COLECCION);
 
-    // Actualiza únicamente los campos permitidos
-    const resultado =
-        await coleccionStands.updateOne(
-            {
-                _id: new ObjectId(idStand)
-            },
-            {
-                $set: datosActualizados
-            }
+    // Verifica que el stand exista
+    const stand =
+        await standDatosService.obtener(
+            baseDatos,
+            idStand
         );
 
-    return resultado;
-}
 
-// Elimina el stand según su identificador
-async function eliminarStand(baseDatos, idStand){
+    if(!stand){
 
-    // Verifica que el identificador tenga un formato válido
-    if(!ObjectId.isValid(idStand)){
-        return null;
+        const error =
+            new Error(
+                "No se encontró el stand."
+            );
+
+        error.status = 404;
+
+        throw error;
     }
 
-    const coleccionStands =
-        baseDatos.collection(COLECCION);
 
-    const resultado =
-        await coleccionStands.deleteOne({
-            _id: new ObjectId(idStand)
-        });
-
-    return resultado;
+    // Realiza la modificación
+    return await standDatosService.modificar(
+        baseDatos,
+        idStand,
+        cambios
+    );
 }
 
+
+/*
+Elimina un stand.
+*/
+async function eliminarStand(
+    baseDatos,
+    idStand
+){
+
+    // Valida el identificador
+    if(!validarId(idStand)){
+
+        const error =
+            new Error(
+                "El identificador del stand no es válido."
+            );
+
+        error.status = 400;
+
+        throw error;
+    }
+
+
+    // Verifica que exista
+    const stand =
+        await standDatosService.obtener(
+            baseDatos,
+            idStand
+        );
+
+
+    if(!stand){
+
+        const error =
+            new Error(
+                "No se encontró el stand."
+            );
+
+        error.status = 404;
+
+        throw error;
+    }
+
+
+    // Elimina el stand
+    return await standDatosService.eliminar(
+        baseDatos,
+        idStand
+    );
+}
+
+
+// Exporta las funciones del servicio
 module.exports = {
-    insertarStand,
-    obtenerStands,
-    obtenerStandPorId,
+    registrarStand,
+    listarStands,
+    consultarStandPorId,
     modificarStand,
     eliminarStand
 };

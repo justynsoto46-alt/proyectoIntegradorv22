@@ -1,13 +1,31 @@
-// Recibe las peticiones del navegador para eventos.
+/*
+============================================================
+CONTROLADOR DE EVENTOS
+============================================================
+
+Este archivo recibe las peticiones del navegador
+y coordina la respuesta al frontend.
+
+Aquí NO se accede directamente a MongoDB.
+
+Flujo:
+Route -> Controller -> Service -> DatosService -> MongoDB
+============================================================
+*/
+
 
 // Importa las funciones del servicio de eventos
 const {
-    insertarEvento,
-    obtenerEventos,
-    obtenerEventoPorId,
-    modificarEvento,
-    eliminarEvento
+    registrarEvento: registrarEventoService,
+    listarEventos: listarEventosService,
+    consultarEventoPorId:
+        consultarEventoPorIdService,
+    modificarEvento:
+        modificarEventoService,
+    eliminarEvento:
+        eliminarEventoService
 } = require("../services/eventoService");
+
 
 // Importa las funciones del modelo de evento
 const {
@@ -16,184 +34,289 @@ const {
 } = require("../models/evento");
 
 
-// Función para registrar el evento
+
+/*
+Función para registrar un evento.
+*/
 async function registrarEvento(req, res){
 
     try{
 
         // Obtiene la base de datos guardada en Express
-        const baseDatos = req.app.locals.baseDatos;
+        const baseDatos =
+            req.app.locals.baseDatos;
 
-        // Crea el evento utilizando la estructura del modelo
-        const datosEvento = crearEvento(req.body);
 
-        // Envía los datos al servicio para guardarlos en MongoDB
-        const resultado = await insertarEvento(
-            baseDatos,
-            datosEvento
-        );
+        // Crea el evento utilizando
+        // la estructura definida en el modelo
+        const datosEvento =
+            crearEvento(
+                req.body
+            );
 
+
+        // Envía el evento al service
+        const eventoGuardado =
+            await registrarEventoService(
+                baseDatos,
+                datosEvento
+            );
+
+
+        // Responde al frontend
         res.status(201).json({
-            mensaje: "Evento registrado correctamente.",
-            idEvento: resultado.insertedId
+
+            mensaje:
+                "Evento registrado correctamente.",
+
+            idEvento:
+                eventoGuardado._id
         });
 
     } catch(error){
 
-        console.error("Error al registrar evento:", error);
+        console.error(
+            "Error al registrar evento:",
+            error
+        );
 
-        res.status(500).json({
-            mensaje: "No se pudo registrar el evento."
+
+        const estado =
+            error.status || 500;
+
+
+        res.status(estado).json({
+
+            mensaje:
+                error.message ||
+                "No se pudo registrar el evento."
         });
     }
 }
 
-// Función para listar todos los eventos
+
+
+/*
+Función para listar todos los eventos.
+*/
 async function listarEventos(req, res){
 
     try{
 
-        const baseDatos = req.app.locals.baseDatos;
+        // Obtiene la base de datos
+        const baseDatos =
+            req.app.locals.baseDatos;
 
-        const eventos = await obtenerEventos(baseDatos);
 
-        res.status(200).json(eventos);
+        // Solicita la lista al service
+        const eventos =
+            await listarEventosService(
+                baseDatos
+            );
 
-    } catch(error){
 
-        console.error("Error al listar eventos:", error);
-
-        res.status(500).json({
-            mensaje: "No se pudieron cargar los eventos."
-        });
-    }
-}
-
-// Función para consultar el evento por su identificador
-async function consultarEventoPorId(req, res){
-
-    try{
-
-        const baseDatos = req.app.locals.baseDatos;
-
-        const idEvento = req.params.id;
-
-        const evento = await obtenerEventoPorId(
-            baseDatos,
-            idEvento
+        // Devuelve la lista al frontend
+        res.status(200).json(
+            eventos
         );
 
-        if(evento === null){
-
-            return res.status(404).json({
-                mensaje: "No se encontró el evento."
-            });
-        }
-
-        res.status(200).json(evento);
-
     } catch(error){
 
-        console.error("Error al consultar evento:", error);
+        console.error(
+            "Error al listar eventos:",
+            error
+        );
+
 
         res.status(500).json({
-            mensaje: "No se pudo consultar el evento."
+
+            mensaje:
+                "No se pudieron cargar los eventos."
         });
     }
 }
 
-// Función para modificar el evento
-async function modificarEventoPorId(req, res){
+
+
+/*
+Función para consultar un evento
+por su identificador.
+*/
+async function consultarEventoPorId(
+    req,
+    res
+){
 
     try{
 
-        const baseDatos = req.app.locals.baseDatos;
+        // Obtiene la base de datos
+        const baseDatos =
+            req.app.locals.baseDatos;
 
-        const idEvento = req.params.id;
 
-        // Construye únicamente los campos permitidos
+        // Obtiene el identificador enviado
+        // como parámetro en la URL
+        const idEvento =
+            req.params.id;
+
+
+        // Solicita el evento al service
+        const evento =
+            await consultarEventoPorIdService(
+                baseDatos,
+                idEvento
+            );
+
+
+        // Devuelve el evento encontrado
+        res.status(200).json(
+            evento
+        );
+
+    } catch(error){
+
+        console.error(
+            "Error al consultar evento:",
+            error
+        );
+
+
+        const estado =
+            error.status || 500;
+
+
+        res.status(estado).json({
+
+            mensaje:
+                error.message ||
+                "No se pudo consultar el evento."
+        });
+    }
+}
+
+
+
+/*
+Función para modificar un evento.
+*/
+async function modificarEventoPorId(
+    req,
+    res
+){
+
+    try{
+
+        // Obtiene la base de datos
+        const baseDatos =
+            req.app.locals.baseDatos;
+
+
+        // Obtiene el identificador
+        const idEvento =
+            req.params.id;
+
+
+        // Construye únicamente
+        // los campos permitidos
         const datosActualizados =
-            crearDatosActualizacion(req.body);
+            crearDatosActualizacion(
+                req.body
+            );
 
-        const resultado = await modificarEvento(
+
+        // Solicita la modificación al service
+        await modificarEventoService(
             baseDatos,
             idEvento,
             datosActualizados
         );
 
-        // Verifica si el identificador era válido
-        if(resultado === null){
 
-            return res.status(400).json({
-                mensaje:
-                    "El identificador del evento no es válido."
-            });
-        }
-
-        if(resultado.matchedCount === 0){
-
-            return res.status(404).json({
-                mensaje: "No se encontró el evento."
-            });
-        }
-
+        // Respuesta exitosa
         res.status(200).json({
-            mensaje: "Evento modificado correctamente."
+
+            mensaje:
+                "Evento modificado correctamente."
         });
 
     } catch(error){
 
-        console.error("Error al modificar evento:", error);
+        console.error(
+            "Error al modificar evento:",
+            error
+        );
 
-        res.status(500).json({
-            mensaje: "No se pudo modificar el evento."
+
+        const estado =
+            error.status || 500;
+
+
+        res.status(estado).json({
+
+            mensaje:
+                error.message ||
+                "No se pudo modificar el evento."
         });
     }
 }
 
-// Función para eliminar el evento
-async function eliminarEventoPorId(req, res){
+
+
+/*
+Función para eliminar un evento.
+*/
+async function eliminarEventoPorId(
+    req,
+    res
+){
 
     try{
 
-        const baseDatos = req.app.locals.baseDatos;
+        // Obtiene la base de datos
+        const baseDatos =
+            req.app.locals.baseDatos;
 
-        const idEvento = req.params.id;
 
-        const resultado = await eliminarEvento(
+        // Obtiene el identificador
+        const idEvento =
+            req.params.id;
+
+
+        // Solicita la eliminación al service
+        await eliminarEventoService(
             baseDatos,
             idEvento
         );
 
-        // Verifica si el identificador era válido
-        if(resultado === null){
 
-            return res.status(400).json({
-                mensaje:
-                    "El identificador del evento no es válido."
-            });
-        }
-
-        if(resultado.deletedCount === 0){
-
-            return res.status(404).json({
-                mensaje: "No se encontró el evento."
-            });
-        }
-
+        // Responde al frontend
         res.status(200).json({
-            mensaje: "Evento eliminado correctamente."
+
+            mensaje:
+                "Evento eliminado correctamente."
         });
 
     } catch(error){
 
-        console.error("Error al eliminar evento:", error);
+        console.error(
+            "Error al eliminar evento:",
+            error
+        );
 
-        res.status(500).json({
-            mensaje: "No se pudo eliminar el evento."
+
+        const estado =
+            error.status || 500;
+
+
+        res.status(estado).json({
+
+            mensaje:
+                error.message ||
+                "No se pudo eliminar el evento."
         });
     }
 }
+
 
 
 // Exporta las funciones del controlador

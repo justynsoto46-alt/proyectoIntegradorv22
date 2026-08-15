@@ -1,132 +1,234 @@
-// Aquí está toda la lógica para insertar, buscar,
-// modificar y eliminar responsables en MongoDB.
+/*
+============================================================
+SERVICIO DE RESPONSABLES
+============================================================
 
-// Importa el tipo de dato especial que usa MongoDB para los _id (ObjectId)
+Este archivo contiene la lógica relacionada con responsables.
+
+Aquí NO se accede directamente a MongoDB.
+
+Flujo:
+Controller -> Service -> DatosService -> MongoDB
+============================================================
+*/
+
 const { ObjectId } = require("mongodb");
 
-// Nombre de la colección
-const COLECCION = "responsables";
+// Importa el servicio de acceso a datos
+const responsableDatosService =
+    require("./responsableDatosService");
 
-// Inserta el responsable en MongoDB
-async function insertarResponsable(baseDatos, responsable){
 
-    const coleccionResponsables = baseDatos.collection(COLECCION);
+/*
+Valida que el identificador tenga formato ObjectId.
+*/
+function validarId(idResponsable){
 
-    const resultado = await coleccionResponsables.insertOne(responsable);
-
-    return resultado;
+    return ObjectId.isValid(
+        idResponsable
+    );
 }
 
-// Obtiene todos los responsables guardados en MongoDB
-async function obtenerResponsables(baseDatos){
 
-    const coleccionResponsables =
-        baseDatos.collection(COLECCION);
+/*
+Registra un responsable.
 
-    // Consulta todos los documentos y los convierte en un arreglo
-    const responsables =
-        await coleccionResponsables
-            .find()
-            .sort({ fechaRegistro: -1 })
-            .toArray();
+Antes de guardar, verifica que el correo
+no esté registrado previamente.
+*/
+async function registrarResponsable(
+    baseDatos,
+    responsable
+){
 
-    return responsables;
+    const responsableExistente =
+        await responsableDatosService
+            .obtenerPorCorreo(
+                baseDatos,
+                responsable.correo
+            );
+
+    if(responsableExistente){
+
+        const error =
+            new Error(
+                "Ya existe un responsable registrado con este correo."
+            );
+
+        error.status = 409;
+
+        throw error;
+    }
+
+    const responsableGuardado =
+        await responsableDatosService
+            .crear(
+                baseDatos,
+                responsable
+            );
+
+    return responsableGuardado;
 }
 
-// Obtiene el responsable según su identificador
-async function obtenerResponsablePorId(
+
+/*
+Obtiene todos los responsables.
+*/
+async function listarResponsables(
+    baseDatos
+){
+
+    return await responsableDatosService
+        .listar(
+            baseDatos
+        );
+}
+
+
+/*
+Consulta un responsable por su identificador.
+*/
+async function consultarResponsablePorId(
     baseDatos,
     idResponsable
 ){
 
-    // Verifica que el identificador tenga un formato válido
-    if(!ObjectId.isValid(idResponsable)){
-        return null;
+    if(!validarId(idResponsable)){
+
+        const error =
+            new Error(
+                "El identificador del responsable no es válido."
+            );
+
+        error.status = 400;
+
+        throw error;
     }
 
-    const coleccionResponsables =
-        baseDatos.collection(COLECCION);
-
     const responsable =
-        await coleccionResponsables.findOne(
-            {
-                _id: new ObjectId(idResponsable)
-            }
-        );
+        await responsableDatosService
+            .obtener(
+                baseDatos,
+                idResponsable
+            );
+
+    if(!responsable){
+
+        const error =
+            new Error(
+                "No se encontró el responsable."
+            );
+
+        error.status = 404;
+
+        throw error;
+    }
 
     return responsable;
 }
 
-// Busca el responsable según su correo
-async function obtenerResponsablePorCorreo(
-    baseDatos,
-    correo
-){
 
-    const coleccionResponsables =
-        baseDatos.collection(COLECCION);
-
-    const responsable =
-        await coleccionResponsables.findOne({
-            correo: correo
-        });
-
-    return responsable;
-}
-
-// Modifica el responsable según su identificador
+/*
+Modifica un responsable.
+*/
 async function modificarResponsable(
     baseDatos,
     idResponsable,
-    datosActualizados
+    cambios
 ){
 
-    // Verifica que el identificador tenga un formato válido
-    if(!ObjectId.isValid(idResponsable)){
-        return null;
+    if(!validarId(idResponsable)){
+
+        const error =
+            new Error(
+                "El identificador del responsable no es válido."
+            );
+
+        error.status = 400;
+
+        throw error;
     }
 
-    const coleccionResponsables =
-        baseDatos.collection(COLECCION);
+    const responsable =
+        await responsableDatosService
+            .obtener(
+                baseDatos,
+                idResponsable
+            );
 
-    // Actualiza únicamente los campos permitidos
-    const resultado =
-        await coleccionResponsables.updateOne(
-            {
-                _id: new ObjectId(idResponsable)
-            },
-            {
-                $set: datosActualizados
-            }
+    if(!responsable){
+
+        const error =
+            new Error(
+                "No se encontró el responsable."
+            );
+
+        error.status = 404;
+
+        throw error;
+    }
+
+    return await responsableDatosService
+        .modificar(
+            baseDatos,
+            idResponsable,
+            cambios
         );
-
-    return resultado;
 }
 
-// Elimina el responsable según su identificador
-async function eliminarResponsable(baseDatos, idResponsable){
 
-    // Verifica que el identificador tenga un formato válido
-    if(!ObjectId.isValid(idResponsable)){
-        return null;
+/*
+Elimina un responsable.
+*/
+async function eliminarResponsable(
+    baseDatos,
+    idResponsable
+){
+
+    if(!validarId(idResponsable)){
+
+        const error =
+            new Error(
+                "El identificador del responsable no es válido."
+            );
+
+        error.status = 400;
+
+        throw error;
     }
 
-    const coleccionResponsables =
-        baseDatos.collection(COLECCION);
+    const responsable =
+        await responsableDatosService
+            .obtener(
+                baseDatos,
+                idResponsable
+            );
 
-    const resultado =
-        await coleccionResponsables.deleteOne({
-            _id: new ObjectId(idResponsable)
-        });
+    if(!responsable){
 
-    return resultado;
+        const error =
+            new Error(
+                "No se encontró el responsable."
+            );
+
+        error.status = 404;
+
+        throw error;
+    }
+
+    return await responsableDatosService
+        .eliminar(
+            baseDatos,
+            idResponsable
+        );
 }
 
+
+// Exporta las funciones del servicio
 module.exports = {
-    insertarResponsable,
-    obtenerResponsables,
-    obtenerResponsablePorId,
-    obtenerResponsablePorCorreo,
+    registrarResponsable,
+    listarResponsables,
+    consultarResponsablePorId,
     modificarResponsable,
     eliminarResponsable
 };

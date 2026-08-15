@@ -1,53 +1,92 @@
-// Función para buscar un administrador por correo
-async function buscarAdministradorPorCorreo(
-    baseDatos,
-    correo
-){
+/*
+============================================================
+SERVICIO DE CONTRASEÑA
+============================================================
 
-    // Obtiene la colección de administradores
-    const coleccionAdministradores =
-        baseDatos.collection("administradores");
+Este archivo contiene la lógica necesaria
+para modificar la contraseña de un administrador.
 
-    // Busca un administrador con el correo indicado
-    const administrador =
-        await coleccionAdministradores.findOne({
-            correo: correo
-        });
+Aquí NO se accede directamente a MongoDB.
 
-    return administrador;
-}
+Flujo:
+Controller -> Service -> DatosService -> MongoDB
+============================================================
+*/
 
 
-// Función para actualizar la contraseña
-async function actualizarContrasena(
+// Importa el servicio de acceso a datos
+const contrasenaDatosService =
+    require("./contrasenaDatosService");
+
+
+/*
+Modifica la contraseña de un administrador.
+
+Antes de modificar verifica que exista
+un administrador registrado con el correo indicado.
+*/
+async function modificarContrasena(
     baseDatos,
     correo,
     nuevaContrasena
 ){
 
-    // Obtiene la colección de administradores
-    const coleccionAdministradores =
-        baseDatos.collection("administradores");
+    // Busca el administrador por correo
+    const administrador =
+        await contrasenaDatosService
+            .obtenerPorCorreo(
+                baseDatos,
+                correo
+            );
 
-    // Actualiza la contraseña del administrador
+
+    // Verifica que el administrador exista
+    if(!administrador){
+
+        const error =
+            new Error(
+                "No existe un administrador registrado con este correo."
+            );
+
+        error.status = 404;
+
+        throw error;
+    }
+
+
+    // Verifica que la nueva contraseña
+    // no sea igual a la contraseña actual
+    if(
+        administrador.contrasena ===
+        nuevaContrasena
+    ){
+
+        const error =
+            new Error(
+                "La nueva contraseña debe ser diferente de la contraseña actual."
+            );
+
+        error.status = 400;
+
+        throw error;
+    }
+
+
+    // Solicita al DatosService actualizar la contraseña
     const resultado =
-        await coleccionAdministradores.updateOne(
-            {
-                correo: correo
-            },
-            {
-                $set: {
-                    contrasena: nuevaContrasena
-                }
-            }
-        );
+        await contrasenaDatosService
+            .modificarContrasena(
+                baseDatos,
+                correo,
+                nuevaContrasena
+            );
+
 
     return resultado;
 }
 
 
-// Exporta las funciones
+// Exporta las funciones del servicio
 module.exports = {
-    buscarAdministradorPorCorreo,
-    actualizarContrasena
+    modificarContrasena
 };

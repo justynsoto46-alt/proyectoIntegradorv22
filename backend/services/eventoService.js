@@ -1,114 +1,222 @@
-// Aquí está toda la lógica para insertar, buscar,
-// modificar y eliminar eventos en MongoDB.
+/*
+============================================================
+SERVICIO DE EVENTOS
+============================================================
 
-// Importa el tipo de dato especial que usa MongoDB para los _id (ObjectId)
+Este archivo contiene la lógica relacionada con eventos.
+
+Aquí NO se accede directamente a MongoDB.
+
+Flujo:
+Controller -> Service -> DatosService -> MongoDB
+============================================================
+*/
+
 const { ObjectId } = require("mongodb");
 
-// Nombre de la colección
-const COLECCION = "eventos";
+// Importa el servicio de acceso a datos
+const eventoDatosService =
+    require("./eventoDatosService");
 
-// Inserta el evento en MongoDB
-async function insertarEvento(baseDatos, evento){
 
-    const coleccionEventos = baseDatos.collection(COLECCION);
+/*
+Valida que el identificador tenga formato ObjectId.
+*/
+function validarId(idEvento){
 
-    const resultado = await coleccionEventos.insertOne(evento);
-
-    return resultado;
+    return ObjectId.isValid(
+        idEvento
+    );
 }
 
-// Obtiene todos los eventos guardados en MongoDB
-async function obtenerEventos(baseDatos){
 
-    const coleccionEventos =
-        baseDatos.collection(COLECCION);
+/*
+Registra un evento.
+*/
+async function registrarEvento(
+    baseDatos,
+    evento
+){
 
-    // Consulta todos los documentos y los convierte en un arreglo
-    const eventos =
-        await coleccionEventos
-            .find()
-            .sort({ fechaRegistro: -1 })
-            .toArray();
+    const eventoGuardado =
+        await eventoDatosService.crear(
+            baseDatos,
+            evento
+        );
 
-    return eventos;
+    return eventoGuardado;
 }
 
-// Obtiene el evento según su identificador
-async function obtenerEventoPorId(
+
+/*
+Obtiene todos los eventos.
+*/
+async function listarEventos(
+    baseDatos
+){
+
+    return await eventoDatosService.listar(
+        baseDatos
+    );
+}
+
+
+/*
+Consulta un evento por su identificador.
+*/
+async function consultarEventoPorId(
     baseDatos,
     idEvento
 ){
 
-    // Verifica que el identificador tenga un formato válido
-    if(!ObjectId.isValid(idEvento)){
-        return null;
+    // Valida el identificador
+    if(!validarId(idEvento)){
+
+        const error =
+            new Error(
+                "El identificador del evento no es válido."
+            );
+
+        error.status = 400;
+
+        throw error;
     }
 
-    const coleccionEventos =
-        baseDatos.collection(COLECCION);
 
+    // Busca el evento
     const evento =
-        await coleccionEventos.findOne(
-            {
-                _id: new ObjectId(idEvento)
-            }
+        await eventoDatosService.obtener(
+            baseDatos,
+            idEvento
         );
+
+
+    // Verifica que exista
+    if(!evento){
+
+        const error =
+            new Error(
+                "No se encontró el evento."
+            );
+
+        error.status = 404;
+
+        throw error;
+    }
 
     return evento;
 }
 
-// Modifica el evento según su identificador
+
+/*
+Modifica un evento.
+*/
 async function modificarEvento(
     baseDatos,
     idEvento,
-    datosActualizados
+    cambios
 ){
 
-    // Verifica que el identificador tenga un formato válido
-    if(!ObjectId.isValid(idEvento)){
-        return null;
+    // Valida el identificador
+    if(!validarId(idEvento)){
+
+        const error =
+            new Error(
+                "El identificador del evento no es válido."
+            );
+
+        error.status = 400;
+
+        throw error;
     }
 
-    const coleccionEventos =
-        baseDatos.collection(COLECCION);
 
-    // Actualiza únicamente los campos permitidos
-    const resultado =
-        await coleccionEventos.updateOne(
-            {
-                _id: new ObjectId(idEvento)
-            },
-            {
-                $set: datosActualizados
-            }
+    // Verifica que el evento exista
+    const evento =
+        await eventoDatosService.obtener(
+            baseDatos,
+            idEvento
         );
 
-    return resultado;
-}
 
-// Elimina el evento según su identificador
-async function eliminarEvento(baseDatos, idEvento){
+    if(!evento){
 
-    // Verifica que el identificador tenga un formato válido
-    if(!ObjectId.isValid(idEvento)){
-        return null;
+        const error =
+            new Error(
+                "No se encontró el evento."
+            );
+
+        error.status = 404;
+
+        throw error;
     }
 
-    const coleccionEventos =
-        baseDatos.collection(COLECCION);
 
-    const resultado =
-        await coleccionEventos.deleteOne({
-            _id: new ObjectId(idEvento)
-        });
-
-    return resultado;
+    // Realiza la modificación
+    return await eventoDatosService.modificar(
+        baseDatos,
+        idEvento,
+        cambios
+    );
 }
 
+
+/*
+Elimina un evento.
+*/
+async function eliminarEvento(
+    baseDatos,
+    idEvento
+){
+
+    // Valida el identificador
+    if(!validarId(idEvento)){
+
+        const error =
+            new Error(
+                "El identificador del evento no es válido."
+            );
+
+        error.status = 400;
+
+        throw error;
+    }
+
+
+    // Verifica que exista
+    const evento =
+        await eventoDatosService.obtener(
+            baseDatos,
+            idEvento
+        );
+
+
+    if(!evento){
+
+        const error =
+            new Error(
+                "No se encontró el evento."
+            );
+
+        error.status = 404;
+
+        throw error;
+    }
+
+
+    // Elimina el evento
+    return await eventoDatosService.eliminar(
+        baseDatos,
+        idEvento
+    );
+}
+
+
+// Exporta las funciones del servicio
 module.exports = {
-    insertarEvento,
-    obtenerEventos,
-    obtenerEventoPorId,
+    registrarEvento,
+    listarEventos,
+    consultarEventoPorId,
     modificarEvento,
     eliminarEvento
 };

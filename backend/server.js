@@ -44,6 +44,9 @@ const autenticacionRoutes =
 const contrasenaRoutes =
     require("./routes/contrasenaRoutes");
 
+const inscripcionRoutes =
+    require("./routes/inscripcionRoutes");
+
 // Permite recibir información en formato JSON
 app.use(express.json());
 
@@ -54,6 +57,7 @@ app.use("/api/actividades", actividadRoutes);
 app.use("/api/stands", standRoutes);
 app.use("/api/responsables", responsableRoutes);
 app.use("/api/administradores", administradorRoutes);
+app.use("/api/inscripciones", inscripcionRoutes);
 
 // Permite que Express muestre los archivos del frontend
 app.use(express.static(carpetaPublica));

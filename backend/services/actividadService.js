@@ -1,114 +1,222 @@
-// Aquí está toda la lógica para insertar, buscar,
-// modificar y eliminar actividades en MongoDB.
+/*
+============================================================
+SERVICIO DE ACTIVIDADES
+============================================================
 
-// Importa el tipo de dato especial que usa MongoDB para los _id (ObjectId)
+Este archivo contiene la lógica relacionada con actividades.
+
+Aquí NO se accede directamente a MongoDB.
+
+Flujo:
+Controller -> Service -> DatosService -> MongoDB
+============================================================
+*/
+
 const { ObjectId } = require("mongodb");
 
-// Nombre de la colección
-const COLECCION = "actividades";
+// Importa el servicio de acceso a datos
+const actividadDatosService =
+    require("./actividadDatosService");
 
-// Inserta la actividad en MongoDB
-async function insertarActividad(baseDatos, actividad){
 
-    const coleccionActividades = baseDatos.collection(COLECCION);
+/*
+Valida que el identificador tenga formato ObjectId.
+*/
+function validarId(idActividad){
 
-    const resultado = await coleccionActividades.insertOne(actividad);
-
-    return resultado;
+    return ObjectId.isValid(
+        idActividad
+    );
 }
 
-// Obtiene todas las actividades guardados en MongoDB
-async function obtenerActividades(baseDatos){
 
-    const coleccionActividades =
-        baseDatos.collection(COLECCION);
+/*
+Registra una actividad.
+*/
+async function registrarActividad(
+    baseDatos,
+    actividad
+){
 
-    // Consulta todos los documentos y los convierte en un arreglo
-    const actividades =
-        await coleccionActividades
-            .find()
-            .sort({ fechaRegistro: -1 })
-            .toArray();
+    const actividadGuardada =
+        await actividadDatosService.crear(
+            baseDatos,
+            actividad
+        );
 
-    return actividades;
+    return actividadGuardada;
 }
 
-// Obtiene la actividad según su identificador
-async function obtenerActividadPorId(
+
+/*
+Obtiene todas las actividades.
+*/
+async function listarActividades(
+    baseDatos
+){
+
+    return await actividadDatosService.listar(
+        baseDatos
+    );
+}
+
+
+/*
+Consulta una actividad por su identificador.
+*/
+async function consultarActividadPorId(
     baseDatos,
     idActividad
 ){
 
-    // Verifica que el identificador tenga un formato válido
-    if(!ObjectId.isValid(idActividad)){
-        return null;
+    // Valida el identificador
+    if(!validarId(idActividad)){
+
+        const error =
+            new Error(
+                "El identificador de la actividad no es válido."
+            );
+
+        error.status = 400;
+
+        throw error;
     }
 
-    const coleccionActividades =
-        baseDatos.collection(COLECCION);
 
+    // Busca la actividad
     const actividad =
-        await coleccionActividades.findOne(
-            {
-                _id: new ObjectId(idActividad)
-            }
+        await actividadDatosService.obtener(
+            baseDatos,
+            idActividad
         );
+
+
+    // Verifica que exista
+    if(!actividad){
+
+        const error =
+            new Error(
+                "No se encontró la actividad."
+            );
+
+        error.status = 404;
+
+        throw error;
+    }
 
     return actividad;
 }
 
-// Modifica la actividad según su identificador
+
+/*
+Modifica una actividad.
+*/
 async function modificarActividad(
     baseDatos,
     idActividad,
-    datosActualizados
+    cambios
 ){
 
-    // Verifica que el identificador tenga un formato válido
-    if(!ObjectId.isValid(idActividad)){
-        return null;
+    // Valida el identificador
+    if(!validarId(idActividad)){
+
+        const error =
+            new Error(
+                "El identificador de la actividad no es válido."
+            );
+
+        error.status = 400;
+
+        throw error;
     }
 
-    const coleccionActividades =
-        baseDatos.collection(COLECCION);
 
-    // Actualiza únicamente los campos permitidos
-    const resultado =
-        await coleccionActividades.updateOne(
-            {
-                _id: new ObjectId(idActividad)
-            },
-            {
-                $set: datosActualizados
-            }
+    // Verifica que la actividad exista
+    const actividad =
+        await actividadDatosService.obtener(
+            baseDatos,
+            idActividad
         );
 
-    return resultado;
-}
 
-// Elimina la actividad según su identificador
-async function eliminarActividad(baseDatos, idActividad){
+    if(!actividad){
 
-    // Verifica que el identificador tenga un formato válido
-    if(!ObjectId.isValid(idActividad)){
-        return null;
+        const error =
+            new Error(
+                "No se encontró la actividad."
+            );
+
+        error.status = 404;
+
+        throw error;
     }
 
-    const coleccionActividades =
-        baseDatos.collection(COLECCION);
 
-    const resultado =
-        await coleccionActividades.deleteOne({
-            _id: new ObjectId(idActividad)
-        });
-
-    return resultado;
+    // Realiza la modificación
+    return await actividadDatosService.modificar(
+        baseDatos,
+        idActividad,
+        cambios
+    );
 }
 
+
+/*
+Elimina una actividad.
+*/
+async function eliminarActividad(
+    baseDatos,
+    idActividad
+){
+
+    // Valida el identificador
+    if(!validarId(idActividad)){
+
+        const error =
+            new Error(
+                "El identificador de la actividad no es válido."
+            );
+
+        error.status = 400;
+
+        throw error;
+    }
+
+
+    // Verifica que exista
+    const actividad =
+        await actividadDatosService.obtener(
+            baseDatos,
+            idActividad
+        );
+
+
+    if(!actividad){
+
+        const error =
+            new Error(
+                "No se encontró la actividad."
+            );
+
+        error.status = 404;
+
+        throw error;
+    }
+
+
+    // Elimina la actividad
+    return await actividadDatosService.eliminar(
+        baseDatos,
+        idActividad
+    );
+}
+
+
+// Exporta las funciones del servicio
 module.exports = {
-    insertarActividad,
-    obtenerActividades,
-    obtenerActividadPorId,
+    registrarActividad,
+    listarActividades,
+    consultarActividadPorId,
     modificarActividad,
     eliminarActividad
 };

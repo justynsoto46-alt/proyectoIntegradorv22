@@ -1,139 +1,274 @@
-// Aquí está toda la lógica para insertar, buscar,
-// modificar y eliminar administradores en MongoDB.
+/*
+============================================================
+SERVICIO DE ADMINISTRADORES
+============================================================
 
-// Importa el tipo de dato especial que usa MongoDB para los _id (ObjectId)
+Este archivo contiene la lógica relacionada con
+los administradores.
+
+Aquí NO se accede directamente a MongoDB.
+
+Flujo:
+Controller -> Service -> DatosService -> MongoDB
+============================================================
+*/
+
 const { ObjectId } = require("mongodb");
 
-// Nombre de la colección
-const COLECCION = "administradores";
+// Importa el servicio de acceso a datos
+const administradorDatosService =
+    require("./administradorDatosService");
 
-// Campos que nunca se devuelven al frontend
-const PROYECCION = {
-    projection: {
-        contrasena: 0
+
+/*
+Valida que el identificador tenga formato ObjectId.
+*/
+function validarId(idAdministrador){
+
+    return ObjectId.isValid(
+        idAdministrador
+    );
+}
+
+
+/*
+Registra un administrador.
+
+Antes de guardar verifica que el correo
+no esté registrado previamente.
+*/
+async function registrarAdministrador(
+    baseDatos,
+    administrador
+){
+
+    const administradorExistente =
+        await administradorDatosService
+            .obtenerPorCorreo(
+                baseDatos,
+                administrador.correo
+            );
+
+    if(administradorExistente){
+
+        const error =
+            new Error(
+                "Ya existe un administrador registrado con este correo."
+            );
+
+        error.status = 409;
+
+        throw error;
     }
-};
 
-// Inserta el administrador en MongoDB
-async function insertarAdministrador(baseDatos, administrador){
+    const administradorGuardado =
+        await administradorDatosService
+            .crear(
+                baseDatos,
+                administrador
+            );
 
-    const coleccionAdministradores = baseDatos.collection(COLECCION);
-
-    const resultado = await coleccionAdministradores.insertOne(administrador);
-
-    return resultado;
+    return administradorGuardado;
 }
 
-// Obtiene todos los administradores guardados en MongoDB
-async function obtenerAdministradores(baseDatos){
 
-    const coleccionAdministradores =
-        baseDatos.collection(COLECCION);
+/*
+Obtiene todos los administradores.
+*/
+async function listarAdministradores(
+    baseDatos
+){
 
-    // Consulta todos los documentos y los convierte en un arreglo
-    const administradores =
-        await coleccionAdministradores
-            .find({}, PROYECCION)
-            .sort({ fechaRegistro: -1 })
-            .toArray();
-
-    return administradores;
+    return await administradorDatosService
+        .listar(
+            baseDatos
+        );
 }
 
-// Obtiene el administrador según su identificador
-async function obtenerAdministradorPorId(
+
+/*
+Consulta un administrador por su identificador.
+*/
+async function consultarAdministradorPorId(
     baseDatos,
     idAdministrador
 ){
 
-    // Verifica que el identificador tenga un formato válido
-    if(!ObjectId.isValid(idAdministrador)){
-        return null;
+    if(!validarId(idAdministrador)){
+
+        const error =
+            new Error(
+                "El identificador del administrador no es válido."
+            );
+
+        error.status = 400;
+
+        throw error;
     }
 
-    const coleccionAdministradores =
-        baseDatos.collection(COLECCION);
-
     const administrador =
-        await coleccionAdministradores.findOne(
-            {
-                _id: new ObjectId(idAdministrador)
-            }, PROYECCION
-        );
+        await administradorDatosService
+            .obtener(
+                baseDatos,
+                idAdministrador
+            );
+
+    if(!administrador){
+
+        const error =
+            new Error(
+                "No se encontró el administrador."
+            );
+
+        error.status = 404;
+
+        throw error;
+    }
 
     return administrador;
 }
 
-// Busca el administrador según su correo
-async function obtenerAdministradorPorCorreo(
-    baseDatos,
-    correo
-){
 
-    const coleccionAdministradores =
-        baseDatos.collection(COLECCION);
+/*
+Modifica un administrador.
 
-    const administrador =
-        await coleccionAdministradores.findOne({
-            correo: correo
-        });
-
-    return administrador;
-}
-
-// Modifica el administrador según su identificador
+Antes de modificar verifica:
+- que el identificador sea válido
+- que el administrador exista
+- que el nuevo correo no pertenezca a otro administrador
+*/
 async function modificarAdministrador(
     baseDatos,
     idAdministrador,
-    datosActualizados
+    cambios
 ){
 
-    // Verifica que el identificador tenga un formato válido
-    if(!ObjectId.isValid(idAdministrador)){
-        return null;
+    // Valida el identificador
+    if(!validarId(idAdministrador)){
+
+        const error =
+            new Error(
+                "El identificador del administrador no es válido."
+            );
+
+        error.status = 400;
+
+        throw error;
     }
 
-    const coleccionAdministradores =
-        baseDatos.collection(COLECCION);
 
-    // Actualiza únicamente los campos permitidos
-    const resultado =
-        await coleccionAdministradores.updateOne(
-            {
-                _id: new ObjectId(idAdministrador)
-            },
-            {
-                $set: datosActualizados
-            }
+    // Busca el administrador que se desea modificar
+    const administrador =
+        await administradorDatosService.obtener(
+            baseDatos,
+            idAdministrador
         );
 
-    return resultado;
-}
 
-// Elimina el administrador según su identificador
-async function eliminarAdministrador(baseDatos, idAdministrador){
+    // Verifica que exista
+    if(!administrador){
 
-    // Verifica que el identificador tenga un formato válido
-    if(!ObjectId.isValid(idAdministrador)){
-        return null;
+        const error =
+            new Error(
+                "No se encontró el administrador."
+            );
+
+        error.status = 404;
+
+        throw error;
     }
 
-    const coleccionAdministradores =
-        baseDatos.collection(COLECCION);
 
-    const resultado =
-        await coleccionAdministradores.deleteOne({
-            _id: new ObjectId(idAdministrador)
-        });
+    // Busca si existe otro administrador
+    // con el correo que se desea guardar
+    const administradorConCorreo =
+        await administradorDatosService
+            .obtenerPorCorreo(
+                baseDatos,
+                cambios.correo
+            );
 
-    return resultado;
+
+    // Si existe un administrador con ese correo,
+    // verifica que no sea el mismo que estamos modificando
+    if(
+        administradorConCorreo &&
+        administradorConCorreo._id.toString()
+            !== idAdministrador
+    ){
+
+        const error =
+            new Error(
+                "Ya existe un administrador registrado con este correo."
+            );
+
+        error.status = 409;
+
+        throw error;
+    }
+
+
+    // Realiza la modificación
+    return await administradorDatosService.modificar(
+        baseDatos,
+        idAdministrador,
+        cambios
+    );
 }
 
+
+/*
+Elimina un administrador.
+*/
+async function eliminarAdministrador(
+    baseDatos,
+    idAdministrador
+){
+
+    if(!validarId(idAdministrador)){
+
+        const error =
+            new Error(
+                "El identificador del administrador no es válido."
+            );
+
+        error.status = 400;
+
+        throw error;
+    }
+
+    const administrador =
+        await administradorDatosService
+            .obtener(
+                baseDatos,
+                idAdministrador
+            );
+
+    if(!administrador){
+
+        const error =
+            new Error(
+                "No se encontró el administrador."
+            );
+
+        error.status = 404;
+
+        throw error;
+    }
+
+    return await administradorDatosService
+        .eliminar(
+            baseDatos,
+            idAdministrador
+        );
+}
+
+
+// Exporta las funciones del servicio
 module.exports = {
-    insertarAdministrador,
-    obtenerAdministradores,
-    obtenerAdministradorPorId,
-    obtenerAdministradorPorCorreo,
+    registrarAdministrador,
+    listarAdministradores,
+    consultarAdministradorPorId,
     modificarAdministrador,
     eliminarAdministrador
 };

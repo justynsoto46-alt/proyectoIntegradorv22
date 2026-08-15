@@ -1,139 +1,248 @@
-//Aquí irá toda la lógica para:
-// insertar
-// buscar
-// modificar
-// eliminar
+/*
+============================================================
+SERVICIO DE PARTICIPANTES
+============================================================
 
-// Su trabajo será hablar con MongoDB.
+Este archivo contiene la lógica relacionada con participantes.
 
+Aquí NO se trabaja directamente con MongoDB.
+Para consultar o modificar datos se utiliza
+participanteDatosService.js.
 
-// Convierte el texto recibido en un ObjectId
-// Importa el tipo de dato especial que usa MongoDB para los _id (ObjectId)
+Flujo:
+Controller -> Service -> DatosService -> MongoDB
+============================================================
+*/
+
 const { ObjectId } = require("mongodb");
 
+// Importa las funciones de acceso a datos
+const participanteDatosService =
+    require("./participanteDatosService");
 
-// Nombre de la colección
-const COLECCION = "participantes";
 
-// Inserta un participante en MongoDB
-async function insertarParticipante(baseDatos, participante){
+/*
+Valida que el identificador de MongoDB tenga
+un formato correcto.
+*/
+function validarId(idParticipante){
 
-    const coleccionParticipantes = baseDatos.collection(COLECCION);
-
-    const resultado = await coleccionParticipantes.insertOne(participante);
-
-    return resultado;
+    return ObjectId.isValid(idParticipante);
 }
 
-// Obtiene todos los participantes guardados en MongoDB
-async function obtenerParticipantes(baseDatos){
 
-    // Obtiene la colección de participantes
-    const coleccionParticipantes =
-        baseDatos.collection(COLECCION);
+/*
+Registra un participante.
 
-    // Consulta todos los documentos y los convierte en un arreglo
+Antes de guardar verifica que la identificación
+no esté registrada previamente.
+*/
+async function registrarParticipante(
+    baseDatos,
+    participante
+){
+
+    // Busca si ya existe un participante
+    // con la misma identificación
+    const participanteExistente =
+        await participanteDatosService
+            .obtenerPorIdentificacion(
+                baseDatos,
+                participante.identificacion
+            );
+
+    // Si existe, genera un error
+    if(participanteExistente){
+
+        const error =
+            new Error(
+                "Ya existe un participante con esta identificación."
+            );
+
+        error.status = 409;
+
+        throw error;
+    }
+
+    // Guarda el participante
+    const participanteGuardado =
+        await participanteDatosService.crear(
+            baseDatos,
+            participante
+        );
+
+    return participanteGuardado;
+}
+
+
+/*
+Obtiene todos los participantes registrados.
+*/
+async function listarParticipantes(baseDatos){
+
     const participantes =
-        await coleccionParticipantes.find().toArray();
+        await participanteDatosService.listar(
+            baseDatos
+        );
 
     return participantes;
 }
 
-// Elimina un participante según su identificador
-async function eliminarParticipante(baseDatos, idParticipante){
 
-    // Obtiene la colección de participantes
-    const coleccionParticipantes =
-        baseDatos.collection(COLECCION);
-
-    // Elimina el participante indicado
-    const resultado =
-        await coleccionParticipantes.deleteOne({
-            _id: new ObjectId(idParticipante)
-        });
-
-    return resultado;
-}
-
-// Obtiene un participante según su identificador
-async function obtenerParticipantePorId(
+/*
+Obtiene un participante por su identificador.
+*/
+async function consultarParticipantePorId(
     baseDatos,
     idParticipante
 ){
 
-    // Verifica que el identificador tenga un formato válido
-    if(!ObjectId.isValid(idParticipante)){
-        return null;
+    // Valida el formato del identificador
+    if(!validarId(idParticipante)){
+
+        const error =
+            new Error(
+                "El identificador del participante no es válido."
+            );
+
+        error.status = 400;
+
+        throw error;
     }
 
-    // Obtiene la colección de participantes
-    const coleccionParticipantes =
-        baseDatos.collection(COLECCION);
-
-    // Busca el participante por su _id
+    // Busca el participante
     const participante =
-        await coleccionParticipantes.findOne({
-            _id: new ObjectId(idParticipante)
-        });
+        await participanteDatosService.obtener(
+            baseDatos,
+            idParticipante
+        );
+
+    // Verifica que exista
+    if(!participante){
+
+        const error =
+            new Error(
+                "No se encontró el participante."
+            );
+
+        error.status = 404;
+
+        throw error;
+    }
 
     return participante;
 }
 
-// Busca un participante según su número de identificación
-async function obtenerParticipantePorIdentificacion(
-    baseDatos,
-    identificacion
-){
 
-    // Obtiene la colección de participantes
-    const coleccionParticipantes =
-        baseDatos.collection(COLECCION);
-
-    // Busca un participante con la identificación indicada
-    const participante =
-        await coleccionParticipantes.findOne({
-            identificacion: identificacion
-        });
-
-    return participante;
-}
-
-// Modifica un participante según su identificador
+/*
+Modifica un participante.
+*/
 async function modificarParticipante(
     baseDatos,
     idParticipante,
-    datosActualizados
+    cambios
 ){
 
-    // Verifica que el identificador tenga un formato válido
-    if(!ObjectId.isValid(idParticipante)){
-        return null;
+    // Valida el identificador
+    if(!validarId(idParticipante)){
+
+        const error =
+            new Error(
+                "El identificador del participante no es válido."
+            );
+
+        error.status = 400;
+
+        throw error;
     }
 
-    // Obtiene la colección de participantes
-    const coleccionParticipantes =
-        baseDatos.collection(COLECCION);
+    // Verifica que el participante exista
+    const participante =
+        await participanteDatosService.obtener(
+            baseDatos,
+            idParticipante
+        );
 
-    // Actualiza únicamente los campos permitidos
+    if(!participante){
+
+        const error =
+            new Error(
+                "No se encontró el participante."
+            );
+
+        error.status = 404;
+
+        throw error;
+    }
+
+    // Realiza la modificación
     const resultado =
-        await coleccionParticipantes.updateOne(
-            {
-                _id: new ObjectId(idParticipante)
-            },
-            {
-                $set: datosActualizados
-            }
+        await participanteDatosService.modificar(
+            baseDatos,
+            idParticipante,
+            cambios
         );
 
     return resultado;
 }
 
 
+/*
+Elimina un participante.
+*/
+async function eliminarParticipante(
+    baseDatos,
+    idParticipante
+){
+
+    // Valida el identificador
+    if(!validarId(idParticipante)){
+
+        const error =
+            new Error(
+                "El identificador del participante no es válido."
+            );
+
+        error.status = 400;
+
+        throw error;
+    }
+
+    // Verifica que exista
+    const participante =
+        await participanteDatosService.obtener(
+            baseDatos,
+            idParticipante
+        );
+
+    if(!participante){
+
+        const error =
+            new Error(
+                "No se encontró el participante."
+            );
+
+        error.status = 404;
+
+        throw error;
+    }
+
+    // Elimina el participante
+    const resultado =
+        await participanteDatosService.eliminar(
+            baseDatos,
+            idParticipante
+        );
+
+    return resultado;
+}
+
+
+// Exporta las funciones del servicio
 module.exports = {
-    insertarParticipante,
-    obtenerParticipantes,
-    obtenerParticipantePorId,
-    obtenerParticipantePorIdentificacion,
+    registrarParticipante,
+    listarParticipantes,
+    consultarParticipantePorId,
     modificarParticipante,
     eliminarParticipante
 };

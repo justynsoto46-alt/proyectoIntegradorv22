@@ -303,8 +303,7 @@ function mostrarActividadesRetorno(
 ){
 
     // Limpia las tarjetas anteriores
-    contenedorActividades.innerHTML =
-        "";
+    contenedorActividades.innerHTML = "";
 
 
     // Verifica si existen actividades
@@ -332,7 +331,12 @@ function mostrarActividadesRetorno(
             );
 
 
-            // Agrega la información
+            // Obtiene el cupo disponible
+            const cuposDisponibles =
+                Number(actividad.cupo ?? 0);
+
+
+            // Agrega la información de la actividad
             tarjeta.innerHTML = `
 
                 <h3>
@@ -373,52 +377,81 @@ function mostrarActividadesRetorno(
 
                 <p>
                     <strong>Cupos disponibles:</strong>
+
                     <span class="cupos">
-                        ${actividad.cupo || 0}
+                        ${cuposDisponibles}
                     </span>
                 </p>
 
+
                 <button
                     type="button"
-                    class="boton-inscribir">
-                    Inscribirme
+                    class="${
+                        cuposDisponibles > 0
+                            ? "boton-inscribir"
+                            : "boton-sin-cupos"
+                    }"
+                    ${
+                        cuposDisponibles <= 0
+                            ? "disabled"
+                            : ""
+                    }>
+
+                    ${
+                        cuposDisponibles > 0
+                            ? "Inscribirme"
+                            : "Sin cupos"
+                    }
+
                 </button>
+
 
                 <button
                     type="button"
                     class="boton-quitar"
                     style="display:none;">
+
                     Quitar selección
+
                 </button>
             `;
 
 
-            // Obtiene los botones recién creados
+            // Obtiene el botón Inscribirme.
+            // Si no hay cupos, este selector devuelve null
+            // porque el botón tendrá la clase boton-sin-cupos.
             const botonInscribir =
                 tarjeta.querySelector(
                     ".boton-inscribir"
                 );
 
+
+            // Obtiene el botón Quitar selección
             const botonQuitar =
                 tarjeta.querySelector(
                     ".boton-quitar"
                 );
 
 
-            // Evento para seleccionar
-            botonInscribir.addEventListener(
-                "click",
-                function(){
+            // Agrega el evento solamente si
+            // la actividad tiene cupos disponibles
+            if(botonInscribir){
 
-                    seleccionarActividadRetorno(
-                        actividad,
-                        tarjeta
-                    );
-                }
-            );
+                botonInscribir.addEventListener(
+                    "click",
+                    function(){
+
+                        seleccionarActividadRetorno(
+                            actividad,
+                            tarjeta
+                        );
+                    }
+                );
+            }
 
 
-            // Evento para quitar
+            // Evento para quitar la actividad
+            // de la selección temporal
             botonQuitar.addEventListener(
                 "click",
                 function(){
@@ -486,11 +519,11 @@ async function cargarActividadesRetorno(){
 }
 
 
-// Función para finalizar
-// todas las inscripciones seleccionadas
+// Función para finalizar todas
+// las inscripciones seleccionadas
 async function finalizarInscripcionRetorno(){
 
-    // Verifica que exista un participante
+    // Verifica que exista un participante identificado
     if(!participanteId){
 
         Swal.fire({
@@ -504,7 +537,8 @@ async function finalizarInscripcionRetorno(){
     }
 
 
-    // Debe seleccionar al menos una actividad
+    // Verifica que se haya seleccionado
+    // al menos una actividad
     if(actividadesSeleccionadas.length === 0){
 
         Swal.fire({
@@ -520,6 +554,14 @@ async function finalizarInscripcionRetorno(){
 
     try{
 
+        // Deshabilita temporalmente el botón
+        // para evitar varios clics seguidos
+        btnFinalizar.disabled = true;
+
+        btnFinalizar.textContent =
+            "Procesando inscripción...";
+
+
         // Recorre todas las actividades seleccionadas
         for(
             const actividad
@@ -534,13 +576,21 @@ async function finalizarInscripcionRetorno(){
                 );
 
 
-            // Guarda la inscripción en MongoDB
+            // Envía la inscripción al backend.
+            // El backend valida:
+            // - participante existente
+            // - actividad existente
+            // - cupos
+            // - duplicados
+            // - conflictos de horario
             await registrarInscripcion(
                 inscripcion
             );
         }
 
 
+        // Si todas las inscripciones se registraron
+        // correctamente, muestra mensaje de éxito
         Swal.fire({
             title: "Inscripción finalizada",
             text: "Las actividades fueron inscritas correctamente.",
@@ -549,15 +599,18 @@ async function finalizarInscripcionRetorno(){
 
         }).then(function(){
 
-            // Ya no se necesita conservar
-            // el participante temporal
+            // Elimina el identificador temporal
+            // del participante
             sessionStorage.removeItem(
                 "participanteId"
             );
 
+
+            // Redirige a la siguiente pantalla
             window.location.href =
                 "/pages/Inscripciones/inscripciones.html";
         });
+
 
     } catch(error){
 
@@ -565,6 +618,14 @@ async function finalizarInscripcionRetorno(){
             "Error al finalizar inscripción:",
             error
         );
+
+
+        // Vuelve a habilitar el botón
+        btnFinalizar.disabled = false;
+
+        btnFinalizar.textContent =
+            "Finalizar inscripción";
+
 
         Swal.fire({
             title: "No se pudo completar la inscripción",

@@ -1,245 +1,330 @@
-// Será quien reciba la petición del navegador.
+/*
+============================================================
+CONTROLADOR DE PARTICIPANTES
+============================================================
 
-// Importa la función del servicio de participantes
+Este archivo recibe las peticiones del navegador
+y coordina la respuesta al frontend.
+
+Aquí NO se accede directamente a MongoDB.
+
+Flujo:
+Route -> Controller -> Service -> DatosService -> MongoDB
+============================================================
+*/
+
+
+// Importa las funciones del servicio de participantes
 const {
-    insertarParticipante,
-    obtenerParticipantes,
-    obtenerParticipantePorId,
-    obtenerParticipantePorIdentificacion,
-    modificarParticipante,
-    eliminarParticipante
+    registrarParticipante: registrarParticipanteService,
+    listarParticipantes: listarParticipantesService,
+    consultarParticipantePorId:
+        consultarParticipantePorIdService,
+    modificarParticipante:
+        modificarParticipanteService,
+    eliminarParticipante:
+        eliminarParticipanteService
 } = require("../services/participanteService");
 
-// Importa la función para crear el modelo de participante
+
+// Importa las funciones del modelo de participante
 const {
     crearParticipante,
     crearDatosActualizacion
 } = require("../models/participante");
 
 
-// Función para registrar un participante
-async function registrarParticipante(req, res) {
 
-    try {
+/*
+Función para registrar un participante.
+*/
+async function registrarParticipante(req, res){
+
+    try{
 
         // Obtiene la base de datos guardada en Express
-        const baseDatos = req.app.locals.baseDatos;
+        const baseDatos =
+            req.app.locals.baseDatos;
 
-        // Crea el participante utilizando la estructura del modelo
-        const datosParticipante = crearParticipante(req.body);
 
-        // Verifica si ya existe un participante con la misma identificación
-        const participanteExistente =
-            await obtenerParticipantePorIdentificacion(
-                baseDatos,
-                datosParticipante.identificacion
+        // Crea el participante utilizando
+        // la estructura definida en el modelo
+        const datosParticipante =
+            crearParticipante(
+                req.body
             );
 
-        if (participanteExistente !== null) {
 
-            return res.status(409).json({
-                mensaje:
-                    "Ya existe un participante registrado con esta identificación."
-            });
-        }
+        // Envía el participante al service.
+        // El service se encarga de validar si
+        // la identificación ya está registrada.
+        const participanteGuardado =
+            await registrarParticipanteService(
+                baseDatos,
+                datosParticipante
+            );
 
-        // Envía los datos al servicio para guardarlos en MongoDB
-        const resultado = await insertarParticipante(
-            baseDatos,
-            datosParticipante
-        );
 
-        // Responde al navegador indicando que el registro fue exitoso
+        // Responde al frontend cuando
+        // el registro fue exitoso
         res.status(201).json({
-            mensaje: "Participante registrado correctamente.",
-            idParticipante: resultado.insertedId
+
+            mensaje:
+                "Participante registrado correctamente.",
+
+            idParticipante:
+                participanteGuardado._id
         });
 
-    } catch (error) {
+    } catch(error){
 
-        console.error("Error al registrar participante:", error);
+        console.error(
+            "Error al registrar participante:",
+            error
+        );
 
-        res.status(500).json({
-            mensaje: "No se pudo registrar el participante."
+
+        // Utiliza el código de estado generado
+        // por el service cuando exista
+        const estado =
+            error.status || 500;
+
+
+        res.status(estado).json({
+
+            mensaje:
+                error.message ||
+                "No se pudo registrar el participante."
         });
     }
 }
 
-// Función para listar todos los participantes
-async function listarParticipantes(req, res) {
 
-    try {
 
-        // Obtiene la conexión a la base de datos
-        const baseDatos = req.app.locals.baseDatos;
+/*
+Función para listar todos los participantes.
+*/
+async function listarParticipantes(req, res){
 
-        // Consulta los participantes por medio del servicio
+    try{
+
+        // Obtiene la base de datos
+        const baseDatos =
+            req.app.locals.baseDatos;
+
+
+        // Solicita la lista al service
         const participantes =
-            await obtenerParticipantes(baseDatos);
+            await listarParticipantesService(
+                baseDatos
+            );
+
 
         // Devuelve la lista al frontend
-        res.status(200).json(participantes);
+        res.status(200).json(
+            participantes
+        );
 
-    } catch (error) {
+    } catch(error){
 
         console.error(
             "Error al listar participantes:",
             error
         );
 
+
         res.status(500).json({
+
             mensaje:
                 "No se pudieron cargar los participantes."
         });
     }
 }
 
-// Función para consultar un participante por su identificador
-async function consultarParticipantePorId(req, res) {
 
-    try {
 
-        // Obtiene la conexión a la base de datos
-        const baseDatos = req.app.locals.baseDatos;
+/*
+Función para consultar un participante
+por su identificador de MongoDB.
+*/
+async function consultarParticipantePorId(
+    req,
+    res
+){
 
-        // Obtiene el identificador enviado en la dirección
-        const idParticipante = req.params.id;
+    try{
 
-        // Busca el participante mediante el servicio
+        // Obtiene la base de datos
+        const baseDatos =
+            req.app.locals.baseDatos;
+
+
+        // Obtiene el identificador enviado
+        // como parámetro en la URL
+        const idParticipante =
+            req.params.id;
+
+
+        // Solicita el participante al service
         const participante =
-            await obtenerParticipantePorId(
+            await consultarParticipantePorIdService(
                 baseDatos,
                 idParticipante
             );
 
-        // Verifica si el participante existe
-        if (participante === null) {
 
-            return res.status(404).json({
-                mensaje: "No se encontró el participante."
-            });
-        }
+        // Devuelve el participante encontrado
+        res.status(200).json(
+            participante
+        );
 
-        // Devuelve el participante al frontend
-        res.status(200).json(participante);
-
-    } catch (error) {
+    } catch(error){
 
         console.error(
             "Error al consultar participante:",
             error
         );
 
-        res.status(500).json({
+
+        // El service puede devolver, por ejemplo:
+        // 400 -> id inválido
+        // 404 -> participante no encontrado
+        const estado =
+            error.status || 500;
+
+
+        res.status(estado).json({
+
             mensaje:
+                error.message ||
                 "No se pudo consultar el participante."
         });
     }
 }
 
 
-// Función para modificar un participante
-async function modificarParticipantePorId(req, res) {
 
-    try {
+/*
+Función para modificar un participante.
+*/
+async function modificarParticipantePorId(
+    req,
+    res
+){
 
-        // Obtiene la conexión a la base de datos
-        const baseDatos = req.app.locals.baseDatos;
+    try{
 
-        // Obtiene el identificador enviado en la dirección
-        const idParticipante = req.params.id;
+        // Obtiene la base de datos
+        const baseDatos =
+            req.app.locals.baseDatos;
 
-        // Construye únicamente los campos permitidos
+
+        // Obtiene el identificador
+        const idParticipante =
+            req.params.id;
+
+
+        // Construye únicamente los campos
+        // que pueden modificarse
         const datosActualizados =
-            crearDatosActualizacion(req.body);
-
-        // Solicita al servicio modificar el participante
-        const resultado =
-            await modificarParticipante(
-                baseDatos,
-                idParticipante,
-                datosActualizados
+            crearDatosActualizacion(
+                req.body
             );
 
-        // Verifica si el identificador era válido
-        if (resultado === null) {
 
-            return res.status(400).json({
-                mensaje:
-                    "El identificador del participante no es válido."
-            });
-        }
+        // Solicita la modificación al service
+        await modificarParticipanteService(
+            baseDatos,
+            idParticipante,
+            datosActualizados
+        );
 
-        // Verifica si se encontró el participante
-        if (resultado.matchedCount === 0) {
 
-            return res.status(404).json({
-                mensaje: "No se encontró el participante."
-            });
-        }
-
-        // Responde cuando la modificación fue exitosa
+        // Responde al frontend
         res.status(200).json({
+
             mensaje:
                 "Participante modificado correctamente."
         });
 
-    } catch (error) {
+    } catch(error){
 
         console.error(
             "Error al modificar participante:",
             error
         );
 
-        res.status(500).json({
+
+        const estado =
+            error.status || 500;
+
+
+        res.status(estado).json({
+
             mensaje:
+                error.message ||
                 "No se pudo modificar el participante."
         });
     }
 }
 
-// Función para eliminar un participante
-async function eliminarParticipantePorId(req, res) {
 
-    try {
 
-        // Obtiene la conexión a la base de datos
-        const baseDatos = req.app.locals.baseDatos;
+/*
+Función para eliminar un participante.
+*/
+async function eliminarParticipantePorId(
+    req,
+    res
+){
 
-        // Obtiene el identificador enviado en la dirección
-        const idParticipante = req.params.id;
+    try{
 
-        // Solicita al servicio eliminar el participante
-        const resultado = await eliminarParticipante(
+        // Obtiene la base de datos
+        const baseDatos =
+            req.app.locals.baseDatos;
+
+
+        // Obtiene el identificador
+        const idParticipante =
+            req.params.id;
+
+
+        // Solicita la eliminación al service
+        await eliminarParticipanteService(
             baseDatos,
             idParticipante
         );
 
-        // Verifica si se encontró y eliminó un participante
-        if (resultado.deletedCount === 0) {
 
-            return res.status(404).json({
-                mensaje: "No se encontró el participante."
-            });
-        }
-
-        // Responde al frontend cuando la eliminación fue exitosa
+        // Responde al frontend
         res.status(200).json({
-            mensaje: "Participante eliminado correctamente."
+
+            mensaje:
+                "Participante eliminado correctamente."
         });
 
-    } catch (error) {
+    } catch(error){
 
         console.error(
             "Error al eliminar participante:",
             error
         );
 
-        res.status(500).json({
-            mensaje: "No se pudo eliminar el participante."
+
+        const estado =
+            error.status || 500;
+
+
+        res.status(estado).json({
+
+            mensaje:
+                error.message ||
+                "No se pudo eliminar el participante."
         });
     }
 }
+
 
 
 // Exporta las funciones del controlador
