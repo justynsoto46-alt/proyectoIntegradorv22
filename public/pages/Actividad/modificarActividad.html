@@ -89,6 +89,20 @@
                     <textarea id="descripcion" name="descripcion" rows="5"
                         required>Actividad enfocada en tendencias actuales de IA.</textarea>
 
+                    <!-- Sugerencia de descripción con inteligencia artificial (RF-04) -->
+                    <button
+                        type="button"
+                        class="boton boton-secundario"
+                        id="botonMejorarDescripcion"
+                        data-tipo="actividad"
+                        data-campo-nombre="nombreActividad"
+                        data-campo-categoria="categoria">
+
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        Mejorar con IA
+
+                    </button>
+
                     <label for="fecha">
                         Fecha
                     </label>
@@ -173,6 +187,10 @@
         src="/js/controllers/modificarActividadController.js">
     </script>
 
+    <script
+        type="module"
+        src="/js/comunes/mejorarDescripcion.js">
+    </script>
 </body>
 
 </html>

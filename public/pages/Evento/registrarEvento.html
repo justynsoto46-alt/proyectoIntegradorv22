@@ -68,6 +68,19 @@
                         placeholder="Ingrese la descripción del evento"
                         required></textarea>
 
+                    <!-- Sugerencia de descripción con inteligencia artificial (RF-04) -->
+                    <button
+                        type="button"
+                        class="boton boton-secundario"
+                        id="botonMejorarDescripcion"
+                        data-tipo="evento"
+                        data-campo-nombre="nombreEvento">
+
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        Mejorar con IA
+
+                    </button>
+
                     <label for="fechaInicio">
                         Fecha de inicio
                     </label>
@@ -157,6 +170,10 @@
     <script
         type="module"
         src="/js/controllers/registrarEventoController.js">
+    </script>
+    <script
+        type="module"
+        src="/js/comunes/mejorarDescripcion.js">
     </script>
 </body>
 

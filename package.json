@@ -4,6 +4,8 @@
   "description": "Repositorio para la creaction del proyecto final del curso de Proyecto Integrador l\r Para la pagina web de U Cenfotec",
   "main": "index.js",
   "scripts": {
+    "start": "node backend/server.js",
+    "dev": "node --watch backend/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -22,6 +24,7 @@
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "jsdom": "^30.0.1",
-    "mongodb": "^7.5.0"
+    "mongodb": "^7.5.0",
+    "nodemailer": "^9.0.5"
   }
 }
