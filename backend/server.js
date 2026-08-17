@@ -51,13 +51,10 @@ const inscripcionRoutes =
 const geminiRoutes =
     require("./routes/geminiRoutes");
 
-<<<<<<< HEAD
 // Importa las rutas de correo electrónico
 const correoRoutes =
     require("./routes/correoRoutes");
 
-=======
->>>>>>> c771a0c6d8166f1ef631f9e9d8aa71b6bd44e470
 // Permite recibir información en formato JSON
 app.use(express.json());
 
@@ -70,10 +67,7 @@ app.use("/api/responsables", responsableRoutes);
 app.use("/api/administradores", administradorRoutes);
 app.use("/api/inscripciones", inscripcionRoutes);
 app.use("/api/gemini", geminiRoutes);
-<<<<<<< HEAD
 app.use("/api/correos", correoRoutes);
-=======
->>>>>>> c771a0c6d8166f1ef631f9e9d8aa71b6bd44e470
 
 // Permite que Express muestre los archivos del frontend
 app.use(express.static(carpetaPublica));
