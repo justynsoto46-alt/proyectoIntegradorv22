@@ -114,6 +114,20 @@
                     <textarea id="descripcion" name="descripcion" rows="5"
                         placeholder="Ingrese la descripción de la actividad" required></textarea>
 
+                    <!-- Sugerencia de descripción con inteligencia artificial (RF-04) -->
+                    <button
+                        type="button"
+                        class="boton boton-secundario"
+                        id="botonMejorarDescripcion"
+                        data-tipo="actividad"
+                        data-campo-nombre="nombreActividad"
+                        data-campo-categoria="categoria">
+
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        Mejorar con IA
+
+                    </button>
+
                     <label for="fecha">
                         Fecha
                     </label>
@@ -250,6 +264,10 @@
     <script
         type="module"
         src="/js/controllers/registrarActividadController.js">
+    </script>
+    <script
+        type="module"
+        src="/js/comunes/mejorarDescripcion.js">
     </script>
 </body>
 

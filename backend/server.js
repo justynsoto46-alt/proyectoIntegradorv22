@@ -47,6 +47,14 @@ const contrasenaRoutes =
 const inscripcionRoutes =
     require("./routes/inscripcionRoutes");
 
+// Importa las rutas de Gemini
+const geminiRoutes =
+    require("./routes/geminiRoutes");
+
+// Importa las rutas de correo electrónico
+const correoRoutes =
+    require("./routes/correoRoutes");
+
 // Permite recibir información en formato JSON
 app.use(express.json());
 
@@ -58,6 +66,8 @@ app.use("/api/stands", standRoutes);
 app.use("/api/responsables", responsableRoutes);
 app.use("/api/administradores", administradorRoutes);
 app.use("/api/inscripciones", inscripcionRoutes);
+app.use("/api/gemini", geminiRoutes);
+app.use("/api/correos", correoRoutes);
 
 // Permite que Express muestre los archivos del frontend
 app.use(express.static(carpetaPublica));
