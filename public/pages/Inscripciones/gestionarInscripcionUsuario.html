@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -35,47 +36,62 @@
         <section class="seccion-inscripciones">
 
             <div class="contenedor">
+
                 <h2>Gestionar mis inscripciones</h2>
 
                 <p class="descripcion">
                     Digite su número de cédula para consultar las actividades en las que se encuentra inscrito.
                 </p>
 
+
+                <!-- Formulario para buscar al participante por cédula -->
                 <div class="formulario-consulta">
-                    <label for="cedula">Número de cédula:</label>
+
+                    <label for="cedula">
+                        Número de cédula:
+                    </label>
+
                     <input type="text" id="cedula" placeholder="Ejemplo: 123456789">
 
                     <button type="button" id="btnBuscarInscripciones" class="boton-buscar">
                         Buscar inscripciones
                     </button>
+
                 </div>
 
+
+                <!--
+                Aquí se crearán automáticamente
+                las tarjetas de las actividades
+                inscritas del participante.
+            -->
                 <div id="contenedorInscripciones" class="contenedor-inscripciones">
-                    <div class="tarjeta-inscripcion">
-                        
-                        <button type="button" class="boton-cancelar">
-                            Cancelar inscripción
-                        </button>
-                    </div>
-
-                    <div class="tarjeta-inscripcion">
-                        
-                        <button type="button" class="boton-cancelar">
-                            Cancelar inscripción
-                        </button>
-                    </div>
                 </div>
 
+
+                <!--
+                Este mensaje se mostrará cuando
+                el participante no tenga inscripciones.
+            -->
                 <p id="mensajeSinInscripciones" class="mensaje-sin-inscripciones">
                     No tiene actividades inscritas actualmente.
                 </p>
 
+
+                <!--
+                Este botón se mostrará después de
+                encontrar al participante.
+            -->
                 <div class="acciones-finales">
+
                     <button type="button" id="btnAgregarActividades" class="boton-agregar">
                         Agregar más actividades
                     </button>
+
                 </div>
+
             </div>
+
         </section>
     </main>
 
@@ -85,9 +101,9 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="/js/comunes/utilidades.js"></script>
-    <script src="/js/comunes/api.js"></script>
-    <script src="/js/comunes/avisos.js"></script>
-    <script src="/js/Inscripciones/gestionarInscripcionUsuario.js"></script>
+
+    <script type="module" src="/js/controllers/gestionarInscripcionesController.js">
+    </script>
 </body>
+
 </html>

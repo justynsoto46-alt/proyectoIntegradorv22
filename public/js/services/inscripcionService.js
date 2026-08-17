@@ -5,12 +5,15 @@ import {
     eliminarDatos
 } from "../comunes/api.js";
 
+
 // Dirección base de la API de inscripciones
 const URL_INSCRIPCIONES =
     "/api/inscripciones";
 
 
-// Función para registrar una inscripción
+/*
+Registra una inscripción.
+*/
 export async function registrarInscripcion(
     inscripcion
 ){
@@ -22,8 +25,10 @@ export async function registrarInscripcion(
 }
 
 
-// Función para consultar las inscripciones
-// de un participante
+/*
+Obtiene las inscripciones de un participante
+utilizando su identificador de MongoDB.
+*/
 export async function obtenerInscripcionesParticipante(
     participanteId
 ){
@@ -34,7 +39,23 @@ export async function obtenerInscripcionesParticipante(
 }
 
 
-// Función para cancelar una inscripción
+/*
+Busca un participante por su número de identificación
+y obtiene todas sus inscripciones.
+*/
+export async function obtenerInscripcionesPorIdentificacion(
+    identificacion
+){
+
+    return await obtenerDatos(
+        `${URL_INSCRIPCIONES}/identificacion/${identificacion}`
+    );
+}
+
+
+/*
+Cancela una inscripción.
+*/
 export async function cancelarInscripcion(
     idInscripcion
 ){
@@ -44,13 +65,13 @@ export async function cancelarInscripcion(
     );
 }
 
-// Busca las inscripciones de un participante
-// utilizando su identificación
-export async function obtenerInscripcionesPorIdentificacion(
-    identificacion
+// Obtiene los participantes inscritos
+// en una actividad
+export async function obtenerInscripcionesPorActividad(
+    actividadId
 ){
 
     return await obtenerDatos(
-        `${URL_INSCRIPCIONES}/identificacion/${identificacion}`
+        `${URL_INSCRIPCIONES}/actividad/${actividadId}`
     );
 }

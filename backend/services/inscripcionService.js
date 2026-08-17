@@ -303,13 +303,16 @@ async function listarInscripcionesPorParticipante(
 
 
 /*
-Obtiene las inscripciones de una actividad.
+Obtiene los participantes inscritos
+en una actividad.
 */
 async function listarInscripcionesPorActividad(
     baseDatos,
     actividadId
 ){
 
+    // Verifica que el identificador
+    // de la actividad sea válido
     if(!validarId(actividadId)){
 
         const error =
@@ -344,11 +347,94 @@ async function listarInscripcionesPorActividad(
     }
 
 
-    return await inscripcionDatosService
-        .listarPorActividad(
-            baseDatos,
-            actividadId
-        );
+    // Obtiene todas las inscripciones
+    // relacionadas con la actividad
+    const inscripciones =
+        await inscripcionDatosService
+            .listarPorActividad(
+                baseDatos,
+                actividadId
+            );
+
+
+    // Arreglo donde se guardarán
+    // los participantes encontrados
+    const participantes = [];
+
+
+    // Recorre las inscripciones
+    for(
+        const inscripcion
+        of inscripciones
+    ){
+
+        // Busca el participante relacionado
+        // con cada inscripción
+        const participante =
+            await participanteDatosService.obtener(
+                baseDatos,
+                inscripcion.participanteId.toString()
+            );
+
+
+        // Verifica que el participante exista
+        if(participante){
+
+            participantes.push({
+
+                _id:
+                    participante._id,
+
+                nombreCompleto:
+                    participante.nombreCompleto,
+
+                identificacion:
+                    participante.identificacion,
+
+                correoElectronico:
+                    participante.correoElectronico,
+
+                telefono:
+                    participante.telefono,
+
+                edad:
+                    participante.edad,
+
+                profesion:
+                    participante.profesion,
+
+                idInscripcion:
+                    inscripcion._id
+            });
+        }
+    }
+
+
+    // Devuelve la actividad consultada
+    // junto con sus participantes inscritos
+    return {
+
+        actividad: {
+
+            _id:
+                actividad._id,
+
+            nombreActividad:
+                actividad.nombreActividad,
+
+            fecha:
+                actividad.fecha,
+
+            horaInicio:
+                actividad.horaInicio,
+
+            horaFin:
+                actividad.horaFin
+        },
+
+        participantes:
+            participantes
+    };
 }
 
 /*

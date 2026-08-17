@@ -1,157 +1,187 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CENFOTEC Página Web Eventos - Participantes por Actividad</title>
+
+    <title>
+        CENFOTEC Página Web Eventos - Participantes por Actividad
+    </title>
 
     <link rel="stylesheet" href="/css/base.css">
+
     <link rel="stylesheet" href="/css/componentes.css">
+
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <link rel="stylesheet" href="/css/paginas/menuPrincipal.css">
+
     <link rel="stylesheet" href="/css/paginas/buscarParticipantes.css">
 </head>
 
 <body>
+
     <header class="encabezado">
+
         <div class="contenedor">
+
             <img src="/img/LogoBlanco.png" alt="Logo Universidad CENFOTEC" class="logo">
-            <h1>CENFOTEC Página Web Eventos</h1>
+
+            <h1>
+                CENFOTEC Página Web Eventos
+            </h1>
 
             <div class="usuario">
+
                 <i class="fa-solid fa-user"></i>
+
                 Administrador
+
             </div>
+
         </div>
+
     </header>
 
+
     <main>
+
         <!-- El menú lateral se carga desde /partials/navbar.html -->
         <div id="navbar"></div>
 
+
         <section class="section">
+
             <div class="contenedor formulario-contenedor">
-                <h2>Consultar Participantes por Actividad</h2>
+
+                <h2>
+                    Consultar Participantes por Actividad
+                </h2>
+
 
                 <p class="descripcion">
                     Seleccione una actividad para visualizar los participantes inscritos y controlar el aforo.
                 </p>
 
-                <div class="buscador">
-                    <label for="actividad">Actividad</label>
 
+                <div class="buscador">
+
+                    <label for="actividad">
+                        Actividad
+                    </label>
+
+
+                    <!--
+                        Las actividades se cargarán
+                        desde MongoDB
+                    -->
                     <select id="actividad" name="actividad">
-                        <option value="">Seleccione una actividad</option>
-                        <option value="conferenciaIA">Conferencia de Inteligencia Artificial</option>
-                        <option value="tallerRobotica">Taller de Robótica</option>
-                        <option value="exposicionProyectos">Exposición de Proyectos</option>
-                        <option value="ciberseguridad">Conferencia de Ciberseguridad</option>
+
+                        <option value="">
+                            Seleccione una actividad
+                        </option>
+
                     </select>
+
 
                     <button type="button" id="btnConsultar" class="boton">
                         Consultar
                     </button>
+
                 </div>
 
-                <table class="tabla-participantes" id="tablaParticipantes">
+
+                <!--
+                    La tabla empieza oculta y se muestra
+                    cuando existen participantes inscritos.
+                -->
+                <table class="tabla-participantes" id="tablaParticipantes" style="display:none;">
+
                     <thead>
+
                         <tr>
-                            <th>Nombre completo</th>
-                            <th>Identificación</th>
-                            <th>Correo electrónico</th>
-                            <th>Teléfono</th>
-                            <th>Profesión</th>
+                            <th>
+                                Nombre completo
+                            </th>
+
+                            <th>
+                                Identificación
+                            </th>
+
+                            <th>
+                                Correo electrónico
+                            </th>
+
+                            <th>
+                                Teléfono
+                            </th>
+
+                            <th>
+                                Profesión
+                            </th>
                         </tr>
+
                     </thead>
 
-                    <tbody>
-                        <tr class="fila-actividad conferenciaIA">
-                            <td>María José Rodríguez Alvarado</td>
-                            <td>123456789</td>
-                            <td>mrodrigueza@ucenfotec.ac.cr</td>
-                            <td>88888888</td>
-                            <td>Estudiante</td>
-                        </tr>
 
-                        <tr class="fila-actividad tallerRobotica">
-                            <td>Carlos Miranda Pérez</td>
-                            <td>287654321</td>
-                            <td>cmirandap@ucenfotec.ac.cr</td>
-                            <td>87777777</td>
-                            <td>Estudiante</td>
-                        </tr>
-
-                        <tr class="fila-actividad exposicionProyectos">
-                            <td>José Alejandro Quirós Méndez</td>
-                            <td>456789123</td>
-                            <td>jquirosm@ucenfotec.ac.cr</td>
-                            <td>86666666</td>
-                            <td>Estudiante</td>
-                        </tr>
-
-                        <tr class="fila-actividad conferenciaIA">
-                            <td>Amanda Álvarez Quesada</td>
-                            <td>189123456</td>
-                            <td>aalvarezq@gmail.com</td>
-                            <td>85555555</td>
-                            <td>Diseñadora</td>
-                        </tr>
-
-                        <tr class="fila-actividad tallerRobotica">
-                            <td>Mario Hidalgo Hidalgo</td>
-                            <td>109860455</td>
-                            <td>mhidalgoh@gmail.com</td>
-                            <td>82222222</td>
-                            <td>Arquitecto</td>
-                        </tr>
-
-                        <tr class="fila-actividad exposicionProyectos">
-                            <td>Francisco Molina Navarro</td>
-                            <td>378290736</td>
-                            <td>fmolinan@ucenfotec.ac.cr</td>
-                            <td>84444444</td>
-                            <td>Estudiante</td>
-                        </tr>
-
-                        <tr class="fila-actividad conferenciaIA">
-                            <td>David Cordero Barrantes</td>
-                            <td>226870652</td>
-                            <td>dcorderob@ucenfotec.ac.cr</td>
-                            <td>81111111</td>
-                            <td>Estudiante</td>
-                        </tr>
-
-                        <tr class="fila-actividad tallerRobotica">
-                            <td>Samantha Bogantes Oviedo</td>
-                            <td>318670321</td>
-                            <td>sboganteso@gmail.com</td>
-                            <td>88008888</td>
-                            <td>Desarrolladora de Software</td>
-                        </tr>
+                    <!--
+                        Las filas se crean dinámicamente
+                        desde JavaScript.
+                    -->
+                    <tbody id="cuerpoTablaParticipantes">
                     </tbody>
 
-                    <p id="mensajeSinParticipantes">
-                        No hay participantes inscritos en esta actividad.
-                    </p>
-                    
                 </table>
+
+
+                <!--
+                    Mensaje cuando una actividad
+                    no tiene participantes inscritos.
+                -->
+                <p id="mensajeSinParticipantes" style="display:none;">
+                    No hay participantes inscritos en esta actividad.
+                </p>
+
             </div>
+
         </section>
+
     </main>
 
+
     <footer>
-        <h2>Somos lo que sabemos</h2>
-        <p>&copy; 2026 Universidad Cenfotec</p>
+
+        <h2>
+            Somos lo que sabemos
+        </h2>
+
+        <p>
+            &copy; 2026 Universidad Cenfotec
+        </p>
+
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="/js/comunes/utilidades.js"></script>
-    <script src="/js/comunes/api.js"></script>
-    <script src="/js/comunes/avisos.js"></script>
-    <script src="/js/comunes/navbar.js"></script>
-    <script src="/js/comunes/sesion.js"></script>
-    <script src="/js/Participantes/buscarParticipantes.js"></script>
+
+    <!-- SweetAlert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11">
+    </script>
+
+
+    <!-- Archivos comunes -->
+    <script src="/js/comunes/navbar.js">
+    </script>
+
+    <script src="/js/comunes/sesion.js">
+    </script>
+
+
+    <!-- Controller de participantes por actividad -->
+    <script type="module" src="/js/controllers/participantesPorActividadController.js">
+    </script>
+
 </body>
+
 </html>
